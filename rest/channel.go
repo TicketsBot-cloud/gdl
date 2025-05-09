@@ -3,18 +3,19 @@ package rest
 import (
 	"context"
 	"fmt"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/objects/channel/embed"
-	"github.com/rxdn/gdl/objects/channel/message"
-	"github.com/rxdn/gdl/objects/interaction/component"
-	"github.com/rxdn/gdl/objects/invite"
-	"github.com/rxdn/gdl/objects/user"
-	"github.com/rxdn/gdl/rest/ratelimit"
-	"github.com/rxdn/gdl/rest/request"
-	"github.com/rxdn/gdl/utils"
 	"net/url"
 	"strconv"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/embed"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/gdl/objects/invite"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
+	"github.com/TicketsBot-cloud/gdl/utils"
 )
 
 func GetChannel(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId uint64) (channel.Channel, error) {

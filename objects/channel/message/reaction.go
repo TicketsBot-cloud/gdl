@@ -1,6 +1,6 @@
 package message
 
-import "github.com/rxdn/gdl/objects/guild/emoji"
+import "github.com/TicketsBot-cloud/gdl/objects/guild/emoji"
 
 type Reaction struct {
 	Count int

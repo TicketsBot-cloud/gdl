@@ -1,8 +1,9 @@
 package user
 
 import (
-	"github.com/rxdn/gdl/utils"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/utils"
 )
 
 type Presence struct {

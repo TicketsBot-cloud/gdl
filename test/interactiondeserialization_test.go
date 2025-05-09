@@ -2,9 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/rxdn/gdl/objects/interaction"
-	"github.com/rxdn/gdl/objects/interaction/component"
 	"testing"
+
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
 )
 
 func TestDeserializeButtonInteraction(t *testing.T) {

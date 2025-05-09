@@ -6,8 +6,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/rxdn/gdl/rest/ratelimit"
-	"github.com/rxdn/gdl/rest/request"
+
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 type (

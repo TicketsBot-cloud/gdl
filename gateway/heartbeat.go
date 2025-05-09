@@ -1,14 +1,15 @@
 package gateway
 
 import (
-	"github.com/rxdn/gdl/gateway/payloads"
-	"github.com/rxdn/gdl/utils"
-	"github.com/sirupsen/logrus"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads"
+	"github.com/TicketsBot-cloud/gdl/utils"
+	"github.com/sirupsen/logrus"
 )
 
 func (s *Shard) CountdownHeartbeat(ticker *time.Ticker) {
-	loop:
+loop:
 	for {
 		select {
 		case <-s.killHeartbeat:

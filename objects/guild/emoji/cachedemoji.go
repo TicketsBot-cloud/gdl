@@ -1,8 +1,8 @@
 package emoji
 
 import (
-	"github.com/rxdn/gdl/objects"
-	"github.com/rxdn/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/objects"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
 )
 
 type CachedEmoji struct {

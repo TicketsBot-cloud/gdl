@@ -1,10 +1,10 @@
 package gateway
 
 import (
-	"github.com/rxdn/gdl/cache"
-	"github.com/rxdn/gdl/gateway/intents"
-	"github.com/rxdn/gdl/objects/user"
-	"github.com/rxdn/gdl/rest/ratelimit"
+	"github.com/TicketsBot-cloud/gdl/cache"
+	"github.com/TicketsBot-cloud/gdl/gateway/intents"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
 )
 
 type ShardOptions struct {

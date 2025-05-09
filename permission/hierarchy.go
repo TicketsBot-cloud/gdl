@@ -3,8 +3,9 @@ package permission
 import (
 	"context"
 	"errors"
-	"github.com/rxdn/gdl/cache"
-	"github.com/rxdn/gdl/gateway"
+
+	"github.com/TicketsBot-cloud/gdl/cache"
+	"github.com/TicketsBot-cloud/gdl/gateway"
 )
 
 func CanSelfInteractWith(ctx context.Context, shard *gateway.Shard, guildId, targetId uint64) (bool, error) {

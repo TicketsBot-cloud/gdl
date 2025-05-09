@@ -5,16 +5,17 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/pasztorpisti/qs"
-	"github.com/pkg/errors"
-	"github.com/rxdn/gdl/rest/ratelimit"
-	"github.com/sirupsen/logrus"
 	"io"
 	"net/http"
 	"strconv"
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
+	"github.com/pasztorpisti/qs"
+	"github.com/pkg/errors"
+	"github.com/sirupsen/logrus"
 )
 
 const (
@@ -153,7 +154,7 @@ func (e *Endpoint) Request(ctx context.Context, token string, body any, response
 		req.Header.Set(key, value)
 	}
 
-	req.Header.Set("User-Agent", "DiscordBot (https://github.com/rxdn/gdl, 1.0.0)")
+	req.Header.Set("User-Agent", "DiscordBot (https://github.com/TicketsBot-cloud/gdl, 1.0.0)")
 
 	var res *http.Response
 	var content []byte

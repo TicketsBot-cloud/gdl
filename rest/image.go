@@ -3,9 +3,10 @@ package rest
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/rxdn/gdl/rest/request"
 	"io"
 	"io/ioutil"
+
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 type Image struct {
@@ -25,10 +26,10 @@ func (i *Image) Encode() (string, error) {
 }
 
 func (i Image) MarshalJSON() ([]byte, error) {
-	imageData, err := i.Encode(); if err != nil {
+	imageData, err := i.Encode()
+	if err != nil {
 		return nil, err
 	}
 
 	return []byte(fmt.Sprintf("\"%s\"", imageData)), nil
 }
-

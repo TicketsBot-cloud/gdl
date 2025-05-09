@@ -1,8 +1,9 @@
 package channel
 
 import (
-	"github.com/rxdn/gdl/objects"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/objects"
 )
 
 type PartialChannel struct {

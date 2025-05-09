@@ -1,8 +1,8 @@
 package message
 
 import (
-	"github.com/rxdn/gdl/objects/member"
-	"github.com/rxdn/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
 )
 
 // Mentions is an array of users with partial member

@@ -1,6 +1,6 @@
 package events
 
-import "github.com/rxdn/gdl/utils"
+import "github.com/TicketsBot-cloud/gdl/utils"
 
 type MessageDeleteBulk struct {
 	Id        utils.Uint64StringSlice `json:"ids"`

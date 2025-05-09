@@ -1,8 +1,8 @@
 package payloads
 
 import (
-	gatewayintents "github.com/rxdn/gdl/gateway/intents"
-	"github.com/rxdn/gdl/objects/user"
+	gatewayintents "github.com/TicketsBot-cloud/gdl/gateway/intents"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
 )
 
 type (

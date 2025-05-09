@@ -1,13 +1,13 @@
 package interaction
 
 import (
-	"github.com/rxdn/gdl/objects"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/objects/channel/message"
-	"github.com/rxdn/gdl/objects/entitlement"
-	"github.com/rxdn/gdl/objects/interaction/component"
-	"github.com/rxdn/gdl/objects/member"
-	"github.com/rxdn/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/objects"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
+	"github.com/TicketsBot-cloud/gdl/objects/entitlement"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
 )
 
 type Interaction struct {

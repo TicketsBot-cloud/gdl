@@ -1,4 +1,4 @@
-module github.com/rxdn/gdl
+module github.com/TicketsBot-cloud/gdl
 
 go 1.22.0
 

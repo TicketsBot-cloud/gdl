@@ -1,7 +1,7 @@
 package guild
 
 import (
-	"github.com/rxdn/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
 )
 
 type CachedVoiceState struct {

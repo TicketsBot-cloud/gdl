@@ -1,24 +1,24 @@
 package main
 
 import (
-	"github.com/rxdn/gdl/cache"
-	"github.com/rxdn/gdl/gateway"
-	"github.com/rxdn/gdl/gateway/payloads/events"
-	"github.com/rxdn/gdl/objects/channel/embed"
-	"github.com/rxdn/gdl/rest"
-	"github.com/rxdn/gdl/rest/ratelimit"
+	"github.com/TicketsBot-cloud/gdl/cache"
+	"github.com/TicketsBot-cloud/gdl/gateway"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/embed"
+	"github.com/TicketsBot-cloud/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
 	"github.com/sirupsen/logrus"
 )
 
-const(
+const (
 	StarboardChannelId = 1
-	StarThreshold = 3
+	StarThreshold      = 3
 )
 
 func main() {
 	cacheFactory := cache.BoltCacheFactory(cache.CacheOptions{
-		Guilds:      true,
-		Users:       true,
+		Guilds: true,
+		Users:  true,
 	}, cache.BoltOptions{
 		ClearOnRestart: false,
 		Path:           "bolt.db",
@@ -32,7 +32,7 @@ func main() {
 			Lowest:  0,
 			Highest: 1,
 		},
-		RateLimitStore: ratelimit.NewMemoryStore(),
+		RateLimitStore:     ratelimit.NewMemoryStore(),
 		CacheFactory:       cacheFactory,
 		GuildSubscriptions: false,
 	}
@@ -50,16 +50,18 @@ func reactListener(s *gateway.Shard, e *events.MessageReactionAdd) {
 	if e.Emoji.Name != "⭐" {
 		return
 	}
-	
+
 	// get people who have reacted with a star so we can check if we've met the threshold
-	reactors, err := s.GetReactions(e.ChannelId, e.MessageId, "⭐", rest.GetReactionsData{}); if err != nil {
+	reactors, err := s.GetReactions(e.ChannelId, e.MessageId, "⭐", rest.GetReactionsData{})
+	if err != nil {
 		logrus.Warn(err)
 		return
 	}
 
 	if len(reactors) >= StarThreshold {
 		// get the message object so we can get the content & sender
-		msg, err := s.GetChannelMessage(e.ChannelId, e.MessageId); if err != nil {
+		msg, err := s.GetChannelMessage(e.ChannelId, e.MessageId)
+		if err != nil {
 			logrus.Warn(err)
 			return
 		}

@@ -1,8 +1,9 @@
 package member
 
 import (
-	"github.com/rxdn/gdl/objects/user"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/objects/user"
 )
 
 type CachedMember struct {

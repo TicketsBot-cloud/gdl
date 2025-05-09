@@ -1,6 +1,6 @@
 package message
 
-import "github.com/rxdn/gdl/objects/channel"
+import "github.com/TicketsBot-cloud/gdl/objects/channel"
 
 type ChannelMention struct {
 	Id      uint64              `json:"id,string"`

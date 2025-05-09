@@ -1,6 +1,6 @@
 package message
 
-import "github.com/rxdn/gdl/utils"
+import "github.com/TicketsBot-cloud/gdl/utils"
 
 type AllowedMention struct {
 	Parse       []AllowedMentionType    `json:"parse,omitempty"`

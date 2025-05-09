@@ -1,10 +1,11 @@
 package invite
 
 import (
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/objects/guild"
-	"github.com/rxdn/gdl/objects/user"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/guild"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
 )
 
 type TargetUserType int

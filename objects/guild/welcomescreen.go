@@ -1,6 +1,6 @@
 package guild
 
-import "github.com/rxdn/gdl/objects"
+import "github.com/TicketsBot-cloud/gdl/objects"
 
 type WelcomeScreen struct {
 	Description     string                 `json:"description"`

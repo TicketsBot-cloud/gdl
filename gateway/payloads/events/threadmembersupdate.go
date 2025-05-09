@@ -1,8 +1,8 @@
 package events
 
 import (
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/utils"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/utils"
 )
 
 type ThreadMembersUpdate struct {

@@ -1,9 +1,10 @@
 package member
 
 import (
-	"github.com/rxdn/gdl/objects/user"
-	"github.com/rxdn/gdl/utils"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/utils"
 )
 
 type Member struct {
@@ -36,4 +37,3 @@ func (m *Member) ToCachedMember() CachedMember {
 		Mute:         m.Mute,
 	}
 }
-

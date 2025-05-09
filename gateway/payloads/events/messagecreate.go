@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/rxdn/gdl/objects/channel/message"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
 )
 
 type MessageCreate struct {

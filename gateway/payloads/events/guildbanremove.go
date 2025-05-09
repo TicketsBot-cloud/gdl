@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/rxdn/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
 )
 
 type GuildBanRemove struct {

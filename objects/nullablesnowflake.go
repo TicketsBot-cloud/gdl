@@ -1,8 +1,9 @@
 package objects
 
 import (
-	"github.com/rxdn/gdl/utils"
 	"strconv"
+
+	"github.com/TicketsBot-cloud/gdl/utils"
 )
 
 type NullableSnowflake struct {

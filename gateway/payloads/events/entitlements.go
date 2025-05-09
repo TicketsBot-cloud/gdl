@@ -1,6 +1,6 @@
 package events
 
-import "github.com/rxdn/gdl/objects/entitlement"
+import "github.com/TicketsBot-cloud/gdl/objects/entitlement"
 
 type EntitlementCreate struct {
 	entitlement.Entitlement

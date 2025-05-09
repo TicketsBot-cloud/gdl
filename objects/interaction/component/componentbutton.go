@@ -3,7 +3,7 @@ package component
 import (
 	"encoding/json"
 
-	"github.com/rxdn/gdl/objects/guild/emoji"
+	"github.com/TicketsBot-cloud/gdl/objects/guild/emoji"
 )
 
 type Button struct {

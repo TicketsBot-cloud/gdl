@@ -1,6 +1,6 @@
 package payloads
 
-import "github.com/rxdn/gdl/objects/user"
+import "github.com/TicketsBot-cloud/gdl/objects/user"
 
 type PresenceUpdate struct {
 	Opcode int               `json:"op"`

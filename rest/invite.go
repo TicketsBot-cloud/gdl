@@ -3,9 +3,10 @@ package rest
 import (
 	"context"
 	"fmt"
-	"github.com/rxdn/gdl/objects/invite"
-	"github.com/rxdn/gdl/rest/ratelimit"
-	"github.com/rxdn/gdl/rest/request"
+
+	"github.com/TicketsBot-cloud/gdl/objects/invite"
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 func GetInvite(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, inviteCode string, withCounts bool) (invite.Invite, error) {

@@ -1,9 +1,9 @@
 package events
 
 import (
-	"github.com/rxdn/gdl/objects/member"
-	"github.com/rxdn/gdl/objects/user"
-	"github.com/rxdn/gdl/utils"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/utils"
 )
 
 type GuildMembersChunk struct {

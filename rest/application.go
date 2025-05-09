@@ -2,9 +2,10 @@ package rest
 
 import (
 	"context"
-	"github.com/rxdn/gdl/objects/application"
-	"github.com/rxdn/gdl/rest/ratelimit"
-	"github.com/rxdn/gdl/rest/request"
+
+	"github.com/TicketsBot-cloud/gdl/objects/application"
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 func GetCurrentApplication(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter) (application.Application, error) {

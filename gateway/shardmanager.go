@@ -1,12 +1,13 @@
 package gateway
 
 import (
-	"github.com/rxdn/gdl/gateway/payloads/events"
-	"github.com/rxdn/gdl/rest/ratelimit"
-	"github.com/rxdn/gdl/rest/request"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 type ShardManager struct {

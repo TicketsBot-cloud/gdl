@@ -6,19 +6,20 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/rxdn/gdl/cache"
-	"github.com/rxdn/gdl/gateway/payloads"
-	"github.com/rxdn/gdl/gateway/payloads/events"
-	"github.com/rxdn/gdl/objects/user"
-	"github.com/rxdn/gdl/utils"
-	"github.com/sirupsen/logrus"
-	"github.com/tatsuworks/czlib"
 	"log"
 	"net/http"
-	"nhooyr.io/websocket"
 	"runtime/debug"
 	"sync"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/cache"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/utils"
+	"github.com/sirupsen/logrus"
+	"github.com/tatsuworks/czlib"
+	"nhooyr.io/websocket"
 )
 
 type Shard struct {

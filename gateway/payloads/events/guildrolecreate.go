@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/rxdn/gdl/objects/guild"
+	"github.com/TicketsBot-cloud/gdl/objects/guild"
 )
 
 type GuildRoleCreate struct {

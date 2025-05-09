@@ -1,6 +1,6 @@
 package guild
 
-import "github.com/rxdn/gdl/objects/member"
+import "github.com/TicketsBot-cloud/gdl/objects/member"
 
 type VoiceState struct {
 	GuildId   uint64        `json:"guild_id,string"`

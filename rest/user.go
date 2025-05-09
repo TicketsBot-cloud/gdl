@@ -3,14 +3,15 @@ package rest
 import (
 	"context"
 	"fmt"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/objects/guild"
-	"github.com/rxdn/gdl/objects/integration"
-	"github.com/rxdn/gdl/objects/user"
-	"github.com/rxdn/gdl/rest/ratelimit"
-	"github.com/rxdn/gdl/rest/request"
 	"net/url"
 	"strconv"
+
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/guild"
+	"github.com/TicketsBot-cloud/gdl/objects/integration"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 func GetCurrentUser(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter) (user.User, error) {

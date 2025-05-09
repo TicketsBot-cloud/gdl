@@ -17,7 +17,7 @@ Most methods and properties are named directly after what the Discord API names 
 
 **Go modules require Go v1.11 or higher**
   
-To install GDL, run `go get github.com/rxdn/gdl`  
+To install GDL, run `go get github.com/TicketsBot-cloud/gdl`  
   
 ## Example
 From the following example, you should be able to work out the gist of a basic bot:
@@ -26,10 +26,10 @@ From the following example, you should be able to work out the gist of a basic b
 package main   
     
 import (  
-   "github.com/rxdn/gdl/cache"   
-   "github.com/rxdn/gdl/gateway"  
-   "github.com/rxdn/gdl/gateway/payloads/events"  
-   "github.com/rxdn/gdl/objects/user"  
+   "github.com/TicketsBot-cloud/gdl/cache"   
+   "github.com/TicketsBot-cloud/gdl/gateway"  
+   "github.com/TicketsBot-cloud/gdl/gateway/payloads/events"  
+   "github.com/TicketsBot-cloud/gdl/objects/user"  
 )    
     
 func main() { 
@@ -71,9 +71,9 @@ func echoListener(s *gateway.Shard, e *events.MessageCreate) {
 Other examples are available in the examples package
 
 # Events
-View the following package for a list of events: [gateway/payloads/events](https://github.com/rxdn/gdl/tree/master/gateway/payloads/events)
+View the following package for a list of events: [gateway/payloads/events](https://github.com/TicketsBot-cloud/gdl/tree/master/gateway/payloads/events)
 
-Gateway events are also available to listen on: [gateway/payloads](https://github.com/rxdn/gdl/tree/master/gateway/payloads)
+Gateway events are also available to listen on: [gateway/payloads](https://github.com/TicketsBot-cloud/gdl/tree/master/gateway/payloads)
 
 # Commands
 GDL comes with a built-in command handler, however, feel free to build your own.
@@ -100,7 +100,7 @@ ch.RegisterCommand(myCommand)
 
 ![Command handler in action](https://i.imgur.com/eNH0NIb.png)
 
-Take a look at the [examples package](https://github.com/rxdn/gdl/tree/master/examples) for more usage examples
+Take a look at the [examples package](https://github.com/TicketsBot-cloud/gdl/tree/master/examples) for more usage examples
 (also feel free to contribute some!).
 
 # Caching
@@ -200,7 +200,7 @@ shardOptions := gateway.ShardOptions{
 
 # Error Handling
 When calling a REST API method, Discord may send an error response. You can tell what kind of error has occurred through
-calling `errors.Is` and comparing the error to one of [GDL's error types](https://github.com/rxdn/gdl/blob/master/rest/request/errors.go).
+calling `errors.Is` and comparing the error to one of [GDL's error types](https://github.com/TicketsBot-cloud/gdl/blob/master/rest/request/errors.go).
 
 More generally, GDL wraps common errors, such as 404, 403 in either a ClientError or ServerError type. You can then run
 `request.IsServerError(err)` and `request.IsClientError(err)` to determine whether an error is a ClientError or
@@ -221,7 +221,7 @@ if err != nil {
 }
 ```
 
-Note: However, in this case it is recommended to use GDL's [permission calculator](https://github.com/rxdn/gdl/blob/master/permission/permissioncalculator.go)
+Note: However, in this case it is recommended to use GDL's [permission calculator](https://github.com/TicketsBot-cloud/gdl/blob/master/permission/permissioncalculator.go)
 to determine whether your bot has the required permissions for an action, rather than sending a request to Discord that
 is guaranteed to fail, as sending 10000 requests in 10 minutes that fail with a 401, 403 or 429 will ban your token
 from the API for an entire hour.

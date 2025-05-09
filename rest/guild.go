@@ -3,16 +3,17 @@ package rest
 import (
 	"context"
 	"fmt"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/objects/guild"
-	"github.com/rxdn/gdl/objects/integration"
-	"github.com/rxdn/gdl/objects/invite"
-	"github.com/rxdn/gdl/objects/member"
-	"github.com/rxdn/gdl/rest/ratelimit"
-	"github.com/rxdn/gdl/rest/request"
-	"github.com/rxdn/gdl/utils"
 	"net/url"
 	"strconv"
+
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/guild"
+	"github.com/TicketsBot-cloud/gdl/objects/integration"
+	"github.com/TicketsBot-cloud/gdl/objects/invite"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
+	"github.com/TicketsBot-cloud/gdl/utils"
 )
 
 type CreateGuildData struct {

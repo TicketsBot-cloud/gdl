@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/rxdn/gdl/objects/guild/emoji"
+	"github.com/TicketsBot-cloud/gdl/objects/guild/emoji"
 )
 
 type GuildEmojisUpdate struct {

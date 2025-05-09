@@ -3,9 +3,10 @@ package permission
 import (
 	"context"
 	"errors"
-	"github.com/rxdn/gdl/gateway"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/objects/guild"
+
+	"github.com/TicketsBot-cloud/gdl/gateway"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/guild"
 	"github.com/sirupsen/logrus"
 )
 

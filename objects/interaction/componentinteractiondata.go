@@ -2,7 +2,8 @@ package interaction
 
 import (
 	"encoding/json"
-	"github.com/rxdn/gdl/objects/interaction/component"
+
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
 )
 
 type MessageComponentInteractionData struct {

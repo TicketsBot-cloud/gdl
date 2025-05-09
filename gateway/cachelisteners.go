@@ -2,8 +2,9 @@ package gateway
 
 import (
 	"context"
-	"github.com/rxdn/gdl/gateway/payloads/events"
-	"github.com/rxdn/gdl/objects/member"
+
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
 	"github.com/sirupsen/logrus"
 )
 

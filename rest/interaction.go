@@ -3,10 +3,11 @@ package rest
 import (
 	"context"
 	"fmt"
-	"github.com/rxdn/gdl/objects/channel/message"
-	"github.com/rxdn/gdl/objects/interaction"
-	"github.com/rxdn/gdl/rest/ratelimit"
-	"github.com/rxdn/gdl/rest/request"
+
+	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 func GetGlobalCommands(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, applicationId uint64) (commands []interaction.ApplicationCommand, err error) {

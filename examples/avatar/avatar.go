@@ -2,18 +2,19 @@ package main
 
 import (
 	"fmt"
-	"github.com/rxdn/gdl/cache"
-	"github.com/rxdn/gdl/command"
-	"github.com/rxdn/gdl/gateway"
-	"github.com/rxdn/gdl/rest"
-	"github.com/rxdn/gdl/rest/ratelimit"
-	"github.com/sirupsen/logrus"
 	"net/http"
+
+	"github.com/TicketsBot-cloud/gdl/cache"
+	"github.com/TicketsBot-cloud/gdl/command"
+	"github.com/TicketsBot-cloud/gdl/gateway"
+	"github.com/TicketsBot-cloud/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
 	cacheFactory := cache.BoltCacheFactory(cache.CacheOptions{
-		Users:       true,
+		Users: true,
 	}, cache.BoltOptions{
 		ClearOnRestart: false,
 		Path:           "bolt.db",
@@ -27,7 +28,7 @@ func main() {
 			Lowest:  0,
 			Highest: 1,
 		},
-		RateLimitStore: ratelimit.NewMemoryStore(),
+		RateLimitStore:     ratelimit.NewMemoryStore(),
 		CacheFactory:       cacheFactory,
 		GuildSubscriptions: false,
 	}
@@ -59,15 +60,16 @@ func onCommand(ctx command.CommandContext) {
 	}
 
 	for _, mention := range ctx.Mentions {
-		res, err := http.Get(mention.AvatarUrl(2048)); if err != nil {
+		res, err := http.Get(mention.AvatarUrl(2048))
+		if err != nil {
 			logrus.Warn(err.Error())
 			continue
 		}
 		defer res.Body.Close()
 
 		data := rest.CreateMessageData{
-			Content:         fmt.Sprintf("%s's avatar is:", mention.Username),
-			File:            &rest.File{
+			Content: fmt.Sprintf("%s's avatar is:", mention.Username),
+			File: &rest.File{
 				Name:        "avatar.png",
 				ContentType: res.Header.Get("Content-Type"),
 				Reader:      res.Body,

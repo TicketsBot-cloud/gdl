@@ -1,9 +1,10 @@
 package command
 
 import (
-	"github.com/rxdn/gdl/gateway"
-	"github.com/rxdn/gdl/gateway/payloads/events"
 	"strings"
+
+	"github.com/TicketsBot-cloud/gdl/gateway"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
 )
 
 type CommandHandler struct {
@@ -53,8 +54,8 @@ func (h *CommandHandler) commandListener(s *gateway.Shard, e *events.MessageCrea
 
 	ctx := CommandContext{
 		MessageCreate: e,
-		Shard: s,
-		Args: args,
+		Shard:         s,
+		Args:          args,
 	}
 
 	for _, cmd := range h.commands {
@@ -72,7 +73,7 @@ func (h *CommandHandler) commandListener(s *gateway.Shard, e *events.MessageCrea
 
 		if match {
 			// check subcommands
-			argloop:
+		argloop:
 			for i, arg := range args {
 				for _, sub := range cmd.SubCommands {
 					subMatch := strings.ToLower(arg) == strings.ToLower(sub.Name)

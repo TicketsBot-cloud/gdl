@@ -1,8 +1,8 @@
 package events
 
 import (
-	"github.com/rxdn/gdl/objects/guild/emoji"
-	"github.com/rxdn/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/objects/guild/emoji"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
 )
 
 type MessageReactionAdd struct {

@@ -2,7 +2,8 @@ package user
 
 import (
 	"fmt"
-	"github.com/rxdn/gdl/utils"
+
+	"github.com/TicketsBot-cloud/gdl/utils"
 )
 
 // Jsoniter does not like leading zeroes on ints

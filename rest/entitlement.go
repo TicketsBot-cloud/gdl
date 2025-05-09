@@ -3,11 +3,12 @@ package rest
 import (
 	"context"
 	"fmt"
-	"github.com/rxdn/gdl/objects/entitlement"
-	"github.com/rxdn/gdl/rest/ratelimit"
-	"github.com/rxdn/gdl/rest/request"
 	"net/url"
 	strconv "strconv"
+
+	"github.com/TicketsBot-cloud/gdl/objects/entitlement"
+	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 type EntitlementQueryOptions struct {

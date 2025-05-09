@@ -1,9 +1,10 @@
 package integration
 
 import (
-	"github.com/rxdn/gdl/objects/guild"
-	"github.com/rxdn/gdl/objects/user"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/objects/guild"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
 )
 
 type Integration struct {

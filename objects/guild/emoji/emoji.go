@@ -1,9 +1,9 @@
 package emoji
 
 import (
-	"github.com/rxdn/gdl/objects"
-	"github.com/rxdn/gdl/objects/user"
-	"github.com/rxdn/gdl/utils"
+	"github.com/TicketsBot-cloud/gdl/objects"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/utils"
 )
 
 // https://discord.com/developers/docs/resources/emoji#emoji-object

@@ -1,9 +1,9 @@
 package auditlog
 
 import (
-	"github.com/rxdn/gdl/objects/guild"
-	"github.com/rxdn/gdl/objects/integration"
-	"github.com/rxdn/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/objects/guild"
+	"github.com/TicketsBot-cloud/gdl/objects/integration"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
 )
 
 type AuditLog struct {

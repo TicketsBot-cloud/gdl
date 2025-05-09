@@ -2,8 +2,9 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/rxdn/gdl/rest/request"
 	"testing"
+
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 func TestObjectError(t *testing.T) {

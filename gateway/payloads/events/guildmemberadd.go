@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/rxdn/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
 )
 
 type GuildMemberAdd struct {

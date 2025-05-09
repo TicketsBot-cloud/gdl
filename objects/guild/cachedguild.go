@@ -1,8 +1,9 @@
 package guild
 
 import (
-	"github.com/rxdn/gdl/objects"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/objects"
 )
 
 type CachedGuild struct {

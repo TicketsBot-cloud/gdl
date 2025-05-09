@@ -1,7 +1,7 @@
 package events
 
 import (
-	"github.com/rxdn/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
 )
 
 type ChannelDelete struct {

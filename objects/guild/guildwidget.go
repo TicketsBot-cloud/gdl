@@ -1,8 +1,8 @@
 package guild
 
 import (
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
 )
 
 type GuildWidget struct {

@@ -1,6 +1,6 @@
 package interaction
 
-import "github.com/rxdn/gdl/objects/channel"
+import "github.com/TicketsBot-cloud/gdl/objects/channel"
 
 type ApplicationCommandInteractionDataOption struct {
 	Name    string                                    `json:"name"`

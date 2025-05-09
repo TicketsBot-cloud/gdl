@@ -1,9 +1,10 @@
 package events
 
 import (
-	"github.com/rxdn/gdl/objects/user"
-	"github.com/rxdn/gdl/utils"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/utils"
 )
 
 type GuildMemberUpdate struct {

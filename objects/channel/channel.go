@@ -2,9 +2,10 @@ package channel
 
 import (
 	"fmt"
-	"github.com/rxdn/gdl/objects"
-	"github.com/rxdn/gdl/objects/user"
 	"time"
+
+	"github.com/TicketsBot-cloud/gdl/objects"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
 )
 
 type Channel struct {

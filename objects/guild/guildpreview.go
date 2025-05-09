@@ -1,6 +1,6 @@
 package guild
 
-import "github.com/rxdn/gdl/objects/guild/emoji"
+import "github.com/TicketsBot-cloud/gdl/objects/guild/emoji"
 
 type GuildPreview struct {
 	Id                       uint64         `json:"id,string"`
