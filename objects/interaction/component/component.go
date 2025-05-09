@@ -13,6 +13,17 @@ const (
 	ComponentButton
 	ComponentSelectMenu
 	ComponentInputText
+	ComponentUserSelect
+	ComponentRoleSelect
+	ComponentMentionableSelect
+	ComponentChannelSelect
+	ComponentSection
+	ComponentTextDisplay
+	ComponentThumbnail
+	ComponentMediaGallery
+	ComponentFile
+	ComponentSeparator
+	ComponentContainer ComponentType = iota + 3
 )
 
 type Component struct {
@@ -20,7 +31,7 @@ type Component struct {
 	ComponentData
 }
 
-type ComponentData interface{
+type ComponentData interface {
 	Type() ComponentType
 }
 
@@ -56,6 +67,28 @@ func encode(c ComponentData) (json.RawMessage, error) {
 	case SelectMenu:
 		return json.Marshal(v)
 	case InputText:
+		return json.Marshal(v)
+	case UserSelect:
+		return json.Marshal(v)
+	case RoleSelect:
+		return json.Marshal(v)
+	case MentionableSelect:
+		return json.Marshal(v)
+	case ChannelSelect:
+		return json.Marshal(v)
+	case Section:
+		return json.Marshal(v)
+	case TextDisplay:
+		return json.Marshal(v)
+	case Thumbnail:
+		return json.Marshal(v)
+	case MediaGallery:
+		return json.Marshal(v)
+	case File:
+		return json.Marshal(v)
+	case Separator:
+		return json.Marshal(v)
+	case Container:
 		return json.Marshal(v)
 	default:
 		fmt.Println(v)
@@ -94,8 +127,52 @@ func (c *Component) UnmarshalJSON(data []byte) error {
 		var parsed InputText
 		err = json.Unmarshal(data, &parsed)
 		c.ComponentData = parsed
+	case ComponentUserSelect:
+		var parsed UserSelect
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentRoleSelect:
+		var parsed RoleSelect
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentMentionableSelect:
+		var parsed MentionableSelect
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentChannelSelect:
+		var parsed ChannelSelect
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentSection:
+		var parsed Section
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentTextDisplay:
+		var parsed TextDisplay
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentThumbnail:
+		var parsed Thumbnail
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentMediaGallery:
+		var parsed MediaGallery
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentFile:
+		var parsed File
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentSeparator:
+		var parsed Separator
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentContainer:
+		var parsed Container
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
 	default:
-		return ErrUnknownType
+		return errors.Join(ErrUnknownType, fmt.Errorf("unknown component type %d", componentType))
 	}
 
 	if err != nil {
