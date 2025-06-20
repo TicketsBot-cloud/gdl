@@ -11,6 +11,7 @@ const (
 	_ // 1 << 5 not documented
 	FlagEphemeral
 	FlagLoading
+	FlagComponentsV2 MessageFlag = 1 << 15
 )
 
 func SumFlags(flags ...MessageFlag) (sum uint) {

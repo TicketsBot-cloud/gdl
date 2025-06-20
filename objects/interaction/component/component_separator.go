@@ -6,7 +6,7 @@ import (
 
 type Separator struct {
 	Divider *bool `json:"divider,omitempty"`
-	Spacing *int
+	Spacing *int  `json:"spacing,omitempty"`
 }
 
 func (i Separator) Type() ComponentType {

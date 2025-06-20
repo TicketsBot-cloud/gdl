@@ -203,6 +203,7 @@ type WebhookEditBody struct {
 	AllowedMentions message.AllowedMention `json:"allowed_mentions"`
 	Components      []component.Component  `json:"components"`
 	Attachments     []request.Attachment   `json:"attachments"`
+	Flags           uint                   `json:"flags"`
 }
 
 func (d WebhookEditBody) GetAttachments() []request.Attachment {
