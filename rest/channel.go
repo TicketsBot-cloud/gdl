@@ -171,6 +171,19 @@ func (d CreateMessageData) GetAttachments() []request.Attachment {
 	return d.Attachments
 }
 
+func CrosspostMessage(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId, messageId uint64) error {
+	endpoint := request.Endpoint{
+		RequestType: request.POST,
+		ContentType: request.Nil,
+		Endpoint:    fmt.Sprintf("/channels/%d/messages/%d/crosspost", channelId, messageId),
+		Route:       ratelimit.NewChannelRoute(ratelimit.RouteCrosspostMessage, channelId),
+		RateLimiter: rateLimiter,
+	}
+
+	err, _ := endpoint.Request(ctx, token, nil, nil)
+	return err
+}
+
 func CreateMessage(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId uint64, data CreateMessageData) (message.Message, error) {
 	var endpoint request.Endpoint
 	if len(data.Attachments) == 0 {
