@@ -24,6 +24,7 @@ const (
 	ComponentFile
 	ComponentSeparator
 	ComponentContainer ComponentType = iota + 3
+	ComponentLabel
 )
 
 type Component struct {
@@ -89,6 +90,8 @@ func encode(c ComponentData) (json.RawMessage, error) {
 	case Separator:
 		return json.Marshal(v)
 	case Container:
+		return json.Marshal(v)
+	case Label:
 		return json.Marshal(v)
 	default:
 		fmt.Println(v)
@@ -169,6 +172,10 @@ func (c *Component) UnmarshalJSON(data []byte) error {
 		c.ComponentData = parsed
 	case ComponentContainer:
 		var parsed Container
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentLabel:
+		var parsed Label
 		err = json.Unmarshal(data, &parsed)
 		c.ComponentData = parsed
 	default:
