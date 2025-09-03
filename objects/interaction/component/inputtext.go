@@ -7,7 +7,7 @@ import (
 type InputText struct {
 	Style       TextStyleTypes `json:"style"`
 	CustomId    string         `json:"custom_id"`
-	Label       string         `json:"label"`
+	Label       *string        `json:"label,omitempty"`
 	Placeholder *string        `json:"placeholder,omitempty"`
 	MinLength   *uint32        `json:"min_length,omitempty"`
 	MaxLength   *uint32        `json:"max_length,omitempty"`
