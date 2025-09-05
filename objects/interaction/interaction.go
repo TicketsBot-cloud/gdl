@@ -92,6 +92,7 @@ type ModalSubmitInteractionData struct {
 type ModalSubmitInteractionActionRowData struct {
 	Type       component.ComponentType               `json:"type"`
 	Components []ModalSubmitInteractionComponentData `json:"components"`
+	Component  *ModalSubmitInteractionComponentData  `json:"component,omitempty"` // For single component rows
 }
 
 type ModalSubmitInteractionComponentData struct {
