@@ -99,5 +99,6 @@ type ModalSubmitInteractionActionRowData struct {
 type ModalSubmitInteractionComponentData struct {
 	Type     component.ComponentType `json:"type"`
 	CustomId string                  `json:"custom_id"`
+	Values   []string                `json:"values,omitempty"` // For multi-selects
 	Value    string                  `json:"value"`
 }

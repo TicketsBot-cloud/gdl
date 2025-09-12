@@ -5,12 +5,11 @@ import (
 )
 
 type UserSelect struct {
-	CustomId    string         `json:"custom_id"`
-	Options     []SelectOption `json:"options"`
-	Placeholder string         `json:"placeholder,omitempty"`
-	MinValues   *int           `json:"min_values,omitempty"`
-	MaxValues   *int           `json:"max_values,omitempty"`
-	Disabled    bool           `json:"disabled"`
+	CustomId    string `json:"custom_id"`
+	Placeholder string `json:"placeholder,omitempty"`
+	MinValues   *int   `json:"min_values,omitempty"`
+	MaxValues   *int   `json:"max_values,omitempty"`
+	Disabled    *bool  `json:"disabled"`
 }
 
 func (i UserSelect) Type() ComponentType {

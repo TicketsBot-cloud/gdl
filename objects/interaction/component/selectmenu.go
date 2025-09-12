@@ -18,7 +18,7 @@ type SelectMenu struct {
 type SelectOption struct {
 	Label       string       `json:"label"`
 	Value       string       `json:"value"`
-	Description string       `json:"description,omitempty"`
+	Description *string      `json:"description,omitempty"`
 	Emoji       *emoji.Emoji `json:"emoji,omitempty"`
 	Default     bool         `json:"default"`
 }
