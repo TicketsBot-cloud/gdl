@@ -10,6 +10,7 @@ type UserSelect struct {
 	MinValues   *int   `json:"min_values,omitempty"`
 	MaxValues   *int   `json:"max_values,omitempty"`
 	Disabled    *bool  `json:"disabled"`
+	Required    *bool  `json:"required,omitempty"`
 }
 
 func (i UserSelect) Type() ComponentType {
