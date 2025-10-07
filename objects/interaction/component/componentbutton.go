@@ -8,7 +8,7 @@ import (
 
 type Button struct {
 	Label    string       `json:"label"`
-	CustomId string       `json:"custom_id"`
+	CustomId string       `json:"custom_id,omitempty"`
 	Style    ButtonStyle  `json:"style"`
 	Emoji    *emoji.Emoji `json:"emoji,omitempty"`
 	SkuId    *uint64      `json:"sku_id,omitempty"`

@@ -9,7 +9,7 @@ type UserSelect struct {
 	Placeholder string `json:"placeholder,omitempty"`
 	MinValues   *int   `json:"min_values,omitempty"`
 	MaxValues   *int   `json:"max_values,omitempty"`
-	Disabled    *bool  `json:"disabled"`
+	Disabled    bool   `json:"disabled"`
 	Required    *bool  `json:"required,omitempty"`
 }
 
