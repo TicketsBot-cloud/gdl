@@ -44,6 +44,15 @@ const (
 	SendMessagesInThreads
 	UseEmbeddedActivities
 	ModerateMembers
+	ViewCreatorMonetizationAnalytics
+	UseSoundboard
+	CreateGuildExpressions
+	CreateEvents
+	UseExternalSounds
+	SendVoiceMessages
+	SendPolls       Permission = 1 << 49 // Explicit bit position (bits 47-48 are skipped by Discord)
+	UseExternalApps Permission = 1 << 50
+	PinMessages     Permission = 1 << 51
 )
 
 func HasPermissionRaw(permissions uint64, permission Permission) bool {
@@ -144,6 +153,24 @@ func (p Permission) String() string {
 		return "Use Embedded Activities"
 	case ModerateMembers:
 		return "Moderate Members"
+	case ViewCreatorMonetizationAnalytics:
+		return "View Creator Monetization Analytics"
+	case UseSoundboard:
+		return "Use Soundboard"
+	case CreateGuildExpressions:
+		return "Create Guild Expressions"
+	case CreateEvents:
+		return "Create Events"
+	case UseExternalSounds:
+		return "Use External Sounds"
+	case SendVoiceMessages:
+		return "Send Voice Messages"
+	case SendPolls:
+		return "Send Polls"
+	case UseExternalApps:
+		return "Use External Apps"
+	case PinMessages:
+		return "Pin Messages"
 	default:
 		return "Unknown Permission"
 	}
@@ -191,4 +218,13 @@ var AllPermissions = []Permission{
 	SendMessagesInThreads,
 	UseEmbeddedActivities,
 	ModerateMembers,
+	ViewCreatorMonetizationAnalytics,
+	UseSoundboard,
+	CreateGuildExpressions,
+	CreateEvents,
+	UseExternalSounds,
+	SendVoiceMessages,
+	SendPolls,
+	UseExternalApps,
+	PinMessages,
 }
