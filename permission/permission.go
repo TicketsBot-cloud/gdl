@@ -50,7 +50,7 @@ const (
 	CreateEvents
 	UseExternalSounds
 	SendVoiceMessages
-	SendPolls       Permission = 1 << 49
+	SendPolls       Permission = 1 << 49 // Explicit bit position (bits 47-48 are skipped by Discord)
 	UseExternalApps Permission = 1 << 50
 	PinMessages     Permission = 1 << 51
 )
