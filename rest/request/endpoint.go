@@ -72,6 +72,21 @@ var Client = http.Client{
 }
 
 func (e *Endpoint) Request(ctx context.Context, token string, body any, response any) (error, *ResponseWithContent) {
+	return e.RequestWithTimeout(ctx, token, body, response, time.Second*3)
+}
+
+func (e *Endpoint) RequestWithTimeout(ctx context.Context, token string, body any, response any, timeout time.Duration) (error, *ResponseWithContent) {
+	client := http.Client{
+		Transport: &http.Transport{
+			TLSHandshakeTimeout: timeout,
+		},
+		Timeout: timeout,
+	}
+
+	return e.RequestWithClient(client, ctx, token, body, response)
+}
+
+func (e *Endpoint) RequestWithClient(Client http.Client, ctx context.Context, token string, body any, response any) (error, *ResponseWithContent) {
 	url := BaseUrl + e.Endpoint
 
 	// Ratelimit
