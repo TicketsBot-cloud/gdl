@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/url"
 	"strconv"
-	"time"
 
 	"github.com/TicketsBot-cloud/gdl/objects/channel"
 	"github.com/TicketsBot-cloud/gdl/objects/guild"
@@ -97,7 +96,7 @@ func GetCurrentUserGuilds(ctx context.Context, token string, rateLimiter *rateli
 	}
 
 	var guilds []guild.Guild
-	err, _ := endpoint.RequestWithTimeout(ctx, token, nil, &guilds, 10*time.Second)
+	err, _ := endpoint.Request(ctx, token, nil, &guilds)
 	return guilds, err
 }
 
