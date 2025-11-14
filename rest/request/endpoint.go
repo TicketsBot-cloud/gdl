@@ -63,14 +63,6 @@ func RegisterPostRequestHook(hook func(*http.Response, []byte)) {
 	postRequestHooksMu.Unlock()
 }
 
-// TODO: Allow users to specify custom timeouts
-var Client = http.Client{
-	Transport: &http.Transport{
-		TLSHandshakeTimeout: time.Second * 3,
-	},
-	Timeout: time.Second * 3,
-}
-
 func (e *Endpoint) Request(ctx context.Context, token string, body any, response any) (error, *ResponseWithContent) {
 	return e.RequestWithTimeout(ctx, token, body, response, time.Second*3)
 }
@@ -86,7 +78,7 @@ func (e *Endpoint) RequestWithTimeout(ctx context.Context, token string, body an
 	return e.RequestWithClient(client, ctx, token, body, response)
 }
 
-func (e *Endpoint) RequestWithClient(Client http.Client, ctx context.Context, token string, body any, response any) (error, *ResponseWithContent) {
+func (e *Endpoint) RequestWithClient(client http.Client, ctx context.Context, token string, body any, response any) (error, *ResponseWithContent) {
 	url := BaseUrl + e.Endpoint
 
 	// Ratelimit
@@ -180,7 +172,7 @@ func (e *Endpoint) RequestWithClient(Client http.Client, ctx context.Context, to
 		executePostRequestHooks(res, content)
 	}()
 
-	res, err = Client.Do(req)
+	res, err = client.Do(req)
 	if err != nil {
 		return err, nil
 	}
