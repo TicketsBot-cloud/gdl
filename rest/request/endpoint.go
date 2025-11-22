@@ -66,9 +66,9 @@ func RegisterPostRequestHook(hook func(*http.Response, []byte)) {
 // TODO: Allow users to specify custom timeouts
 var Client = http.Client{
 	Transport: &http.Transport{
-		TLSHandshakeTimeout: time.Second * 3,
+		TLSHandshakeTimeout: time.Second * 10,
 	},
-	Timeout: time.Second * 3,
+	Timeout: time.Second * 10,
 }
 
 func (e *Endpoint) Request(ctx context.Context, token string, body any, response any) (error, *ResponseWithContent) {
