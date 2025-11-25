@@ -55,6 +55,7 @@ const (
 	SendPolls
 	UseExternalApps
 	PinMessages
+	BypassSlowmode
 )
 
 func HasPermissionRaw(permissions uint64, permission Permission) bool {
