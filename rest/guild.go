@@ -385,8 +385,7 @@ func GetGuildBan(ctx context.Context, token string, rateLimiter *ratelimit.Ratel
 }
 
 type CreateGuildBanData struct {
-	DeleteMessageDays int    `json:"delete_message_days,omitempty"` // 1 - 7
-	Reason            string `json:"-"`
+	DeleteMessageDays int `json:"delete_message_days,omitempty"` // 1 - 7
 }
 
 func CreateGuildBan(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, guildId, userId uint64, data CreateGuildBanData) error {
@@ -396,9 +395,6 @@ func CreateGuildBan(ctx context.Context, token string, rateLimiter *ratelimit.Ra
 		Endpoint:    fmt.Sprintf("/guilds/%d/bans/%d", guildId, userId),
 		Route:       ratelimit.NewGuildRoute(ratelimit.RouteCreateGuildBan, guildId),
 		RateLimiter: rateLimiter,
-		AdditionalHeaders: map[string]string{
-			request.AuditLogReasonHeader: data.Reason,
-		},
 	}
 
 	err, _ := endpoint.Request(ctx, token, data, nil)
