@@ -74,6 +74,14 @@ var Client = http.Client{
 func (e *Endpoint) Request(ctx context.Context, token string, body any, response any) (error, *ResponseWithContent) {
 	url := BaseUrl + e.Endpoint
 
+	// Automatically add audit reason from context if present
+	if auditReason := getAuditReason(ctx); auditReason != "" {
+		if e.AdditionalHeaders == nil {
+			e.AdditionalHeaders = make(map[string]string)
+		}
+		e.AdditionalHeaders[AuditLogReasonHeader] = auditReason
+	}
+
 	// Ratelimit
 	if e.RateLimiter != nil {
 		ch := make(chan error)
