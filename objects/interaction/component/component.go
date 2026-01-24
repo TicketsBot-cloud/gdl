@@ -23,8 +23,12 @@ const (
 	ComponentMediaGallery
 	ComponentFile
 	ComponentSeparator
-	ComponentContainer ComponentType = iota + 3
+	ComponentContainer ComponentType = iota + 3 // 14
 	ComponentLabel
+	ComponentFileUpload
+	ComponentRadioGroup ComponentType = iota + 4 // 21
+	ComponentCheckboxGroup
+	ComponentCheckbox
 )
 
 type Component struct {
@@ -92,6 +96,14 @@ func encode(c ComponentData) (json.RawMessage, error) {
 	case Container:
 		return json.Marshal(v)
 	case Label:
+		return json.Marshal(v)
+	case FileUpload:
+		return json.Marshal(v)
+	case RadioGroup:
+		return json.Marshal(v)
+	case CheckboxGroup:
+		return json.Marshal(v)
+	case Checkbox:
 		return json.Marshal(v)
 	default:
 		fmt.Println(v)
@@ -176,6 +188,22 @@ func (c *Component) UnmarshalJSON(data []byte) error {
 		c.ComponentData = parsed
 	case ComponentLabel:
 		var parsed Label
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentFileUpload:
+		var parsed FileUpload
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentRadioGroup:
+		var parsed RadioGroup
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentCheckboxGroup:
+		var parsed CheckboxGroup
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentCheckbox:
+		var parsed Checkbox
 		err = json.Unmarshal(data, &parsed)
 		c.ComponentData = parsed
 	default:
