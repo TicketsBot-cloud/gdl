@@ -72,7 +72,7 @@ func (d FileUploadInteractionData) Type() component.ComponentType {
 
 type RadioGroupInteractionData struct {
 	MessageComponentInteractionBaseData
-	Value string `json:"value"`
+	Value *string `json:"value"`
 }
 
 func (d RadioGroupInteractionData) Type() component.ComponentType {
