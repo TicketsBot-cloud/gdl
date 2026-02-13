@@ -1,6 +1,8 @@
 package interaction
 
 import (
+	"encoding/json"
+
 	"github.com/TicketsBot-cloud/gdl/objects"
 	"github.com/TicketsBot-cloud/gdl/objects/channel"
 	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
@@ -97,8 +99,32 @@ type ModalSubmitInteractionActionRowData struct {
 }
 
 type ModalSubmitInteractionComponentData struct {
-	Type     component.ComponentType `json:"type"`
-	CustomId string                  `json:"custom_id"`
-	Values   []string                `json:"values,omitempty"` // For multi-selects
-	Value    string                  `json:"value"`
+	Type      component.ComponentType `json:"type"`
+	CustomId  string                  `json:"custom_id"`
+	Values    []string                `json:"values,omitempty"` // For multi-selects and checkbox groups
+	Value     string                  `json:"-"`                // For text inputs and radio groups
+	ValueBool bool                    `json:"-"`                // For boolean values (checkboxes, etc.)
+}
+
+func (d *ModalSubmitInteractionComponentData) UnmarshalJSON(data []byte) error {
+	type Alias ModalSubmitInteractionComponentData
+	aux := &struct {
+		Value interface{} `json:"value"`
+		*Alias
+	}{
+		Alias: (*Alias)(d),
+	}
+
+	if err := json.Unmarshal(data, &aux); err != nil {
+		return err
+	}
+
+	switch v := aux.Value.(type) {
+	case string:
+		d.Value = v
+	case bool:
+		d.ValueBool = v
+	}
+
+	return nil
 }
