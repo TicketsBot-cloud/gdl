@@ -23,10 +23,16 @@ const (
 	ComponentMediaGallery
 	ComponentFile
 	ComponentSeparator
-	ComponentContainer ComponentType = iota + 3 // 14
+)
+
+const (
+	ComponentContainer ComponentType = iota + 17
 	ComponentLabel
 	ComponentFileUpload
-	ComponentRadioGroup ComponentType = iota + 4 // 21
+)
+
+const (
+	ComponentRadioGroup ComponentType = iota + 21
 	ComponentCheckboxGroup
 	ComponentCheckbox
 )
