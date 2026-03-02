@@ -1,7 +1,7 @@
 package user
 
 type ClientStatus struct {
-	Desktop ClientStatusType `json:"desktop"`
-	Mobile  ClientStatusType `json:"mobile"`
-	Web     ClientStatusType `json:"web"`
+	Desktop ClientStatusType `json:"desktop,omitempty"`
+	Mobile  ClientStatusType `json:"mobile,omitempty"`
+	Web     ClientStatusType `json:"web,omitempty"`
 }

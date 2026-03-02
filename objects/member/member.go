@@ -21,12 +21,7 @@ type Member struct {
 	Pending                    *bool                    `json:"pending,omitempty"`
 	Permissions                uint64                   `json:"permissions,string,omitempty"`
 	CommunicationDisabledUntil *time.Time               `json:"communication_disabled_until,omitempty"`
-	AvatarDecorationData       *AvatarDecorationData    `json:"avatar_decoration_data,omitempty"`
-}
-
-type AvatarDecorationData struct {
-	Asset string `json:"asset"`
-	SkuId uint64 `json:"sku_id,string"`
+	AvatarDecorationData       *user.AvatarDecorationData `json:"avatar_decoration_data,omitempty"`
 }
 
 func (m *Member) HasRole(roleId uint64) bool {
