@@ -17,10 +17,16 @@ type Member struct {
 	PremiumSince               *time.Time              `json:"premium_since"`
 	Deaf                       bool                    `json:"deaf"`
 	Mute                       bool                    `json:"mute"`
-	Flags                      int                     `json:"flags"`
-	Pending                    *bool                   `json:"pending"`
-	Permissions                uint64                  `json:"permissions,string"`
-	CommunicationDisabledUntil *time.Time              `json:"communication_disabled_until"`
+	Flags                      int                      `json:"flags"`
+	Pending                    *bool                    `json:"pending,omitempty"`
+	Permissions                uint64                   `json:"permissions,string,omitempty"`
+	CommunicationDisabledUntil *time.Time               `json:"communication_disabled_until,omitempty"`
+	AvatarDecorationData       *AvatarDecorationData    `json:"avatar_decoration_data,omitempty"`
+}
+
+type AvatarDecorationData struct {
+	Asset string `json:"asset"`
+	SkuId uint64 `json:"sku_id,string"`
 }
 
 func (m *Member) HasRole(roleId uint64) bool {
