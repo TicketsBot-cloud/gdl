@@ -8,20 +8,25 @@ import (
 	"github.com/TicketsBot-cloud/gdl/objects"
 	"github.com/TicketsBot-cloud/gdl/objects/channel"
 	"github.com/TicketsBot-cloud/gdl/objects/guild/emoji"
+	"github.com/TicketsBot-cloud/gdl/objects/guild/sticker"
 	"github.com/TicketsBot-cloud/gdl/objects/member"
 )
 
 type Guild struct {
 	Id                          uint64                    `json:"id,string"`
 	Name                        string                    `json:"name"`
-	Icon                        string                    `json:"icon"`
-	Splash                      string                    `json:"splash"`
-	Owner                       bool                      `json:"owner"`
+	Icon                        *string                   `json:"icon"`
+	IconHash                    *string                   `json:"icon_hash,omitempty"`
+	Splash                      *string                   `json:"splash"`
+	DiscoverySplash             *string                   `json:"discovery_splash"`
+	Owner                       bool                      `json:"owner,omitempty"`
 	OwnerId                     uint64                    `json:"owner_id,string"`
-	Permissions                 uint64                    `json:"permissions,string"`
-	Region                      string                    `json:"region"`
+	Permissions                 uint64                    `json:"permissions,string,omitempty"`
+	Region                      *string                   `json:"region,omitempty"`
 	AfkChannelId                objects.NullableSnowflake `json:"afk_channel_id"`
 	AfkTimeout                  int                       `json:"afk_timeout"`
+	WidgetEnabled               *bool                     `json:"widget_enabled,omitempty"`
+	WidgetChannelId             objects.NullableSnowflake `json:"widget_channel_id,omitempty"`
 	VerificationLevel           int                       `json:"verification_level"`
 	DefaultMessageNotifications int                       `json:"default_message_notifications"`
 	ExplicitContentFilter       int                       `json:"explicit_content_filter"`
@@ -30,46 +35,56 @@ type Guild struct {
 	Features                    []GuildFeature            `json:"features"`
 	MfaLevel                    int                       `json:"mfa_level"`
 	ApplicationId               objects.NullableSnowflake `json:"application_id"`
-	WidgetEnabled               bool                      `json:"widget_enabled"`
-	WidgetChannelId             objects.NullableSnowflake `json:"widget_channel_id"`
 	SystemChannelId             objects.NullableSnowflake `json:"system_channel_id"`
 	SystemChannelFlags          uint16                    `json:"system_channel_flags"`
 	RulesChannelId              objects.NullableSnowflake `json:"rules_channel_id,omitempty"`
-	JoinedAt                    time.Time                 `json:"joined_at"`
-	Large                       bool                      `json:"large"`
-	Unavailable                 *bool                     `json:"unavailable"`
-	MemberCount                 int                       `json:"member_count"`
-	VoiceStates                 []VoiceState              `json:"voice_states"`
-	Members                     []member.Member           `json:"members"`
-	Channels                    []channel.Channel         `json:"channels"`
-	Threads                     []channel.Channel         `json:"threads"`
-	MaxPresences                int                       `json:"max_presences"`
-	MaxMembers                  int                       `json:"max_members"`
-	VanityUrlCode               string                    `json:"vanity_url_code"`
-	Description                 string                    `json:"description"`
-	Banner                      string                    `json:"banner"`
+	JoinedAt                    time.Time                 `json:"joined_at,omitempty"`
+	Large                       bool                      `json:"large,omitempty"`
+	Unavailable                 *bool                     `json:"unavailable,omitempty"`
+	MemberCount                 int                       `json:"member_count,omitempty"`
+	VoiceStates                 []VoiceState              `json:"voice_states,omitempty"`
+	Members                     []member.Member           `json:"members,omitempty"`
+	Channels                    []channel.Channel         `json:"channels,omitempty"`
+	Threads                     []channel.Channel         `json:"threads,omitempty"`
+	MaxPresences                *int                      `json:"max_presences,omitempty"`
+	MaxMembers                  *int                      `json:"max_members,omitempty"`
+	VanityUrlCode               *string                   `json:"vanity_url_code"`
+	Description                 *string                   `json:"description"`
+	Banner                      *string                   `json:"banner"`
 	PremiumTier                 PremiumTier               `json:"premium_tier"`
-	PremiumSubscriptionCount    int                       `json:"premium_subscription_count"`
+	PremiumSubscriptionCount    *int                      `json:"premium_subscription_count,omitempty"`
 	PreferredLocale             string                    `json:"preferred_locale"`
 	PublicUpdatesChannelId      objects.NullableSnowflake `json:"public_updates_channel_id"`
-	MaxVideoChannelUsers        int                       `json:"max_video_channel_users"`
-	ApproximateMemberCount      int                       `json:"approximate_member_count"`   // Returned on GET /guild/:id
-	ApproximatePresenceCount    int                       `json:"approximate_presence_count"` // Returned on GET /guild/:id
-	WelcomeScreen               WelcomeScreen             `json:"welcome_screen"`
-	Nsfw                        bool                      `json:"nsfw"`
+	MaxVideoChannelUsers        *int                      `json:"max_video_channel_users,omitempty"`
+	MaxStageVideoChannelUsers   *int                      `json:"max_stage_video_channel_users,omitempty"`
+	ApproximateMemberCount      int                       `json:"approximate_member_count,omitempty"`
+	ApproximatePresenceCount    int                       `json:"approximate_presence_count,omitempty"`
+	WelcomeScreen               *WelcomeScreen            `json:"welcome_screen,omitempty"`
+	NsfwLevel                   int                       `json:"nsfw_level"`
+	Stickers                    []sticker.Sticker         `json:"stickers,omitempty"`
+	PremiumProgressBarEnabled   bool                      `json:"premium_progress_bar_enabled"`
+	SafetyAlertsChannelId       objects.NullableSnowflake `json:"safety_alerts_channel_id"`
+	IncidentsData               *IncidentsData            `json:"incidents_data,omitempty"`
+}
+
+type IncidentsData struct {
+	InvitesDisabledUntil *time.Time `json:"invites_disabled_until,omitempty"`
+	DmsDisabledUntil     *time.Time `json:"dms_disabled_until,omitempty"`
+	DmSpamDetectedAt     *time.Time `json:"dm_spam_detected_at,omitempty"`
+	RaidDetectedAt       *time.Time `json:"raid_detected_at,omitempty"`
 }
 
 func (g *Guild) IconUrl() string {
-	if g.Icon == "" {
+	if g.Icon == nil || *g.Icon == "" {
 		return ""
 	}
 
 	extension := "png"
-	if strings.HasPrefix(g.Icon, "a_") {
+	if strings.HasPrefix(*g.Icon, "a_") {
 		extension = "gif"
 	}
 
-	return fmt.Sprintf("https://cdn.discordapp.com/icons/%d/%s.%s", g.Id, g.Icon, extension)
+	return fmt.Sprintf("https://cdn.discordapp.com/icons/%d/%s.%s", g.Id, *g.Icon, extension)
 }
 
 func (g *Guild) ToCachedGuild() (cached CachedGuild) {

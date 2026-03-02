@@ -3,7 +3,7 @@ package guild
 import "github.com/TicketsBot-cloud/gdl/objects"
 
 type WelcomeScreen struct {
-	Description     string                 `json:"description"`
+	Description     *string                `json:"description"`
 	WelcomeChannels []WelcomeScreenChannel `json:"welcome_channels"`
 }
 
