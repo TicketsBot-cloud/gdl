@@ -11,7 +11,7 @@ type ComponentType uint8
 const (
 	ComponentActionRow ComponentType = iota + 1
 	ComponentButton
-	ComponentSelectMenu
+	ComponentStringSelect
 	ComponentInputText
 	ComponentUserSelect
 	ComponentRoleSelect
@@ -140,7 +140,7 @@ func (c *Component) UnmarshalJSON(data []byte) error {
 		var parsed Button
 		err = json.Unmarshal(data, &parsed)
 		c.ComponentData = parsed
-	case ComponentSelectMenu:
+	case ComponentStringSelect:
 		var parsed SelectMenu
 		err = json.Unmarshal(data, &parsed)
 		c.ComponentData = parsed

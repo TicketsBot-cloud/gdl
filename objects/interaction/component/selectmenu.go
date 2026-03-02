@@ -25,7 +25,7 @@ type SelectOption struct {
 }
 
 func (s SelectMenu) Type() ComponentType {
-	return ComponentSelectMenu
+	return ComponentStringSelect
 }
 
 func (s SelectMenu) MarshalJSON() ([]byte, error) {
@@ -35,14 +35,14 @@ func (s SelectMenu) MarshalJSON() ([]byte, error) {
 		Type ComponentType `json:"type"`
 		WrappedSelectMenu
 	}{
-		Type:              ComponentSelectMenu,
+		Type:              ComponentStringSelect,
 		WrappedSelectMenu: WrappedSelectMenu(s),
 	})
 }
 
 func BuildSelectMenu(data SelectMenu) Component {
 	return Component{
-		Type:          ComponentSelectMenu,
+		Type:          ComponentStringSelect,
 		ComponentData: data,
 	}
 }
