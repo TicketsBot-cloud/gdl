@@ -1,6 +1,10 @@
 package channel
 
-import "time"
+import (
+	"time"
+
+	"github.com/TicketsBot-cloud/gdl/objects/member"
+)
 
 type ThreadMetadata struct {
 	Archived            bool       `json:"archived"`
@@ -12,8 +16,9 @@ type ThreadMetadata struct {
 }
 
 type ThreadMember struct {
-	ThreadId      uint64    `json:"id,string"`
-	UserId        uint64    `json:"user_id,string"`
-	JoinTimestamp time.Time `json:"join_timestamp"`
-	Flags         uint      `json:"flags"`
+	ThreadId      *uint64         `json:"id,string,omitempty"`
+	UserId        *uint64         `json:"user_id,string,omitempty"`
+	JoinTimestamp time.Time       `json:"join_timestamp"`
+	Flags         uint            `json:"flags"`
+	Member        *member.Member  `json:"member,omitempty"`
 }
