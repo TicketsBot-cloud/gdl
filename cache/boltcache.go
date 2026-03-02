@@ -380,9 +380,13 @@ func (c *BoltCache) StoreChannels(channels []channel.Channel) {
 			b := tx.Bucket([]byte("channels"))
 
 			for _, ch := range channels {
+				var guildId uint64
+				if ch.GuildId != nil {
+					guildId = *ch.GuildId
+				}
 				cwg := channelWithGuild{
 					CachedChannel: ch.ToCachedChannel(),
-					guildId:       ch.GuildId,
+					guildId:       guildId,
 				}
 
 				if encoded, err := json.Marshal(cwg); err == nil {

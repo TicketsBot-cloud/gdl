@@ -300,19 +300,21 @@ func (c *MemoryCache) StoreChannels(ctx context.Context, channels []channel.Chan
 
 			// Add to guild object
 			c.guildLock.Lock()
-			if guild, found := c.guilds[channel.GuildId]; found {
-				// Check to see if channel already exists
-				var channelExists bool
-				for _, userId := range guild.Channels {
-					if userId == channel.Id {
-						channelExists = true
-						break
+			if channel.GuildId != nil {
+				if guild, found := c.guilds[*channel.GuildId]; found {
+					// Check to see if channel already exists
+					var channelExists bool
+					for _, userId := range guild.Channels {
+						if userId == channel.Id {
+							channelExists = true
+							break
+						}
 					}
-				}
 
-				if !channelExists {
-					guild.Channels = append(guild.Channels, channel.Id)
-					c.guilds[channel.GuildId] = guild
+					if !channelExists {
+						guild.Channels = append(guild.Channels, channel.Id)
+						c.guilds[*channel.GuildId] = guild
+					}
 				}
 			}
 			c.guildLock.Unlock()

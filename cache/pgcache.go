@@ -255,7 +255,11 @@ func (c *PgCache) StoreGuilds(ctx context.Context, guilds []guild.Guild) error {
 					return err
 				}
 
-				batch.Queue(`INSERT INTO channels("channel_id", "guild_id", "data") VALUES($1, $2, $3) ON CONFLICT("channel_id") DO UPDATE SET "data" = $3;`, channel.Id, channel.GuildId, string(encoded))
+				var chGuildId uint64
+			if channel.GuildId != nil {
+				chGuildId = *channel.GuildId
+			}
+			batch.Queue(`INSERT INTO channels("channel_id", "guild_id", "data") VALUES($1, $2, $3) ON CONFLICT("channel_id") DO UPDATE SET "data" = $3;`, channel.Id, chGuildId, string(encoded))
 			}
 		}
 
@@ -316,7 +320,8 @@ func (c *PgCache) StoreGuild(ctx context.Context, g guild.Guild) error {
 	}
 
 	for i, channel := range g.Channels {
-		channel.GuildId = g.Id
+		gId := g.Id
+		channel.GuildId = &gId
 		g.Channels[i] = channel
 	}
 
@@ -615,7 +620,11 @@ func (c *PgCache) StoreChannel(ctx context.Context, ch channel.Channel) error {
 		return err
 	}
 
-	_, err = c.Exec(ctx, queryInsertChannel, ch.Id, ch.GuildId, string(encoded))
+	var guildId uint64
+	if ch.GuildId != nil {
+		guildId = *ch.GuildId
+	}
+	_, err = c.Exec(ctx, queryInsertChannel, ch.Id, guildId, string(encoded))
 	return err
 }
 
@@ -632,7 +641,11 @@ func (c *PgCache) StoreChannels(ctx context.Context, channels []channel.Channel)
 			return err
 		}
 
-		batch.Queue(queryInsertChannel, ch.Id, ch.GuildId, string(encoded))
+		var chGuildId uint64
+		if ch.GuildId != nil {
+			chGuildId = *ch.GuildId
+		}
+		batch.Queue(queryInsertChannel, ch.Id, chGuildId, string(encoded))
 	}
 
 	br := c.SendBatch(ctx, batch)
@@ -664,7 +677,11 @@ func (c *PgCache) ReplaceChannels(ctx context.Context, guildId uint64, channels 
 			return err
 		}
 
-		if _, err := tx.Exec(ctx, queryInsertChannel, ch.Id, ch.GuildId, string(encoded)); err != nil {
+		var txGuildId uint64
+		if ch.GuildId != nil {
+			txGuildId = *ch.GuildId
+		}
+		if _, err := tx.Exec(ctx, queryInsertChannel, ch.Id, txGuildId, string(encoded)); err != nil {
 			return err
 		}
 	}
