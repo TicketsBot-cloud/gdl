@@ -8,7 +8,7 @@ type SoundboardSound struct {
 	Volume    float64    `json:"volume"`
 	EmojiId   *uint64    `json:"emoji_id,string"`
 	EmojiName *string    `json:"emoji_name,omitempty"`
-	GuildId   *uint64    `json:"guild_id,string"`
+	GuildId   *uint64    `json:"guild_id,string,omitempty"`
 	Available bool       `json:"available"`
 	User      *user.User `json:"user,omitempty"`
 }
