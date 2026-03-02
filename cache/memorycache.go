@@ -677,11 +677,15 @@ func (c *MemoryCache) StoreVoiceStates(ctx context.Context, states []guild.Voice
 		defer c.voiceStateLock.Unlock()
 
 		for _, state := range states {
-			if c.voiceStates[state.GuildId] == nil {
-				c.voiceStates[state.GuildId] = make(map[uint64]guild.CachedVoiceState)
+			if state.GuildId == nil {
+				continue
+			}
+			guildId := *state.GuildId
+			if c.voiceStates[guildId] == nil {
+				c.voiceStates[guildId] = make(map[uint64]guild.CachedVoiceState)
 			}
 
-			c.voiceStates[state.GuildId][state.UserId] = state.ToCachedVoiceState()
+			c.voiceStates[guildId][state.UserId] = state.ToCachedVoiceState()
 		}
 	}
 
@@ -702,11 +706,8 @@ func (c *MemoryCache) GetVoiceState(ctx context.Context, userId, guildId uint64)
 		// get member
 		m, err := c.GetMember(ctx, guildId, userId)
 		if err == ErrNotFound {
-			m = member.Member{
-				User: user.User{
-					Id: userId,
-				},
-			}
+			u := user.User{Id: userId}
+			m = member.Member{User: &u}
 		} else if err != nil {
 			return guild.VoiceState{}, err
 		}
@@ -730,11 +731,8 @@ func (c *MemoryCache) GetGuildVoiceStates(ctx context.Context, guildId uint64) (
 		// get member
 		m, err := c.GetMember(ctx, guildId, userId)
 		if err == ErrNotFound {
-			m = member.Member{
-				User: user.User{
-					Id: userId,
-				},
-			}
+			u := user.User{Id: userId}
+			m = member.Member{User: &u}
 		} else if err != nil {
 			return nil, err
 		}

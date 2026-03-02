@@ -395,7 +395,7 @@ func (s *Shard) SearchGuildMembers(ctx context.Context, guildId uint64, data res
 
 		var users []user.User
 		for _, m := range members {
-			users = append(users, m.User)
+			users = append(users, *m.User)
 		}
 
 		if err := s.Cache.StoreUsers(ctx, users); err != nil {
@@ -419,7 +419,7 @@ func (s *Shard) ListGuildMembers(ctx context.Context, guildId uint64, data rest.
 
 		var users []user.User
 		for _, m := range members {
-			users = append(users, m.User)
+			users = append(users, *m.User)
 		}
 
 		if err := s.Cache.StoreUsers(ctx, users); err != nil {

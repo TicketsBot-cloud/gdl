@@ -39,7 +39,7 @@ type Guild struct {
 	Large                       bool                      `json:"large"`
 	Unavailable                 *bool                     `json:"unavailable"`
 	MemberCount                 int                       `json:"member_count"`
-	VoiceStates                 []VoiceState              `json:"voice_state"`
+	VoiceStates                 []VoiceState              `json:"voice_states"`
 	Members                     []member.Member           `json:"members"`
 	Channels                    []channel.Channel         `json:"channels"`
 	Threads                     []channel.Channel         `json:"threads"`
