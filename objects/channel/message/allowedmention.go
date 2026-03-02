@@ -11,5 +11,5 @@ type AllowedMention struct {
 
 // Helper
 var MentionEveryone = AllowedMention{
-	Parse: []AllowedMentionType{EVERYONE},
+	Parse: []AllowedMentionType{AllowedMentionTypeEveryone},
 }
