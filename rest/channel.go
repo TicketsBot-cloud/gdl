@@ -414,7 +414,7 @@ type CreateInviteData struct {
 	Temporary      bool   `json:"temporary"`
 	Unique         bool   `json:"unique"`
 	TargetUser     uint64 `json:"target_user,string,omitempty"`
-	TargetUserType int    `json:"target_user_type,omitempty"`
+	TargetType     int    `json:"target_type,omitempty"`
 }
 
 func CreateChannelInvite(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId uint64, data CreateInviteData) (invite.Invite, error) {
