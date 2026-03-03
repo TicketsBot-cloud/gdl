@@ -218,7 +218,7 @@ func (s *Shard) CreatePublicThread(ctx context.Context, channelId uint64, name s
 	data := rest.StartThreadWithoutMessageData{
 		Name:                name,
 		AutoArchiveDuration: autoArchiveDuration,
-		Type:                channel.ChannelTypeGuildPublicThread,
+		Type:                channel.ChannelTypePublicThread,
 	}
 
 	return rest.StartThreadWithoutMessage(ctx, s.Token, s.ShardManager.RateLimiter, channelId, data)
@@ -228,7 +228,7 @@ func (s *Shard) CreatePrivateThread(ctx context.Context, channelId uint64, name 
 	data := rest.StartThreadWithoutMessageData{
 		Name:                name,
 		AutoArchiveDuration: autoArchiveDuration,
-		Type:                channel.ChannelTypeGuildPrivateThread,
+		Type:                channel.ChannelTypePrivateThread,
 		Invitable:           invitable,
 	}
 
