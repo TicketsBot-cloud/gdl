@@ -4,17 +4,18 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/TicketsBot-cloud/gdl/objects/application"
 	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
 	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
 	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
-func GetGlobalCommands(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, applicationId uint64) (commands []interaction.ApplicationCommand, err error) {
+func GetGlobalCommands(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, applicationId uint64, withLocalizations bool) (commands []interaction.ApplicationCommand, err error) {
 	endpoint := request.Endpoint{
 		RequestType: request.GET,
 		ContentType: request.Nil,
-		Endpoint:    fmt.Sprintf("/applications/%d/commands", applicationId),
+		Endpoint:    fmt.Sprintf("/applications/%d/commands?with_localizations=%t", applicationId, withLocalizations),
 		Route:       ratelimit.NewApplicationRoute(ratelimit.RouteGetGlobalCommands, applicationId),
 		RateLimiter: rateLimiter,
 	}
@@ -23,13 +24,32 @@ func GetGlobalCommands(ctx context.Context, token string, rateLimiter *ratelimit
 	return
 }
 
+func GetGlobalCommand(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, applicationId, commandId uint64) (command interaction.ApplicationCommand, err error) {
+	endpoint := request.Endpoint{
+		RequestType: request.GET,
+		ContentType: request.Nil,
+		Endpoint:    fmt.Sprintf("/applications/%d/commands/%d", applicationId, commandId),
+		Route:       ratelimit.NewApplicationRoute(ratelimit.RouteGetGlobalCommand, applicationId),
+		RateLimiter: rateLimiter,
+	}
+
+	err, _ = endpoint.Request(ctx, token, nil, &command)
+	return
+}
+
 type CreateCommandData struct {
-	Id          uint64                                 `json:"id,omitempty"` // Optional: Use to rename without changing ID
-	Name        string                                 `json:"name"`
-	Description string                                 `json:"description"`
-	Options     []interaction.ApplicationCommandOption `json:"options"`
-	Type        interaction.ApplicationCommandType     `json:"type"`
-	Contexts    []interaction.InteractionContextType   `json:"contexts,omitempty"`
+	Id                       uint64                                   `json:"id,string,omitempty"` // Use in bulk overwrite to update an existing command by ID
+	Name                     string                                   `json:"name"`
+	NameLocalizations        map[string]string                        `json:"name_localizations,omitempty"`
+	Description              string                                   `json:"description,omitempty"`
+	DescriptionLocalizations map[string]string                        `json:"description_localizations,omitempty"`
+	Options                  []interaction.ApplicationCommandOption   `json:"options,omitempty"`
+	DefaultMemberPermissions *string                                  `json:"default_member_permissions,omitempty"`
+	IntegrationTypes         []application.ApplicationIntegrationType `json:"integration_types,omitempty"`
+	Contexts                 []interaction.InteractionContextType     `json:"contexts,omitempty"`
+	Type                     interaction.ApplicationCommandType       `json:"type,omitempty"`
+	Nsfw                     *bool                                    `json:"nsfw,omitempty"`
+	Handler                  *interaction.ApplicationCommandHandlerType `json:"handler,omitempty"`
 }
 
 func CreateGlobalCommand(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, applicationId uint64, data CreateCommandData) (command interaction.ApplicationCommand, err error) {
@@ -84,16 +104,29 @@ func DeleteGlobalCommand(ctx context.Context, token string, rateLimiter *ratelim
 	return
 }
 
-func GetGuildCommands(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, applicationId, guildId uint64) (commands []interaction.ApplicationCommand, err error) {
+func GetGuildCommands(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, applicationId, guildId uint64, withLocalizations bool) (commands []interaction.ApplicationCommand, err error) {
 	endpoint := request.Endpoint{
 		RequestType: request.GET,
 		ContentType: request.Nil,
-		Endpoint:    fmt.Sprintf("/applications/%d/guilds/%d/commands", applicationId, guildId),
+		Endpoint:    fmt.Sprintf("/applications/%d/guilds/%d/commands?with_localizations=%t", applicationId, guildId, withLocalizations),
 		Route:       ratelimit.NewGuildRoute(ratelimit.RouteGetGuildCommands, applicationId),
 		RateLimiter: rateLimiter,
 	}
 
 	err, _ = endpoint.Request(ctx, token, nil, &commands)
+	return
+}
+
+func GetGuildCommand(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, applicationId, guildId, commandId uint64) (command interaction.ApplicationCommand, err error) {
+	endpoint := request.Endpoint{
+		RequestType: request.GET,
+		ContentType: request.Nil,
+		Endpoint:    fmt.Sprintf("/applications/%d/guilds/%d/commands/%d", applicationId, guildId, commandId),
+		Route:       ratelimit.NewGuildRoute(ratelimit.RouteGetGuildCommand, applicationId),
+		RateLimiter: rateLimiter,
+	}
+
+	err, _ = endpoint.Request(ctx, token, nil, &command)
 	return
 }
 
@@ -239,7 +272,7 @@ func DeleteOriginalInteractionResponse(ctx context.Context, token string, rateLi
 		RequestType: request.DELETE,
 		ContentType: request.Nil,
 		Endpoint:    fmt.Sprintf("/webhooks/%d/%s/messages/@original", applicationId, token),
-		Route:       ratelimit.NewWebhookRoute(ratelimit.RouteEditOriginalInteractionResponse, applicationId),
+		Route:       ratelimit.NewWebhookRoute(ratelimit.RouteDeleteOriginalInteractionResponse, applicationId),
 		RateLimiter: rateLimiter,
 	}
 

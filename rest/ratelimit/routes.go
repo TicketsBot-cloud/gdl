@@ -184,6 +184,7 @@ const (
 
 	// /applications/:id/...
 	RouteGetGlobalCommands
+	RouteGetGlobalCommand
 	RouteCreateGlobalCommand
 	RouteModifyGlobalCommand
 	RouteModifyGlobalCommands
@@ -191,6 +192,7 @@ const (
 
 	// /applications/:id/guild/...
 	RouteGetGuildCommands
+	RouteGetGuildCommand
 	RouteCreateGuildCommand
 	RouteModifyGuildCommand
 	RouteModifyGuildCommands
