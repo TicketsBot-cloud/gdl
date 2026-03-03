@@ -3,6 +3,6 @@ package channel
 type PermissionOverwriteType int
 
 const (
-	PermissionTypeRole PermissionOverwriteType = iota
-	PermissionTypeMember
+	PermissionOverwriteTypeRole   PermissionOverwriteType = 0
+	PermissionOverwriteTypeMember PermissionOverwriteType = 1
 )
