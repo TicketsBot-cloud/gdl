@@ -27,6 +27,7 @@ const (
 	TeamMembershipStateInvited  TeamMembershipState = 1
 	TeamMembershipStateAccepted TeamMembershipState = 2
 
+	TeamMemberRoleOwner     TeamMemberRole = "owner"
 	TeamMemberRoleAdmin     TeamMemberRole = "admin"
 	TeamMemberRoleDeveloper TeamMemberRole = "developer"
 	TeamMemberRoleReadOnly  TeamMemberRole = "read_only"
