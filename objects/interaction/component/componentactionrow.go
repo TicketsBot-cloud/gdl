@@ -3,7 +3,8 @@ package component
 import "encoding/json"
 
 type ActionRow struct {
-	Components []Component
+	Id         *int        `json:"id,omitempty"`
+	Components []Component `json:"components"`
 }
 
 func (a ActionRow) Type() ComponentType {
@@ -17,14 +18,14 @@ func (a ActionRow) MarshalJSON() ([]byte, error) {
 		Type ComponentType `json:"type"`
 		WrappedActionRow
 	}{
-		Type:             ComponentButton,
+		Type:             ComponentActionRow,
 		WrappedActionRow: WrappedActionRow(a),
 	})
 }
 
 func BuildActionRow(components ...Component) Component {
 	return Component{
-		Type:          ComponentActionRow,
+		Type: ComponentActionRow,
 		ComponentData: ActionRow{
 			Components: components,
 		},
