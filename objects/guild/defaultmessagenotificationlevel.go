@@ -4,5 +4,5 @@ type DefaultMessageNotificationLevel int
 
 const (
 	DefaultMessageNotificationLevelAllMessages  DefaultMessageNotificationLevel = 0
-	DefaultMessageNotificationLevelOnlyMengions DefaultMessageNotificationLevel = 1
+	DefaultMessageNotificationLevelOnlyMentions DefaultMessageNotificationLevel = 1
 )
