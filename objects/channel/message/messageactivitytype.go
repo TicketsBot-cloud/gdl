@@ -3,8 +3,8 @@ package message
 type MessageActivityType int
 
 const (
-	MessageActivityJoin MessageActivityType = iota
-	MessageActivitySpectate
-	MessageActivityListen
-	MessageActivityJoinRequest
+	MessageActivityTypeJoin        MessageActivityType = 1
+	MessageActivityTypeSpectate    MessageActivityType = 2
+	MessageActivityTypeListen      MessageActivityType = 3
+	MessageActivityTypeJoinRequest MessageActivityType = 5
 )
