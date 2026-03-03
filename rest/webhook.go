@@ -151,12 +151,13 @@ type WebhookBody struct {
 	Content         string                 `json:"content,omitempty"`
 	Username        string                 `json:"username,omitempty"`
 	AvatarUrl       string                 `json:"avatar_url,omitempty"`
-	Tts             bool                   `json:"tts"`
+	Tts             bool                   `json:"tts,omitempty"`
 	Flags           uint                   `json:"flags,omitempty"`
 	Embeds          []*embed.Embed         `json:"embeds,omitempty"`
 	AllowedMentions message.AllowedMention `json:"allowed_mentions,omitempty"`
 	Components      []component.Component  `json:"components,omitempty"`
 	Attachments     []request.Attachment   `json:"attachments,omitempty"`
+	ThreadId        *uint64                `json:"thread_id,string,omitempty"`
 	ThreadName      string                 `json:"thread_name,omitempty"`
 }
 
@@ -210,12 +211,25 @@ func (d WebhookEditBody) GetAttachments() []request.Attachment {
 	return d.Attachments
 }
 
+func GetWebhookMessage(ctx context.Context, webhookToken string, rateLimiter *ratelimit.Ratelimiter, webhookId, messageId uint64) (msg message.Message, err error) {
+	endpoint := request.Endpoint{
+		RequestType: request.GET,
+		ContentType: request.Nil,
+		Endpoint:    fmt.Sprintf("/webhooks/%d/%s/messages/%d", webhookId, webhookToken, messageId),
+		Route:       ratelimit.NewWebhookRoute(ratelimit.RouteGetWebhookMessage, webhookId),
+		RateLimiter: rateLimiter,
+	}
+
+	err, _ = endpoint.Request(ctx, "", nil, &msg)
+	return
+}
+
 func EditWebhookMessage(ctx context.Context, webhookToken string, rateLimiter *ratelimit.Ratelimiter, webhookId, messageId uint64, data WebhookEditBody) (msg message.Message, err error) {
 	var endpoint request.Endpoint
 
 	if len(data.Attachments) == 0 {
 		endpoint = request.Endpoint{
-			RequestType: request.POST,
+			RequestType: request.PATCH,
 			ContentType: request.ApplicationJson,
 			Endpoint:    fmt.Sprintf("/webhooks/%d/%s/messages/%d", webhookId, webhookToken, messageId),
 			Route:       ratelimit.NewWebhookRoute(ratelimit.RouteEditWebhookMessage, webhookId),
@@ -223,7 +237,7 @@ func EditWebhookMessage(ctx context.Context, webhookToken string, rateLimiter *r
 		}
 	} else {
 		endpoint = request.Endpoint{
-			RequestType: request.POST,
+			RequestType: request.PATCH,
 			ContentType: request.MultipartFormData,
 			Endpoint:    fmt.Sprintf("/webhooks/%d/%s/messages/%d", webhookId, webhookToken, messageId),
 			Route:       ratelimit.NewWebhookRoute(ratelimit.RouteEditWebhookMessage, webhookId),
@@ -232,5 +246,18 @@ func EditWebhookMessage(ctx context.Context, webhookToken string, rateLimiter *r
 	}
 
 	err, _ = endpoint.Request(ctx, "", data, &msg)
+	return
+}
+
+func DeleteWebhookMessage(ctx context.Context, webhookToken string, rateLimiter *ratelimit.Ratelimiter, webhookId, messageId uint64) (err error) {
+	endpoint := request.Endpoint{
+		RequestType: request.DELETE,
+		ContentType: request.Nil,
+		Endpoint:    fmt.Sprintf("/webhooks/%d/%s/messages/%d", webhookId, webhookToken, messageId),
+		Route:       ratelimit.NewWebhookRoute(ratelimit.RouteDeleteWebhookMessage, webhookId),
+		RateLimiter: rateLimiter,
+	}
+
+	err, _ = endpoint.Request(ctx, "", nil, nil)
 	return
 }
