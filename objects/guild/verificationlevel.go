@@ -3,9 +3,9 @@ package guild
 type VerificationLevel int
 
 const (
-	NONE      VerificationLevel = 0
-	LOW       VerificationLevel = 1
-	MEDIUM    VerificationLevel = 2
-	HIGH      VerificationLevel = 3
-	VERY_HIGH VerificationLevel = 4
+	VerificationLevelNone     VerificationLevel = 0
+	VerificationLevelLow      VerificationLevel = 1
+	VerificationLevelMedium   VerificationLevel = 2
+	VerificationLevelHigh     VerificationLevel = 3
+	VerificationLevelVeryHigh VerificationLevel = 4
 )
