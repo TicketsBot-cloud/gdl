@@ -5,17 +5,18 @@ import (
 )
 
 type Thumbnail struct {
-	Media       UnfurledMediaItem `json:"media,omitempty"`
+	Id          *int              `json:"id,omitempty"`
+	Media       UnfurledMediaItem `json:"media"`
 	Description *string           `json:"description,omitempty"`
 	Spoiler     *bool             `json:"spoiler,omitempty"`
 }
 
 type UnfurledMediaItem struct {
-	Url         string `json:"url"`
-	ProxyUrl    string `json:"proxy_url"`
-	Height      int    `json:"height"`
-	Width       int    `json:"width"`
-	ContentType string `json:"content_type"`
+	Url         string  `json:"url"`
+	ProxyUrl    *string `json:"proxy_url,omitempty"`
+	Height      *int    `json:"height,omitempty"`
+	Width       *int    `json:"width,omitempty"`
+	ContentType *string `json:"content_type,omitempty"`
 }
 
 func (i Thumbnail) Type() ComponentType {
