@@ -1,11 +1,11 @@
 package auditlog
 
 type AuditLogEntry struct {
-	TargetId   uint64           `json:"target_id,string"`
-	Changes    []AuditLogChange `json:"changes"`
-	UserId     uint64           `json:"user_id,string"`
+	TargetId   *string          `json:"target_id"`
+	Changes    []AuditLogChange `json:"changes,omitempty"`
+	UserId     *uint64          `json:"user_id,string,omitempty"`
 	Id         uint64           `json:"id,string"`
 	ActionType AuditLogEvent    `json:"action_type"`
-	Options    AuditEntryInfo   `json:"options"`
-	Reason     *string          `json:"reason"`
+	Options    *AuditEntryInfo  `json:"options,omitempty"`
+	Reason     *string          `json:"reason,omitempty"`
 }
