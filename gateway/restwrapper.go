@@ -187,7 +187,7 @@ func (s *Shard) GetThreadMember(ctx context.Context, channelId, userId uint64) (
 }
 
 func (s *Shard) ListThreadMembers(ctx context.Context, channelId uint64) ([]channel.ThreadMember, error) {
-	return rest.ListThreadMembers(ctx, s.Token, s.ShardManager.RateLimiter, channelId)
+	return rest.ListThreadMembers(ctx, s.Token, s.ShardManager.RateLimiter, channelId, rest.ListThreadMembersData{})
 }
 
 func (s *Shard) ListActiveThreads(ctx context.Context, guildId uint64) (rest.ThreadsResponse, error) {
