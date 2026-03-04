@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/TicketsBot-cloud/gdl/objects/stage"
+	"github.com/TicketsBot-cloud/gdl/objects/guild/stage"
 	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
 	"github.com/TicketsBot-cloud/gdl/rest/request"
 )

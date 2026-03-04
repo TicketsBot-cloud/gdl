@@ -1,6 +1,6 @@
 package events
 
-import "github.com/TicketsBot-cloud/gdl/objects/stage"
+import "github.com/TicketsBot-cloud/gdl/objects/guild/stage"
 
 type StageInstanceCreate struct {
 	stage.StageInstance

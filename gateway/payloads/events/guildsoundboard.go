@@ -1,6 +1,6 @@
 package events
 
-import "github.com/TicketsBot-cloud/gdl/objects/soundboard"
+import "github.com/TicketsBot-cloud/gdl/objects/guild/soundboard"
 
 type GuildSoundboardSoundCreate struct {
 	soundboard.SoundboardSound

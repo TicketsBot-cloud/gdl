@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/TicketsBot-cloud/gdl/objects/soundboard"
+	"github.com/TicketsBot-cloud/gdl/objects/guild/soundboard"
 	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
 	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
