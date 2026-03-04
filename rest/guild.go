@@ -712,3 +712,68 @@ func GetGuildVanityURL(ctx context.Context, token string, rateLimiter *ratelimit
 	err, _ = endpoint.Request(ctx, token, nil, &invite)
 	return
 }
+
+type AddGuildMemberData struct {
+	AccessToken string                  `json:"access_token"`
+	Nick        *string                 `json:"nick,omitempty"`
+	Roles       utils.Uint64StringSlice `json:"roles,omitempty"`
+	Mute        *bool                   `json:"mute,omitempty"`
+	Deaf        *bool                   `json:"deaf,omitempty"`
+}
+
+// Returns nil if the user was already a member of the guild (HTTP 204).
+func AddGuildMember(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, guildId, userId uint64, data AddGuildMemberData) (*member.Member, error) {
+	endpoint := request.Endpoint{
+		RequestType: request.PUT,
+		ContentType: request.ApplicationJson,
+		Endpoint:    fmt.Sprintf("/guilds/%d/members/%d", guildId, userId),
+		Route:       ratelimit.NewGuildRoute(ratelimit.RouteAddGuildMember, guildId),
+		RateLimiter: rateLimiter,
+	}
+
+	var m member.Member
+	if err, res := endpoint.Request(ctx, token, data, &m); err != nil {
+		return nil, err
+	} else if res != nil && res.StatusCode == 204 {
+		return nil, nil
+	}
+
+	return &m, nil
+}
+
+func GetGuildWelcomeScreen(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, guildId uint64) (guild.WelcomeScreen, error) {
+	endpoint := request.Endpoint{
+		RequestType: request.GET,
+		ContentType: request.Nil,
+		Endpoint:    fmt.Sprintf("/guilds/%d/welcome-screen", guildId),
+		Route:       ratelimit.NewGuildRoute(ratelimit.RouteGetGuildWelcomeScreen, guildId),
+		RateLimiter: rateLimiter,
+	}
+
+	var screen guild.WelcomeScreen
+	err, _ := endpoint.Request(ctx, token, nil, &screen)
+	return screen, err
+}
+
+type ModifyGuildWelcomeScreenData struct {
+	Enabled         *bool                        `json:"enabled,omitempty"`
+	WelcomeChannels []guild.WelcomeScreenChannel `json:"welcome_channels,omitempty"`
+	Description     *string                      `json:"description,omitempty"`
+}
+
+func ModifyGuildWelcomeScreen(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, guildId uint64, data ModifyGuildWelcomeScreenData) (guild.WelcomeScreen, error) {
+	endpoint := request.Endpoint{
+		RequestType: request.PATCH,
+		ContentType: request.ApplicationJson,
+		Endpoint:    fmt.Sprintf("/guilds/%d/welcome-screen", guildId),
+		Route:       ratelimit.NewGuildRoute(ratelimit.RouteModifyGuildWelcomeScreen, guildId),
+		RateLimiter: rateLimiter,
+	}
+
+	var screen guild.WelcomeScreen
+	if err, _ := endpoint.Request(ctx, token, data, &screen); err != nil {
+		return guild.WelcomeScreen{}, err
+	}
+
+	return screen, nil
+}

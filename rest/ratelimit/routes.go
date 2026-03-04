@@ -245,4 +245,59 @@ const (
 	RouteOauth2TokenExchange
 	RouteOauth2TokenRevoke
 	RouteGetCurrentAuthorizationInformation
+
+	// Auto Moderation
+	RouteListAutoModerationRules
+	RouteGetAutoModerationRule
+	RouteCreateAutoModerationRule
+	RouteModifyAutoModerationRule
+	RouteDeleteAutoModerationRule
+
+	// Guild Scheduled Events
+	RouteListGuildScheduledEvents
+	RouteGetGuildScheduledEvent
+	RouteCreateGuildScheduledEvent
+	RouteModifyGuildScheduledEvent
+	RouteDeleteGuildScheduledEvent
+	RouteGetGuildScheduledEventUsers
+
+	// Stage Instances
+	RouteCreateStageInstance
+	RouteGetStageInstance
+	RouteModifyStageInstance
+	RouteDeleteStageInstance
+
+	// Soundboard
+	RouteSendSoundboardSound
+	RouteGetDefaultSoundboardSounds
+	RouteListGuildSoundboardSounds
+	RouteGetGuildSoundboardSound
+	RouteCreateGuildSoundboardSound
+	RouteModifyGuildSoundboardSound
+	RouteDeleteGuildSoundboardSound
+
+	// Polls
+	RouteGetPollAnswerVoters
+	RouteEndPoll
+
+	// SKUs
+	RouteListSKUs
+
+	// Subscriptions
+	RouteListSKUSubscriptions
+	RouteGetSKUSubscription
+
+	// Stickers
+	RouteGetSticker
+	RouteGetStickerPacks
+	RouteGetStickerPack
+	RouteListGuildStickers
+	RouteGetGuildSticker
+	RouteCreateGuildSticker
+	RouteModifyGuildSticker
+	RouteDeleteGuildSticker
+
+	// Guild Welcome Screen
+	RouteGetGuildWelcomeScreen
+	RouteModifyGuildWelcomeScreen
 )

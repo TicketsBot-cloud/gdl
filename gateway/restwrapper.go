@@ -511,7 +511,10 @@ func (s *Shard) GetGuildPruneCount(ctx context.Context, guildId uint64, days int
 
 // computePruneCount = whether 'pruned' is returned, discouraged for large guilds
 func (s *Shard) BeginGuildPrune(ctx context.Context, guildId uint64, days int, computePruneCount bool) error {
-	return rest.BeginGuildPrune(ctx, s.Token, s.ShardManager.RateLimiter, guildId, days, computePruneCount)
+	return rest.BeginGuildPrune(ctx, s.Token, s.ShardManager.RateLimiter, guildId, rest.BeginGuildPruneData{
+		Days:              days,
+		ComputePruneCount: computePruneCount,
+	})
 }
 
 func (s *Shard) GetGuildVoiceRegions(ctx context.Context, guildId uint64) ([]guild.VoiceRegion, error) {
@@ -556,7 +559,7 @@ func (s *Shard) GetGuildVanityUrl(ctx context.Context, guildId uint64) (invite.I
 }
 
 func (s *Shard) GetInvite(ctx context.Context, inviteCode string, withCounts bool) (invite.Invite, error) {
-	return rest.GetInvite(ctx, s.Token, s.ShardManager.RateLimiter, inviteCode, withCounts)
+	return rest.GetInvite(ctx, s.Token, s.ShardManager.RateLimiter, inviteCode, withCounts, nil)
 }
 
 func (s *Shard) DeleteInvite(ctx context.Context, inviteCode string) (invite.Invite, error) {
@@ -668,7 +671,7 @@ func (s *Shard) GetGuildAuditLog(ctx context.Context, guildId uint64, data rest.
 }
 
 func (s *Shard) GetGlobalCommands(ctx context.Context, applicationId uint64) ([]interaction.ApplicationCommand, error) {
-	return rest.GetGlobalCommands(ctx, s.Token, s.ShardManager.RateLimiter, applicationId)
+	return rest.GetGlobalCommands(ctx, s.Token, s.ShardManager.RateLimiter, applicationId, false)
 }
 
 func (s *Shard) CreateGlobalCommand(ctx context.Context, applicationId uint64, data rest.CreateCommandData) (interaction.ApplicationCommand, error) {
@@ -688,7 +691,7 @@ func (s *Shard) DeleteGlobalCommand(ctx context.Context, applicationId, commandI
 }
 
 func (s *Shard) GetGuildCommands(ctx context.Context, applicationId, guildId uint64) ([]interaction.ApplicationCommand, error) {
-	return rest.GetGuildCommands(ctx, s.Token, s.ShardManager.RateLimiter, applicationId, guildId)
+	return rest.GetGuildCommands(ctx, s.Token, s.ShardManager.RateLimiter, applicationId, guildId, false)
 }
 
 func (s *Shard) CreateGuildCommand(ctx context.Context, applicationId, guildId uint64, data rest.CreateCommandData) (interaction.ApplicationCommand, error) {
