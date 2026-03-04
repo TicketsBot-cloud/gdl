@@ -244,4 +244,5 @@ const (
 	// /oauth2/
 	RouteOauth2TokenExchange
 	RouteOauth2TokenRevoke
+	RouteGetCurrentAuthorizationInformation
 )

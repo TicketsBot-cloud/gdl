@@ -6,7 +6,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"time"
 
+	"github.com/TicketsBot-cloud/gdl/objects/application"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
 	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
 	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
@@ -40,6 +43,7 @@ type (
 const (
 	GrantTypeAuthorizationCode GrantType = "authorization_code"
 	GrantTypeRefreshToken      GrantType = "refresh_token"
+	GrantTypeClientCredentials GrantType = "client_credentials"
 
 	TokenTypeHintAccessToken  TokenTypeHint = "access_token"
 	TokenTypeHintRefreshToken TokenTypeHint = "refresh_token"
@@ -104,6 +108,29 @@ func RevokeToken(ctx context.Context, rateLimiter *ratelimit.Ratelimiter, client
 	header := "Basic " + base64.URLEncoding.EncodeToString([]byte(fmt.Sprintf("%d:%s", clientId, clientSecret)))
 	err, _ := endpoint.Request(ctx, header, body, nil)
 	return convertToOauthError(err)
+}
+
+// AuthorizationInformation is returned by GET /oauth2/@me (bearer token only).
+type AuthorizationInformation struct {
+	Application application.Application `json:"application"`
+	Scopes      []string                `json:"scopes"`
+	Expires     time.Time               `json:"expires"`
+	User        *user.User              `json:"user,omitempty"`
+}
+
+// GetCurrentAuthorizationInformation requires a bearer token, not a bot token.
+func GetCurrentAuthorizationInformation(ctx context.Context, bearerToken string, rateLimiter *ratelimit.Ratelimiter) (AuthorizationInformation, error) {
+	endpoint := request.Endpoint{
+		RequestType: request.GET,
+		ContentType: request.Nil,
+		Endpoint:    "/oauth2/@me",
+		Route:       ratelimit.NewOtherRoute(ratelimit.RouteGetCurrentAuthorizationInformation, 0),
+		RateLimiter: rateLimiter,
+	}
+
+	var info AuthorizationInformation
+	err, _ := endpoint.Request(ctx, "Bearer "+bearerToken, nil, &info)
+	return info, err
 }
 
 func convertToOauthError(err error) error {
