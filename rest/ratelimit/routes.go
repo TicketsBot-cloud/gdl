@@ -173,6 +173,12 @@ const (
 	// /voice/regions
 	RouteListVoiceRegions
 
+	// /guilds/:id/voice-states
+	RouteGetCurrentUserVoiceState
+	RouteGetUserVoiceState
+	RouteModifyCurrentUserVoiceState
+	RouteModifyUserVoiceState
+
 	// /channels/:id/webhooks
 	RouteCreateWebhook
 	RouteGetChannelWebhooks
