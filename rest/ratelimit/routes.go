@@ -98,6 +98,13 @@ const (
 	RouteModifyGuildEmoji
 	RouteDeleteGuildEmoji
 
+	// /applications/:id/emojis
+	RouteListApplicationEmojis
+	RouteGetApplicationEmoji
+	RouteCreateApplicationEmoji
+	RouteModifyApplicationEmoji
+	RouteDeleteApplicationEmoji
+
 	// /guilds/:id/...
 	RouteCreateGuild
 	RouteGetGuild
