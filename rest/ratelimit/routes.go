@@ -230,6 +230,7 @@ const (
 
 	///applications/:id/entitlements
 	RouteListEntitlements
+	RouteGetEntitlement
 	RouteConsumeEntitlement
 	RouteCreateTestEntitlement
 	RouteDeleteTestEntitlement
