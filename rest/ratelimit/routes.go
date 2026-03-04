@@ -156,6 +156,7 @@ const (
 	RouteGetUser
 	RouteModifyCurrentUser
 	RouteGetCurrentUserGuilds
+	RouteGetCurrentUserGuildMember
 	RouteLeaveGuild
 	RouteGetUserDMs
 	RouteCreateDM

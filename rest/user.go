@@ -9,6 +9,7 @@ import (
 	"github.com/TicketsBot-cloud/gdl/objects/channel"
 	"github.com/TicketsBot-cloud/gdl/objects/guild"
 	"github.com/TicketsBot-cloud/gdl/objects/integration"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
 	"github.com/TicketsBot-cloud/gdl/objects/user"
 	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
 	"github.com/TicketsBot-cloud/gdl/rest/request"
@@ -43,8 +44,9 @@ func GetUser(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimit
 }
 
 type ModifyUserData struct {
-	Username string `json:"username,omitempty"`
-	Avatar   string `json:"avatar,omitempty"`
+	Username string  `json:"username,omitempty"`
+	Avatar   *string `json:"avatar,omitempty"`
+	Banner   *string `json:"banner,omitempty"`
 }
 
 func ModifyCurrentUser(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, data ModifyUserData) (user.User, error) {
@@ -62,9 +64,10 @@ func ModifyCurrentUser(ctx context.Context, token string, rateLimiter *ratelimit
 }
 
 type CurrentUserGuildsData struct {
-	Before uint64
-	After  uint64
-	Limit  int
+	Before     uint64
+	After      uint64
+	Limit      int // 1-200, omitted if 0
+	WithCounts bool
 }
 
 func (d *CurrentUserGuildsData) Query() string {
@@ -78,10 +81,13 @@ func (d *CurrentUserGuildsData) Query() string {
 		query.Set("after", strconv.FormatUint(d.After, 10))
 	}
 
-	if d.Limit > 200 || d.Limit < 1 {
-		d.Limit = 200
+	if d.Limit >= 1 && d.Limit <= 200 {
+		query.Set("limit", strconv.Itoa(d.Limit))
 	}
-	query.Set("limit", strconv.Itoa(d.Limit))
+
+	if d.WithCounts {
+		query.Set("with_counts", "true")
+	}
 
 	return query.Encode()
 }
@@ -98,6 +104,20 @@ func GetCurrentUserGuilds(ctx context.Context, token string, rateLimiter *rateli
 	var guilds []guild.Guild
 	err, _ := endpoint.Request(ctx, token, nil, &guilds)
 	return guilds, err
+}
+
+func GetCurrentUserGuildMember(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, guildId uint64) (member.Member, error) {
+	endpoint := request.Endpoint{
+		RequestType: request.GET,
+		ContentType: request.Nil,
+		Endpoint:    fmt.Sprintf("/users/@me/guilds/%d/member", guildId),
+		Route:       ratelimit.NewOtherRoute(ratelimit.RouteGetCurrentUserGuildMember, 0),
+		RateLimiter: rateLimiter,
+	}
+
+	var m member.Member
+	err, _ := endpoint.Request(ctx, token, nil, &m)
+	return m, err
 }
 
 func LeaveGuild(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, guildId uint64) error {
@@ -117,7 +137,7 @@ func CreateDM(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimi
 	endpoint := request.Endpoint{
 		RequestType: request.POST,
 		ContentType: request.ApplicationJson,
-		Endpoint:    fmt.Sprintf("/users/@me/channels"),
+		Endpoint:    "/users/@me/channels",
 		Route:       ratelimit.NewOtherRoute(ratelimit.RouteCreateDM, recipientId),
 		RateLimiter: rateLimiter,
 	}
@@ -135,7 +155,7 @@ func GetUserConnections(ctx context.Context, token string, rateLimiter *ratelimi
 	endpoint := request.Endpoint{
 		RequestType: request.GET,
 		ContentType: request.Nil,
-		Endpoint:    fmt.Sprintf("/users/@me/connections"),
+		Endpoint:    "/users/@me/connections",
 		Route:       ratelimit.NewOtherRoute(ratelimit.RouteGetUserConnections, 0),
 		RateLimiter: rateLimiter,
 	}
