@@ -5,6 +5,7 @@ import (
 )
 
 type TextDisplay struct {
+	Id      *int   `json:"id,omitempty"`
 	Content string `json:"content"`
 }
 

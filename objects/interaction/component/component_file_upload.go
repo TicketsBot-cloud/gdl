@@ -3,6 +3,7 @@ package component
 import "encoding/json"
 
 type FileUpload struct {
+	Id        *int   `json:"id,omitempty"`
 	CustomId  string `json:"custom_id"`
 	MinValues *int   `json:"min_values,omitempty"`
 	MaxValues *int   `json:"max_values,omitempty"`

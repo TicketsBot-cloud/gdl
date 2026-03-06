@@ -98,6 +98,13 @@ const (
 	RouteModifyGuildEmoji
 	RouteDeleteGuildEmoji
 
+	// /applications/:id/emojis
+	RouteListApplicationEmojis
+	RouteGetApplicationEmoji
+	RouteCreateApplicationEmoji
+	RouteModifyApplicationEmoji
+	RouteDeleteApplicationEmoji
+
 	// /guilds/:id/...
 	RouteCreateGuild
 	RouteGetGuild
@@ -156,6 +163,7 @@ const (
 	RouteGetUser
 	RouteModifyCurrentUser
 	RouteGetCurrentUserGuilds
+	RouteGetCurrentUserGuildMember
 	RouteLeaveGuild
 	RouteGetUserDMs
 	RouteCreateDM
@@ -164,6 +172,12 @@ const (
 
 	// /voice/regions
 	RouteListVoiceRegions
+
+	// /guilds/:id/voice-states
+	RouteGetCurrentUserVoiceState
+	RouteGetUserVoiceState
+	RouteModifyCurrentUserVoiceState
+	RouteModifyUserVoiceState
 
 	// /channels/:id/webhooks
 	RouteCreateWebhook
@@ -180,10 +194,13 @@ const (
 	RouteDeleteWebhook
 	RouteDeleteWebhookWithToken
 	RouteExecuteWebhook
+	RouteGetWebhookMessage
 	RouteEditWebhookMessage
+	RouteDeleteWebhookMessage
 
 	// /applications/:id/...
 	RouteGetGlobalCommands
+	RouteGetGlobalCommand
 	RouteCreateGlobalCommand
 	RouteModifyGlobalCommand
 	RouteModifyGlobalCommands
@@ -191,6 +208,7 @@ const (
 
 	// /applications/:id/guild/...
 	RouteGetGuildCommands
+	RouteGetGuildCommand
 	RouteCreateGuildCommand
 	RouteModifyGuildCommand
 	RouteModifyGuildCommands
@@ -214,9 +232,11 @@ const (
 	// /applications/@me
 	RouteGetCurrentApplication
 	RouteEditCurrentApplication
+	RouteGetActivityInstance
 
 	///applications/:id/entitlements
 	RouteListEntitlements
+	RouteGetEntitlement
 	RouteConsumeEntitlement
 	RouteCreateTestEntitlement
 	RouteDeleteTestEntitlement
@@ -224,4 +244,60 @@ const (
 	// /oauth2/
 	RouteOauth2TokenExchange
 	RouteOauth2TokenRevoke
+	RouteGetCurrentAuthorizationInformation
+
+	// Auto Moderation
+	RouteListAutoModerationRules
+	RouteGetAutoModerationRule
+	RouteCreateAutoModerationRule
+	RouteModifyAutoModerationRule
+	RouteDeleteAutoModerationRule
+
+	// Guild Scheduled Events
+	RouteListGuildScheduledEvents
+	RouteGetGuildScheduledEvent
+	RouteCreateGuildScheduledEvent
+	RouteModifyGuildScheduledEvent
+	RouteDeleteGuildScheduledEvent
+	RouteGetGuildScheduledEventUsers
+
+	// Stage Instances
+	RouteCreateStageInstance
+	RouteGetStageInstance
+	RouteModifyStageInstance
+	RouteDeleteStageInstance
+
+	// Soundboard
+	RouteSendSoundboardSound
+	RouteGetDefaultSoundboardSounds
+	RouteListGuildSoundboardSounds
+	RouteGetGuildSoundboardSound
+	RouteCreateGuildSoundboardSound
+	RouteModifyGuildSoundboardSound
+	RouteDeleteGuildSoundboardSound
+
+	// Polls
+	RouteGetPollAnswerVoters
+	RouteEndPoll
+
+	// SKUs
+	RouteListSKUs
+
+	// Subscriptions
+	RouteListSKUSubscriptions
+	RouteGetSKUSubscription
+
+	// Stickers
+	RouteGetSticker
+	RouteGetStickerPacks
+	RouteGetStickerPack
+	RouteListGuildStickers
+	RouteGetGuildSticker
+	RouteCreateGuildSticker
+	RouteModifyGuildSticker
+	RouteDeleteGuildSticker
+
+	// Guild Welcome Screen
+	RouteGetGuildWelcomeScreen
+	RouteModifyGuildWelcomeScreen
 )

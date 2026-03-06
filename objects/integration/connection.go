@@ -1,20 +1,21 @@
 package integration
 
-type Visibility int
+type ConnectionVisibility int
 
 const (
-	VisibilityNone     Visibility = 0
-	VisibilityEveryone Visibility = 1
+	ConnectionVisibilityNone ConnectionVisibility = iota
+	ConnectionVisibilityEveryone
 )
 
 type Connection struct {
-	Id           string        `json:"id"`
-	Name         string        `json:"name"`
-	Type         string        `json:"type"` // youtube, twitch, etc.
-	Revoked      bool          `json:"revoked"`
-	Integrations []Integration `json:"integrations"`
-	Verified     bool          `json:"verified"`
-	FriendSync   bool          `json:"friend_sync"`
-	ShowActivity bool          `json:"show_activity"`
-	Visibility   Visibility    `json:"visibility"`
+	Id           string               `json:"id"`
+	Name         string               `json:"name"`
+	Type         string               `json:"type"` // twitch, youtube, spotify, etc.
+	Revoked      *bool                `json:"revoked,omitempty"`
+	Integrations []Integration        `json:"integrations,omitempty"`
+	Verified     bool                 `json:"verified"`
+	FriendSync   bool                 `json:"friend_sync"`
+	ShowActivity bool                 `json:"show_activity"`
+	TwoWayLink   bool                 `json:"two_way_link"`
+	Visibility   ConnectionVisibility `json:"visibility"`
 }

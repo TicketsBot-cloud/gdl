@@ -3,39 +3,121 @@ package auditlog
 type AuditLogEvent int
 
 const (
-	EventGuildUpdate              AuditLogEvent = 1
-	EventChannelCreate            AuditLogEvent = 10
-	EventChannelUpdate            AuditLogEvent = 11
-	EventChannelDelete            AuditLogEvent = 12
-	EventChannelOverwriteCreate   AuditLogEvent = 13
-	EventChannelOverwriteUpdate   AuditLogEvent = 14
-	EventChannelOverwriteDelete   AuditLogEvent = 15
-	EventMemberKick               AuditLogEvent = 20
-	EventMemberPrune              AuditLogEvent = 21
-	EventMemberBanAdd             AuditLogEvent = 22
-	EventMemberBanRemove          AuditLogEvent = 23
-	EventMemberUpdate             AuditLogEvent = 24
-	EventMemberRoleUpdate         AuditLogEvent = 25
-	EventMemberMove               AuditLogEvent = 26
-	EventMemberDisconnect         AuditLogEvent = 27
-	EventBotAdd                   AuditLogEvent = 28
-	EventRoleCreate               AuditLogEvent = 30
-	EventRoleUpdate               AuditLogEvent = 31
-	EventRoleDelete               AuditLogEvent = 32
-	EventInviteCreate             AuditLogEvent = 40
-	EventInviteUpdate             AuditLogEvent = 41
-	EventInviteDelete             AuditLogEvent = 42
-	EventWebhookCreate            AuditLogEvent = 50
-	EventWebhookUpdate            AuditLogEvent = 51
-	EventWebhookDelete            AuditLogEvent = 52
-	EventEmojiCreate              AuditLogEvent = 60
-	EventEmojiUpdate              AuditLogEvent = 61
-	EventEmojiDelete              AuditLogEvent = 62
-	EventMessageDelete            AuditLogEvent = 72
-	EventMessageBulkDelete        AuditLogEvent = 73
-	EventMessagePin               AuditLogEvent = 74
-	EventMessageUnpin             AuditLogEvent = 75
-	EventMessageIntegrationCreate AuditLogEvent = 80
-	EventMessageIntegrationUpdate AuditLogEvent = 81
-	EventMessageIntegrationDelete AuditLogEvent = 82
+	AuditLogEventGuildUpdate AuditLogEvent = 1
+)
+
+const (
+	AuditLogEventChannelCreate AuditLogEvent = iota + 10
+	AuditLogEventChannelUpdate
+	AuditLogEventChannelDelete
+	AuditLogEventChannelOverwriteCreate
+	AuditLogEventChannelOverwriteUpdate
+	AuditLogEventChannelOverwriteDelete
+)
+
+const (
+	AuditLogEventMemberKick AuditLogEvent = iota + 20
+	AuditLogEventMemberPrune
+	AuditLogEventMemberBanAdd
+	AuditLogEventMemberBanRemove
+	AuditLogEventMemberUpdate
+	AuditLogEventMemberRoleUpdate
+	AuditLogEventMemberMove
+	AuditLogEventMemberDisconnect
+	AuditLogEventBotAdd
+)
+
+const (
+	AuditLogEventRoleCreate AuditLogEvent = iota + 30
+	AuditLogEventRoleUpdate
+	AuditLogEventRoleDelete
+)
+
+const (
+	AuditLogEventInviteCreate AuditLogEvent = iota + 40
+	AuditLogEventInviteUpdate
+	AuditLogEventInviteDelete
+)
+
+const (
+	AuditLogEventWebhookCreate AuditLogEvent = iota + 50
+	AuditLogEventWebhookUpdate
+	AuditLogEventWebhookDelete
+)
+
+const (
+	AuditLogEventEmojiCreate AuditLogEvent = iota + 60
+	AuditLogEventEmojiUpdate
+	AuditLogEventEmojiDelete
+)
+
+const (
+	AuditLogEventMessageDelete AuditLogEvent = iota + 72
+	AuditLogEventMessageBulkDelete
+	AuditLogEventMessagePin
+	AuditLogEventMessageUnpin
+)
+
+const (
+	AuditLogEventIntegrationCreate AuditLogEvent = iota + 80
+	AuditLogEventIntegrationUpdate
+	AuditLogEventIntegrationDelete
+	AuditLogEventStageInstanceCreate
+	AuditLogEventStageInstanceUpdate
+	AuditLogEventStageInstanceDelete
+)
+
+const (
+	AuditLogEventStickerCreate AuditLogEvent = iota + 90
+	AuditLogEventStickerUpdate
+	AuditLogEventStickerDelete
+)
+
+const (
+	AuditLogEventGuildScheduledEventCreate AuditLogEvent = iota + 100
+	AuditLogEventGuildScheduledEventUpdate
+	AuditLogEventGuildScheduledEventDelete
+)
+
+const (
+	AuditLogEventThreadCreate AuditLogEvent = iota + 110
+	AuditLogEventThreadUpdate
+	AuditLogEventThreadDelete
+)
+
+const (
+	AuditLogEventApplicationCommandPermissionUpdate AuditLogEvent = 121
+)
+
+const (
+	AuditLogEventSoundboardSoundCreate AuditLogEvent = iota + 130
+	AuditLogEventSoundboardSoundUpdate
+	AuditLogEventSoundboardSoundDelete
+)
+
+const (
+	AuditLogEventAutoModerationRuleCreate AuditLogEvent = iota + 140
+	AuditLogEventAutoModerationRuleUpdate
+	AuditLogEventAutoModerationRuleDelete
+	AuditLogEventAutoModerationBlockMessage
+	AuditLogEventAutoModerationFlagToChannel
+	AuditLogEventAutoModerationUserCommunicationDis
+)
+
+const (
+	AuditLogEventCreatorMonetizationRequestCreated AuditLogEvent = iota + 150
+	AuditLogEventCreatorMonetizationTermsAccepted
+)
+
+const (
+	AuditLogEventOnboardingPromptCreate AuditLogEvent = iota + 163
+	AuditLogEventOnboardingPromptUpdate
+	AuditLogEventOnboardingPromptDelete
+	AuditLogEventOnboardingCreate
+	AuditLogEventOnboardingUpdate
+)
+
+const (
+	AuditLogEventHomeSettingsCreate AuditLogEvent = iota + 190
+	AuditLogEventHomeSettingsUpdate
 )

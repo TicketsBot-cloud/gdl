@@ -54,7 +54,7 @@ type ResponseAckWithSource struct {
 func NewResponseAckWithSource(flags uint) ResponseAckWithSource {
 	return ResponseAckWithSource{
 		Response: Response{
-			Type: ResponseTypeACKWithSource,
+			Type: ResponseTypeDeferredChannelMessageWithSource,
 		},
 		Data: struct {
 			Flags uint `json:"flags"`
@@ -74,7 +74,7 @@ type ResponseDeferredMessageUpdate struct {
 func NewResponseDeferredMessageUpdate() ResponseDeferredMessageUpdate {
 	return ResponseDeferredMessageUpdate{
 		Response: Response{
-			Type: ResponseTypeDeferredMessageUpdate,
+			Type: ResponseTypeDeferredUpdateMessage,
 		},
 	}
 }

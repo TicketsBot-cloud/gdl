@@ -78,7 +78,7 @@ func guildMemberRemoveListener(s *Shard, e *events.GuildMemberRemove) {
 
 func guildMemberUpdateListener(s *Shard, e *events.GuildMemberUpdate) {
 	s.Cache.StoreMember(context.Background(), member.Member{
-		User:         e.User,
+		User:         &e.User,
 		Nick:         e.Nick,
 		Roles:        e.Roles,
 		PremiumSince: e.PremiumSince,

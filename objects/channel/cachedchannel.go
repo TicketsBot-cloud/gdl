@@ -9,27 +9,27 @@ import (
 type CachedChannel struct {
 	GuildId              uint64                    `json:"-"`
 	Type                 ChannelType               `json:"type"`
-	Position             int                       `json:"position"`
+	Position             *int                      `json:"position,omitempty"`
 	PermissionOverwrites []PermissionOverwrite     `json:"permission_overwrites"`
-	Name                 string                    `json:"name"`
-	Topic                string                    `json:"topic"`
+	Name                 *string                   `json:"name,omitempty"`
+	Topic                *string                   `json:"topic,omitempty"`
 	Nsfw                 bool                      `json:"nsfw"`
 	LastMessageId        objects.NullableSnowflake `json:"last_message_id"`
 	Bitrate              int                       `json:"bitrate"`
 	UserLimit            int                       `json:"user_limit"`
 	RateLimitPerUser     int                       `json:"rate_limit_per_user"`
-	Icon                 string                    `json:"icon"`
-	OwnerId              uint64                    `json:"owner_id,string"`
-	ApplicationId        uint64                    `json:"application_id"`
+	Icon                 *string                   `json:"icon,omitempty"`
+	OwnerId              *uint64                   `json:"owner_id,string,omitempty"`
+	ApplicationId        *uint64                   `json:"application_id,string,omitempty"`
 	ParentId             objects.NullableSnowflake `json:"parent_id,omitempty"`
-	LastPinTimestamp     time.Time                 `json:"last_pin_timestamp"`
+	LastPinTimestamp     *time.Time                `json:"last_pin_timestamp,omitempty"`
 }
 
 func (c *CachedChannel) ToChannel(channelId, guildId uint64) Channel {
 	return Channel{
 		Id:                   channelId,
 		Type:                 c.Type,
-		GuildId:              guildId,
+		GuildId:              &guildId,
 		Position:             c.Position,
 		PermissionOverwrites: c.PermissionOverwrites,
 		Name:                 c.Name,
@@ -39,7 +39,6 @@ func (c *CachedChannel) ToChannel(channelId, guildId uint64) Channel {
 		Bitrate:              c.Bitrate,
 		UserLimit:            c.UserLimit,
 		RateLimitPerUser:     c.RateLimitPerUser,
-		Recipients:           nil,
 		Icon:                 c.Icon,
 		OwnerId:              c.OwnerId,
 		ApplicationId:        c.ApplicationId,

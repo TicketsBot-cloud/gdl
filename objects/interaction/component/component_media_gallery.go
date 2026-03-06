@@ -5,11 +5,12 @@ import (
 )
 
 type MediaGallery struct {
+	Id    *int               `json:"id,omitempty"`
 	Items []MediaGalleryItem `json:"items"`
 }
 
 type MediaGalleryItem struct {
-	Media       UnfurledMediaItem `json:"media,omitempty"`
+	Media       UnfurledMediaItem `json:"media"`
 	Description *string           `json:"description,omitempty"`
 	Spoiler     *bool             `json:"spoiler,omitempty"`
 }

@@ -33,7 +33,7 @@ const (
 	ManageNicknames
 	ManageRoles // Manage permissions
 	ManageWebhooks
-	ManageEmojis
+	ManageGuildExpressions
 	UseApplicationCommands
 	RequestToSpeak
 	ManageEvents
@@ -134,8 +134,8 @@ func (p Permission) String() string {
 		return "Manage Roles"
 	case ManageWebhooks:
 		return "Manage Webhooks"
-	case ManageEmojis:
-		return "Manage Emojis"
+	case ManageGuildExpressions:
+		return "Manage Guild Expressions"
 	case UseApplicationCommands:
 		return "Use Application Commands"
 	case RequestToSpeak:
@@ -174,6 +174,8 @@ func (p Permission) String() string {
 		return "Use External Apps"
 	case PinMessages:
 		return "Pin Messages"
+	case BypassSlowmode:
+		return "Bypass Slowmode"
 	default:
 		return "Unknown Permission"
 	}
@@ -210,7 +212,7 @@ var AllPermissions = []Permission{
 	ManageNicknames,
 	ManageRoles,
 	ManageWebhooks,
-	ManageEmojis,
+	ManageGuildExpressions,
 	UseApplicationCommands,
 	RequestToSpeak,
 	ManageEvents,
@@ -230,4 +232,5 @@ var AllPermissions = []Permission{
 	SendPolls,
 	UseExternalApps,
 	PinMessages,
+	BypassSlowmode,
 }

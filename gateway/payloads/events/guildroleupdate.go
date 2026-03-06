@@ -6,5 +6,5 @@ import (
 
 type GuildRoleUpdate struct {
 	GuildId uint64     `json:"guild_id,string"`
-	Role    guild.Role ` json:"role"`
+	Role    guild.Role `json:"role"`
 }

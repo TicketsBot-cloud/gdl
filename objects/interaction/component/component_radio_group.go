@@ -3,6 +3,7 @@ package component
 import "encoding/json"
 
 type RadioGroup struct {
+	Id       *int               `json:"id,omitempty"`
 	CustomId string             `json:"custom_id"`
 	Options  []RadioGroupOption `json:"options"`
 	Required *bool              `json:"required,omitempty"`
