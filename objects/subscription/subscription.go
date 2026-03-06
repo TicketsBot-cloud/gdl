@@ -9,7 +9,7 @@ import (
 type SubscriptionStatus int
 
 const (
-	SubscriptionStatusActive   SubscriptionStatus = iota
+	SubscriptionStatusActive SubscriptionStatus = iota
 	SubscriptionStatusEnding
 	SubscriptionStatusInactive
 )

@@ -12,7 +12,7 @@ const (
 type StickerFormatType int
 
 const (
-	StickerFormatTypePNG    StickerFormatType = iota + 1
+	StickerFormatTypePNG StickerFormatType = iota + 1
 	StickerFormatTypeAPNG
 	StickerFormatTypeLottie
 	StickerFormatTypeGIF

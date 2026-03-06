@@ -32,7 +32,7 @@ const (
 type RecurrenceFrequency int
 
 const (
-	RecurrenceFrequencyYearly  RecurrenceFrequency = iota
+	RecurrenceFrequencyYearly RecurrenceFrequency = iota
 	RecurrenceFrequencyMonthly
 	RecurrenceFrequencyWeekly
 	RecurrenceFrequencyDaily
@@ -41,7 +41,7 @@ const (
 type RecurrenceWeekday int
 
 const (
-	RecurrenceWeekdayMonday    RecurrenceWeekday = iota
+	RecurrenceWeekdayMonday RecurrenceWeekday = iota
 	RecurrenceWeekdayTuesday
 	RecurrenceWeekdayWednesday
 	RecurrenceWeekdayThursday
@@ -53,7 +53,7 @@ const (
 type RecurrenceMonth int
 
 const (
-	RecurrenceMonthJanuary  RecurrenceMonth = iota + 1
+	RecurrenceMonthJanuary RecurrenceMonth = iota + 1
 	RecurrenceMonthFebruary
 	RecurrenceMonthMarch
 	RecurrenceMonthApril
