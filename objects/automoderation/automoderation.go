@@ -5,35 +5,36 @@ import "github.com/TicketsBot-cloud/gdl/utils"
 type EventType int
 
 const (
-	EventTypeMessageSend  EventType = 1
-	EventTypeMemberUpdate EventType = 2
+	EventTypeMessageSend EventType = iota + 1
+	EventTypeMemberUpdate
 )
 
 type TriggerType int
 
 const (
-	TriggerTypeKeyword       TriggerType = 1
-	TriggerTypeSpam          TriggerType = 3
-	TriggerTypeKeywordPreset TriggerType = 4
-	TriggerTypeMentionSpam   TriggerType = 5
-	TriggerTypeMemberProfile TriggerType = 6
+	TriggerTypeKeyword TriggerType = iota + 1
+	_
+	TriggerTypeSpam
+	TriggerTypeKeywordPreset
+	TriggerTypeMentionSpam
+	TriggerTypeMemberProfile
 )
 
 type KeywordPresetType int
 
 const (
-	KeywordPresetTypeProfanity     KeywordPresetType = 1
-	KeywordPresetTypeSexualContent KeywordPresetType = 2
-	KeywordPresetTypeSlurs         KeywordPresetType = 3
+	KeywordPresetTypeProfanity KeywordPresetType = iota + 1
+	KeywordPresetTypeSexualContent
+	KeywordPresetTypeSlurs
 )
 
 type ActionType int
 
 const (
-	ActionTypeBlockMessage           ActionType = 1
-	ActionTypeSendAlertMessage       ActionType = 2
-	ActionTypeTimeout                ActionType = 3
-	ActionTypeBlockMemberInteraction ActionType = 4
+	ActionTypeBlockMessage ActionType = iota + 1
+	ActionTypeSendAlertMessage
+	ActionTypeTimeout
+	ActionTypeBlockMemberInteraction
 )
 
 type TriggerMetadata struct {

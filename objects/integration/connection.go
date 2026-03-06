@@ -3,8 +3,8 @@ package integration
 type ConnectionVisibility int
 
 const (
-	ConnectionVisibilityNone     ConnectionVisibility = 0
-	ConnectionVisibilityEveryone ConnectionVisibility = 1
+	ConnectionVisibilityNone ConnectionVisibility = iota
+	ConnectionVisibilityEveryone
 )
 
 type Connection struct {

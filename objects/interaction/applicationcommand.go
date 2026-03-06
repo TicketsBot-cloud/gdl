@@ -32,6 +32,6 @@ const (
 type ApplicationCommandHandlerType uint8
 
 const (
-	ApplicationCommandHandlerTypeAppHandler            ApplicationCommandHandlerType = 1
-	ApplicationCommandHandlerTypeDiscordLaunchActivity ApplicationCommandHandlerType = 2
+	ApplicationCommandHandlerTypeAppHandler ApplicationCommandHandlerType = iota + 1
+	ApplicationCommandHandlerTypeDiscordLaunchActivity
 )

@@ -42,16 +42,16 @@ type Application struct {
 type ApplicationEventWebhookStatus int
 
 const (
-	ApplicationEventWebhookStatusDisabled          ApplicationEventWebhookStatus = 1
-	ApplicationEventWebhookStatusEnabled           ApplicationEventWebhookStatus = 2
-	ApplicationEventWebhookStatusDisabledByDiscord ApplicationEventWebhookStatus = 3
+	ApplicationEventWebhookStatusDisabled ApplicationEventWebhookStatus = iota + 1
+	ApplicationEventWebhookStatusEnabled
+	ApplicationEventWebhookStatusDisabledByDiscord
 )
 
 type ApplicationIntegrationType int
 
 const (
-	ApplicationIntegrationTypeGuildInstall ApplicationIntegrationType = 0
-	ApplicationIntegrationTypeUserInstall  ApplicationIntegrationType = 1
+	ApplicationIntegrationTypeGuildInstall ApplicationIntegrationType = iota
+	ApplicationIntegrationTypeUserInstall
 )
 
 type ApplicationIntegrationTypeConfig struct {

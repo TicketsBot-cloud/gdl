@@ -5,8 +5,8 @@ import "github.com/TicketsBot-cloud/gdl/objects"
 type StagePrivacyLevel int
 
 const (
-	StagePrivacyLevelPublic    StagePrivacyLevel = 1 // Deprecated
-	StagePrivacyLevelGuildOnly StagePrivacyLevel = 2
+	StagePrivacyLevelPublic StagePrivacyLevel = iota + 1 // Deprecated
+	StagePrivacyLevelGuildOnly
 )
 
 type StageInstance struct {

@@ -24,8 +24,8 @@ type (
 )
 
 const (
-	TeamMembershipStateInvited  TeamMembershipState = 1
-	TeamMembershipStateAccepted TeamMembershipState = 2
+	TeamMembershipStateInvited TeamMembershipState = iota + 1
+	TeamMembershipStateAccepted
 
 	TeamMemberRoleOwner     TeamMemberRole = "owner"
 	TeamMemberRoleAdmin     TeamMemberRole = "admin"

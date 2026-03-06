@@ -13,16 +13,16 @@ import (
 type InviteType int
 
 const (
-	InviteTypeGuild   InviteType = 0
-	InviteTypeGroupDm InviteType = 1
-	InviteTypeFriend  InviteType = 2
+	InviteTypeGuild InviteType = iota
+	InviteTypeGroupDm
+	InviteTypeFriend
 )
 
 type InviteTargetType int
 
 const (
-	InviteTargetTypeStream              InviteTargetType = 1
-	InviteTargetTypeEmbeddedApplication InviteTargetType = 2
+	InviteTargetTypeStream InviteTargetType = iota + 1
+	InviteTargetTypeEmbeddedApplication
 )
 
 type Invite struct {

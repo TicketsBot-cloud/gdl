@@ -3,10 +3,12 @@ package sku
 type SKUType int
 
 const (
-	SKUTypeDurable           SKUType = 2
-	SKUTypeConsumable        SKUType = 3
-	SKUTypeSubscription      SKUType = 5
-	SKUTypeSubscriptionGroup SKUType = 6
+	_ SKUType = iota + 1
+	SKUTypeDurable
+	SKUTypeConsumable
+	_
+	SKUTypeSubscription
+	SKUTypeSubscriptionGroup
 )
 
 type SKUFlag uint32
