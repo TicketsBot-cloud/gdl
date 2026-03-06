@@ -18,8 +18,8 @@ type Role struct {
 }
 
 type RoleTags struct {
-	BotId                 *uint64 `json:"bot_id,string,omitempty"`
-	IntegrationId         *uint64 `json:"integration_id,string,omitempty"`
+	BotId         *uint64 `json:"bot_id,string,omitempty"`
+	IntegrationId *uint64 `json:"integration_id,string,omitempty"`
 	// PremiumSubscriber, AvailableForPurchase, GuildConnections: key present (even as null) = tag applies
 	PremiumSubscriber     *bool   `json:"premium_subscriber,omitempty"`
 	SubscriptionListingId *uint64 `json:"subscription_listing_id,string,omitempty"`

@@ -737,10 +737,10 @@ func (c *BoltCache) StoreVoiceStates(states []guild.VoiceState) {
 		for _, state := range states {
 			if encoded, err := json.Marshal(state.ToCachedVoiceState()); err == nil {
 				guildId := uint64(0)
-			if state.GuildId != nil {
-				guildId = *state.GuildId
-			}
-			if err := b.Put(memberToBytes(state.UserId, guildId), encoded); err != nil {
+				if state.GuildId != nil {
+					guildId = *state.GuildId
+				}
+				if err := b.Put(memberToBytes(state.UserId, guildId), encoded); err != nil {
 					return err
 				}
 			} else {

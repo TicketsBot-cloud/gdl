@@ -9,21 +9,21 @@ import (
 type UserFlag int
 
 const (
-	UserFlagStaff                    UserFlag = 1 << 0
-	UserFlagPartner                  UserFlag = 1 << 1
-	UserFlagHypesquad                UserFlag = 1 << 2
-	UserFlagBugHunterLevel1          UserFlag = 1 << 3
-	UserFlagHypesquadOnlineHouse1    UserFlag = 1 << 6
-	UserFlagHypesquadOnlineHouse2    UserFlag = 1 << 7
-	UserFlagHypesquadOnlineHouse3    UserFlag = 1 << 8
-	UserFlagPremiumEarlySupporter    UserFlag = 1 << 9
-	UserFlagTeamPseudoUser           UserFlag = 1 << 10
-	UserFlagBugHunterLevel2          UserFlag = 1 << 14
-	UserFlagVerifiedBot              UserFlag = 1 << 16
-	UserFlagVerifiedDeveloper        UserFlag = 1 << 17
-	UserFlagCertifiedModerator       UserFlag = 1 << 18
-	UserFlagBotHttpInteractions      UserFlag = 1 << 19
-	UserFlagActiveDeveloper          UserFlag = 1 << 22
+	UserFlagStaff                 UserFlag = 1 << 0
+	UserFlagPartner               UserFlag = 1 << 1
+	UserFlagHypesquad             UserFlag = 1 << 2
+	UserFlagBugHunterLevel1       UserFlag = 1 << 3
+	UserFlagHypesquadOnlineHouse1 UserFlag = 1 << 6
+	UserFlagHypesquadOnlineHouse2 UserFlag = 1 << 7
+	UserFlagHypesquadOnlineHouse3 UserFlag = 1 << 8
+	UserFlagPremiumEarlySupporter UserFlag = 1 << 9
+	UserFlagTeamPseudoUser        UserFlag = 1 << 10
+	UserFlagBugHunterLevel2       UserFlag = 1 << 14
+	UserFlagVerifiedBot           UserFlag = 1 << 16
+	UserFlagVerifiedDeveloper     UserFlag = 1 << 17
+	UserFlagCertifiedModerator    UserFlag = 1 << 18
+	UserFlagBotHttpInteractions   UserFlag = 1 << 19
+	UserFlagActiveDeveloper       UserFlag = 1 << 22
 )
 
 type PremiumType int
@@ -76,7 +76,7 @@ type User struct {
 	PremiumType          *PremiumType          `json:"premium_type,omitempty"`
 	PublicFlags          *UserFlag             `json:"public_flags,omitempty"`
 	AvatarDecorationData *AvatarDecorationData `json:"avatar_decoration_data,omitempty"`
-	Collectibles         *UserCollectibles      `json:"collectibles,omitempty"`
+	Collectibles         *UserCollectibles     `json:"collectibles,omitempty"`
 	PrimaryGuild         *UserPrimaryGuild     `json:"primary_guild,omitempty"`
 }
 

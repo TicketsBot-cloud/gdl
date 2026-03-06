@@ -256,10 +256,10 @@ func (c *PgCache) StoreGuilds(ctx context.Context, guilds []guild.Guild) error {
 				}
 
 				var chGuildId uint64
-			if channel.GuildId != nil {
-				chGuildId = *channel.GuildId
-			}
-			batch.Queue(`INSERT INTO channels("channel_id", "guild_id", "data") VALUES($1, $2, $3) ON CONFLICT("channel_id") DO UPDATE SET "data" = $3;`, channel.Id, chGuildId, string(encoded))
+				if channel.GuildId != nil {
+					chGuildId = *channel.GuildId
+				}
+				batch.Queue(`INSERT INTO channels("channel_id", "guild_id", "data") VALUES($1, $2, $3) ON CONFLICT("channel_id") DO UPDATE SET "data" = $3;`, channel.Id, chGuildId, string(encoded))
 			}
 		}
 

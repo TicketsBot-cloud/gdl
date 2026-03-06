@@ -16,8 +16,8 @@ type ChannelSelect struct {
 	MaxValues     *int                  `json:"max_values,omitempty"`
 	Disabled      *bool                 `json:"disabled,omitempty"`
 	Required      *bool                 `json:"required,omitempty"`
-} 
- 
+}
+
 func (i ChannelSelect) Type() ComponentType {
 	return ComponentChannelSelect
 }

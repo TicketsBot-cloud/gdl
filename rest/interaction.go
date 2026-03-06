@@ -38,17 +38,17 @@ func GetGlobalCommand(ctx context.Context, token string, rateLimiter *ratelimit.
 }
 
 type CreateCommandData struct {
-	Id                       uint64                                   `json:"id,string,omitempty"` // Use in bulk overwrite to update an existing command by ID
-	Name                     string                                   `json:"name"`
-	NameLocalizations        map[string]string                        `json:"name_localizations,omitempty"`
-	Description              string                                   `json:"description,omitempty"`
-	DescriptionLocalizations map[string]string                        `json:"description_localizations,omitempty"`
-	Options                  []interaction.ApplicationCommandOption   `json:"options,omitempty"`
-	DefaultMemberPermissions *string                                  `json:"default_member_permissions,omitempty"`
-	IntegrationTypes         []application.ApplicationIntegrationType `json:"integration_types,omitempty"`
-	Contexts                 []interaction.InteractionContextType     `json:"contexts,omitempty"`
-	Type                     interaction.ApplicationCommandType       `json:"type,omitempty"`
-	Nsfw                     *bool                                    `json:"nsfw,omitempty"`
+	Id                       uint64                                     `json:"id,string,omitempty"` // Use in bulk overwrite to update an existing command by ID
+	Name                     string                                     `json:"name"`
+	NameLocalizations        map[string]string                          `json:"name_localizations,omitempty"`
+	Description              string                                     `json:"description,omitempty"`
+	DescriptionLocalizations map[string]string                          `json:"description_localizations,omitempty"`
+	Options                  []interaction.ApplicationCommandOption     `json:"options,omitempty"`
+	DefaultMemberPermissions *string                                    `json:"default_member_permissions,omitempty"`
+	IntegrationTypes         []application.ApplicationIntegrationType   `json:"integration_types,omitempty"`
+	Contexts                 []interaction.InteractionContextType       `json:"contexts,omitempty"`
+	Type                     interaction.ApplicationCommandType         `json:"type,omitempty"`
+	Nsfw                     *bool                                      `json:"nsfw,omitempty"`
 	Handler                  *interaction.ApplicationCommandHandlerType `json:"handler,omitempty"`
 }
 

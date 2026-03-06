@@ -16,11 +16,11 @@ type GuildSoundboardSoundDelete struct {
 }
 
 type GuildSoundboardSoundsUpdate struct {
-	GuildId        uint64                         `json:"guild_id,string"`
+	GuildId          uint64                       `json:"guild_id,string"`
 	SoundboardSounds []soundboard.SoundboardSound `json:"soundboard_sounds"`
 }
 
 type SoundboardSounds struct {
-	GuildId        uint64                         `json:"guild_id,string"`
+	GuildId          uint64                       `json:"guild_id,string"`
 	SoundboardSounds []soundboard.SoundboardSound `json:"soundboard_sounds"`
 }

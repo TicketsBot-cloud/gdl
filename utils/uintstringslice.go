@@ -43,4 +43,3 @@ func (slice *Uint64StringSlice) UnmarshalJSON(b []byte) error {
 	}
 	return nil
 }
-

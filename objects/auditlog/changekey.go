@@ -65,12 +65,12 @@ const (
 	ChangeKeyExpireGracePeriod ChangeKey = "expire_grace_period"
 
 	// guild
-	ChangeKeyDiscoverySplashHash        ChangeKey = "discovery_splash_hash"
-	ChangeKeyBanner                     ChangeKey = "banner_hash"
-	ChangeKeyRulesChannelId             ChangeKey = "rules_channel_id"
-	ChangeKeyPublicUpdatesChannelId     ChangeKey = "public_updates_channel_id"
-	ChangeKeyPreferredLocale            ChangeKey = "preferred_locale"
-	ChangeKeyPremiumProgressBarEnabled  ChangeKey = "premium_progress_bar_enabled"
+	ChangeKeyDiscoverySplashHash       ChangeKey = "discovery_splash_hash"
+	ChangeKeyBanner                    ChangeKey = "banner_hash"
+	ChangeKeyRulesChannelId            ChangeKey = "rules_channel_id"
+	ChangeKeyPublicUpdatesChannelId    ChangeKey = "public_updates_channel_id"
+	ChangeKeyPreferredLocale           ChangeKey = "preferred_locale"
+	ChangeKeyPremiumProgressBarEnabled ChangeKey = "premium_progress_bar_enabled"
 
 	// channel
 	ChangeKeyDefaultAutoArchiveDuration ChangeKey = "default_auto_archive_duration"

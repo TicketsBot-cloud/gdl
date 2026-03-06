@@ -16,9 +16,9 @@ type ThreadMetadata struct {
 }
 
 type ThreadMember struct {
-	ThreadId      *uint64         `json:"id,string,omitempty"`
-	UserId        *uint64         `json:"user_id,string,omitempty"`
-	JoinTimestamp time.Time       `json:"join_timestamp"`
-	Flags         uint            `json:"flags"`
-	Member        *member.Member  `json:"member,omitempty"`
+	ThreadId      *uint64        `json:"id,string,omitempty"`
+	UserId        *uint64        `json:"user_id,string,omitempty"`
+	JoinTimestamp time.Time      `json:"join_timestamp"`
+	Flags         uint           `json:"flags"`
+	Member        *member.Member `json:"member,omitempty"`
 }

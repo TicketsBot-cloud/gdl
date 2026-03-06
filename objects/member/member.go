@@ -8,19 +8,19 @@ import (
 )
 
 type Member struct {
-	User                       *user.User              `json:"user"`
-	Nick                       *string                 `json:"nick"`
-	Avatar                     *string                 `json:"avatar"`
-	Banner                     *string                 `json:"banner"`
-	Roles                      utils.Uint64StringSlice `json:"roles"`
-	JoinedAt                   *time.Time              `json:"joined_at"`
-	PremiumSince               *time.Time              `json:"premium_since"`
-	Deaf                       bool                    `json:"deaf"`
-	Mute                       bool                    `json:"mute"`
-	Flags                      int                      `json:"flags"`
-	Pending                    *bool                    `json:"pending,omitempty"`
-	Permissions                uint64                   `json:"permissions,string,omitempty"`
-	CommunicationDisabledUntil *time.Time               `json:"communication_disabled_until,omitempty"`
+	User                       *user.User                 `json:"user"`
+	Nick                       *string                    `json:"nick"`
+	Avatar                     *string                    `json:"avatar"`
+	Banner                     *string                    `json:"banner"`
+	Roles                      utils.Uint64StringSlice    `json:"roles"`
+	JoinedAt                   *time.Time                 `json:"joined_at"`
+	PremiumSince               *time.Time                 `json:"premium_since"`
+	Deaf                       bool                       `json:"deaf"`
+	Mute                       bool                       `json:"mute"`
+	Flags                      int                        `json:"flags"`
+	Pending                    *bool                      `json:"pending,omitempty"`
+	Permissions                uint64                     `json:"permissions,string,omitempty"`
+	CommunicationDisabledUntil *time.Time                 `json:"communication_disabled_until,omitempty"`
 	AvatarDecorationData       *user.AvatarDecorationData `json:"avatar_decoration_data,omitempty"`
 }
 

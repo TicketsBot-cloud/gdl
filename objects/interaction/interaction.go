@@ -19,21 +19,21 @@ type Interaction struct {
 
 type InteractionMetadata struct {
 	Interaction
-	Id                             uint64                    `json:"id,string"`
-	ApplicationId                  uint64                    `json:"application_id,string"`
-	GuildId                        objects.NullableSnowflake `json:"guild_id"`
-	ChannelId                      uint64                    `json:"channel_id,string"`
-	Channel                        channel.PartialChannel    `json:"channel"`
-	Member                         *member.Member            `json:"member"`
-	User                           *user.User                `json:"user"`
-	Token                          string                    `json:"token"`
-	AppPermissions                 uint64                    `json:"app_permissions,string"`
-	Locale                         *string                   `json:"locale,omitempty"`
-	GuildLocale                    *string                   `json:"guild_locale,omitempty"`
-	Entitlements                   []entitlement.Entitlement `json:"entitlements"`
-	AuthorizingIntegrationOwners   map[string]string         `json:"authorizing_integration_owners"`
-	Context                        *InteractionContextType   `json:"context,omitempty"`
-	AttachmentSizeLimit            int                       `json:"attachment_size_limit"`
+	Id                           uint64                    `json:"id,string"`
+	ApplicationId                uint64                    `json:"application_id,string"`
+	GuildId                      objects.NullableSnowflake `json:"guild_id"`
+	ChannelId                    uint64                    `json:"channel_id,string"`
+	Channel                      channel.PartialChannel    `json:"channel"`
+	Member                       *member.Member            `json:"member"`
+	User                         *user.User                `json:"user"`
+	Token                        string                    `json:"token"`
+	AppPermissions               uint64                    `json:"app_permissions,string"`
+	Locale                       *string                   `json:"locale,omitempty"`
+	GuildLocale                  *string                   `json:"guild_locale,omitempty"`
+	Entitlements                 []entitlement.Entitlement `json:"entitlements"`
+	AuthorizingIntegrationOwners map[string]string         `json:"authorizing_integration_owners"`
+	Context                      *InteractionContextType   `json:"context,omitempty"`
+	AttachmentSizeLimit          int                       `json:"attachment_size_limit"`
 }
 
 type InteractionType uint8

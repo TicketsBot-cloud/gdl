@@ -328,12 +328,12 @@ func DeleteAllReactionsEmoji(ctx context.Context, token string, rateLimiter *rat
 }
 
 type EditMessageData struct {
-	Content         string                    `json:"content,omitempty"`
-	Embeds          []*embed.Embed            `json:"embeds,omitempty"`
-	Flags           uint                      `json:"flags,omitempty"`
-	AllowedMentions *message.AllowedMention   `json:"allowed_mentions,omitempty"`
-	Components      []component.Component     `json:"components,omitempty"`
-	Attachments     []request.Attachment      `json:"attachments,omitempty"`
+	Content         string                  `json:"content,omitempty"`
+	Embeds          []*embed.Embed          `json:"embeds,omitempty"`
+	Flags           uint                    `json:"flags,omitempty"`
+	AllowedMentions *message.AllowedMention `json:"allowed_mentions,omitempty"`
+	Components      []component.Component   `json:"components,omitempty"`
+	Attachments     []request.Attachment    `json:"attachments,omitempty"`
 }
 
 func (d EditMessageData) GetAttachments() []request.Attachment {

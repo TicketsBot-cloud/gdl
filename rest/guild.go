@@ -96,7 +96,7 @@ type ModifyGuildData struct {
 	Description                 *string                                `json:"description,omitempty"`
 	PremiumProgressBarEnabled   *bool                                  `json:"premium_progress_bar_enabled,omitempty"`
 	SafetyAlertsChannelId       *uint64                                `json:"safety_alerts_channel_id,string,omitempty"`
-} 
+}
 
 func ModifyGuild(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, guildId uint64, data ModifyGuildData) (guild.Guild, error) {
 	endpoint := request.Endpoint{

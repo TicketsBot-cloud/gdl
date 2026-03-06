@@ -28,17 +28,17 @@ type CreateGuildScheduledEventData struct {
 }
 
 type ModifyGuildScheduledEventData struct {
-	ChannelId          *uint64                         `json:"channel_id,string,omitempty"`
-	EntityMetadata     *scheduledevent.EntityMetadata  `json:"entity_metadata,omitempty"`
-	Name               *string                         `json:"name,omitempty"`
-	PrivacyLevel       *scheduledevent.PrivacyLevel    `json:"privacy_level,omitempty"`
-	ScheduledStartTime *time.Time                      `json:"scheduled_start_time,omitempty"`
-	ScheduledEndTime   *time.Time                      `json:"scheduled_end_time,omitempty"`
-	Description        *string                         `json:"description,omitempty"`
-	EntityType         *scheduledevent.EntityType      `json:"entity_type,omitempty"`
-	Status             *scheduledevent.Status          `json:"status,omitempty"`
-	Image              *string                         `json:"image,omitempty"`
-	RecurrenceRule     *scheduledevent.RecurrenceRule  `json:"recurrence_rule,omitempty"`
+	ChannelId          *uint64                        `json:"channel_id,string,omitempty"`
+	EntityMetadata     *scheduledevent.EntityMetadata `json:"entity_metadata,omitempty"`
+	Name               *string                        `json:"name,omitempty"`
+	PrivacyLevel       *scheduledevent.PrivacyLevel   `json:"privacy_level,omitempty"`
+	ScheduledStartTime *time.Time                     `json:"scheduled_start_time,omitempty"`
+	ScheduledEndTime   *time.Time                     `json:"scheduled_end_time,omitempty"`
+	Description        *string                        `json:"description,omitempty"`
+	EntityType         *scheduledevent.EntityType     `json:"entity_type,omitempty"`
+	Status             *scheduledevent.Status         `json:"status,omitempty"`
+	Image              *string                        `json:"image,omitempty"`
+	RecurrenceRule     *scheduledevent.RecurrenceRule `json:"recurrence_rule,omitempty"`
 }
 
 type GetGuildScheduledEventUsersData struct {
