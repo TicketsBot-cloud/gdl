@@ -887,11 +887,11 @@ func (d *SearchGuildMessagesData) Encode() string {
 }
 
 type SearchGuildMessagesResponse struct {
-	DoingDeepHistoricalIndex bool                `json:"doing_deep_historical_index"`
-	DocumentsIndexed         *int                `json:"documents_indexed,omitempty"`
-	TotalResults             int                 `json:"total_results"`
-	Messages                 [][]message.Message `json:"messages"`
-	Threads                  []channel.Channel   `json:"threads,omitempty"`
+	DoingDeepHistoricalIndex bool                   `json:"doing_deep_historical_index"`
+	DocumentsIndexed         *int                   `json:"documents_indexed,omitempty"`
+	TotalResults             int                    `json:"total_results"`
+	Messages                 [][]message.Message    `json:"messages"`
+	Threads                  []channel.Channel      `json:"threads,omitempty"`
 	Members                  []channel.ThreadMember `json:"members,omitempty"`
 }
 
