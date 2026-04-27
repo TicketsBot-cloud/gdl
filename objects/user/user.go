@@ -23,7 +23,6 @@ const (
 	UserFlagVerifiedDeveloper     UserFlag = 1 << 17
 	UserFlagCertifiedModerator    UserFlag = 1 << 18
 	UserFlagBotHttpInteractions   UserFlag = 1 << 19
-	UserFlagActiveDeveloper       UserFlag = 1 << 22
 )
 
 type PremiumType int

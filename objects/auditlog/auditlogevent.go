@@ -101,7 +101,8 @@ const (
 	AuditLogEventAutoModerationRuleDelete
 	AuditLogEventAutoModerationBlockMessage
 	AuditLogEventAutoModerationFlagToChannel
-	AuditLogEventAutoModerationUserCommunicationDis
+	AuditLogEventAutoModerationUserCommunicationDisabled
+	AuditLogEventAutoModerationQuarantineUser
 )
 
 const (
@@ -120,4 +121,9 @@ const (
 const (
 	AuditLogEventHomeSettingsCreate AuditLogEvent = iota + 190
 	AuditLogEventHomeSettingsUpdate
+)
+
+const (
+	AuditLogEventVoiceChannelStatusUpdate AuditLogEvent = iota + 192
+	AuditLogEventVoiceChannelStatusDelete
 )

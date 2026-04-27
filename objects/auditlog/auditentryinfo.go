@@ -14,4 +14,5 @@ type AuditEntryInfo struct {
 	MessageId                     *uint64    `json:"message_id,string,omitempty"`                 // MESSAGE_PIN & MESSAGE_UNPIN
 	RoleName                      string     `json:"role_name,omitempty"`                         // CHANNEL_OVERWRITE_CREATE & CHANNEL_OVERWRITE_UPDATE & CHANNEL_OVERWRITE_DELETE
 	Type                          EntityType `json:"type,omitempty"`                              // CHANNEL_OVERWRITE_CREATE & CHANNEL_OVERWRITE_UPDATE & CHANNEL_OVERWRITE_DELETE
+	Status                        string     `json:"status,omitempty"`                            // VOICE_CHANNEL_STATUS_UPDATE
 }

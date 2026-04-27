@@ -22,6 +22,7 @@ type Member struct {
 	Permissions                uint64                     `json:"permissions,string,omitempty"`
 	CommunicationDisabledUntil *time.Time                 `json:"communication_disabled_until,omitempty"`
 	AvatarDecorationData       *user.AvatarDecorationData `json:"avatar_decoration_data,omitempty"`
+	Collectibles               *user.UserCollectibles     `json:"collectibles,omitempty"`
 }
 
 func (m *Member) HasRole(roleId uint64) bool {

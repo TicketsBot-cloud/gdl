@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
 	"github.com/TicketsBot-cloud/gdl/objects/guild"
 	"github.com/TicketsBot-cloud/gdl/objects/integration"
 	"github.com/TicketsBot-cloud/gdl/objects/invite"
@@ -776,4 +777,137 @@ func ModifyGuildWelcomeScreen(ctx context.Context, token string, rateLimiter *ra
 	}
 
 	return screen, nil
+}
+
+// All fields are optional
+type SearchGuildMessagesData struct {
+	Limit                int      // 1-25, default 25
+	Offset               int      // max 9975
+	MaxId                uint64   // Get messages before this message ID
+	MinId                uint64   // Get messages after this message ID
+	Slop                 int      // Max words to skip between tokens (max 100, default 2)
+	Content              string   // Filter by content (max 1024 chars)
+	ChannelIds           []uint64 // Filter by channels (max 500)
+	AuthorTypes          []string // Filter by author type: "user", "bot", "webhook" (prefix with "-" to negate)
+	AuthorIds            []uint64 // Filter by authors (max 100)
+	Mentions             []uint64 // Filter by mentioned users (max 100)
+	MentionsRoleIds      []uint64 // Filter by mentioned roles (max 100)
+	MentionEveryone      *bool    // Filter by @everyone mention
+	RepliedToUserIds     []uint64 // Filter by replied-to users (max 100)
+	RepliedToMessageIds  []uint64 // Filter by replied-to messages (max 100)
+	Pinned               *bool    // Filter by pinned status
+	Has                  []string // Filter by content type: "image", "sound", "video", "file", "sticker", "embed", "link", "poll", "snapshot"
+	EmbedTypes           []string // Filter by embed type: "image", "video", "gif", "sound", "article"
+	EmbedProviders       []string // Filter by embed provider (max 100)
+	LinkHostnames        []string // Filter by link hostname (max 100)
+	AttachmentFilenames  []string // Filter by attachment filename (max 100)
+	AttachmentExtensions []string // Filter by attachment extension (max 100)
+	SortBy               string   // "timestamp" or "relevance"
+	SortOrder            string   // "asc" or "desc"
+	IncludeNsfw          *bool    // Whether to include age-restricted channels (default false)
+}
+
+func (d *SearchGuildMessagesData) Encode() string {
+	q := url.Values{}
+
+	if d.Limit != 0 {
+		q.Set("limit", strconv.Itoa(d.Limit))
+	}
+	if d.Offset != 0 {
+		q.Set("offset", strconv.Itoa(d.Offset))
+	}
+	if d.MaxId != 0 {
+		q.Set("max_id", strconv.FormatUint(d.MaxId, 10))
+	}
+	if d.MinId != 0 {
+		q.Set("min_id", strconv.FormatUint(d.MinId, 10))
+	}
+	if d.Slop != 0 {
+		q.Set("slop", strconv.Itoa(d.Slop))
+	}
+	if d.Content != "" {
+		q.Set("content", d.Content)
+	}
+	for _, id := range d.ChannelIds {
+		q.Add("channel_id", strconv.FormatUint(id, 10))
+	}
+	for _, t := range d.AuthorTypes {
+		q.Add("author_type", t)
+	}
+	for _, id := range d.AuthorIds {
+		q.Add("author_id", strconv.FormatUint(id, 10))
+	}
+	for _, id := range d.Mentions {
+		q.Add("mentions", strconv.FormatUint(id, 10))
+	}
+	for _, id := range d.MentionsRoleIds {
+		q.Add("mentions_role_id", strconv.FormatUint(id, 10))
+	}
+	if d.MentionEveryone != nil {
+		q.Set("mention_everyone", strconv.FormatBool(*d.MentionEveryone))
+	}
+	for _, id := range d.RepliedToUserIds {
+		q.Add("replied_to_user_id", strconv.FormatUint(id, 10))
+	}
+	for _, id := range d.RepliedToMessageIds {
+		q.Add("replied_to_message_id", strconv.FormatUint(id, 10))
+	}
+	if d.Pinned != nil {
+		q.Set("pinned", strconv.FormatBool(*d.Pinned))
+	}
+	for _, h := range d.Has {
+		q.Add("has", h)
+	}
+	for _, t := range d.EmbedTypes {
+		q.Add("embed_type", t)
+	}
+	for _, p := range d.EmbedProviders {
+		q.Add("embed_provider", p)
+	}
+	for _, h := range d.LinkHostnames {
+		q.Add("link_hostname", h)
+	}
+	for _, f := range d.AttachmentFilenames {
+		q.Add("attachment_filename", f)
+	}
+	for _, e := range d.AttachmentExtensions {
+		q.Add("attachment_extension", e)
+	}
+	if d.SortBy != "" {
+		q.Set("sort_by", d.SortBy)
+	}
+	if d.SortOrder != "" {
+		q.Set("sort_order", d.SortOrder)
+	}
+	if d.IncludeNsfw != nil {
+		q.Set("include_nsfw", strconv.FormatBool(*d.IncludeNsfw))
+	}
+
+	return q.Encode()
+}
+
+type SearchGuildMessagesResponse struct {
+	DoingDeepHistoricalIndex bool                `json:"doing_deep_historical_index"`
+	DocumentsIndexed         *int                `json:"documents_indexed,omitempty"`
+	TotalResults             int                 `json:"total_results"`
+	Messages                 [][]message.Message `json:"messages"`
+	Threads                  []channel.Channel   `json:"threads,omitempty"`
+	Members                  []channel.ThreadMember `json:"members,omitempty"`
+}
+
+func SearchGuildMessages(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, guildId uint64, data SearchGuildMessagesData) (SearchGuildMessagesResponse, error) {
+	endpoint := request.Endpoint{
+		RequestType: request.GET,
+		ContentType: request.Nil,
+		Endpoint:    fmt.Sprintf("/guilds/%d/messages/search?%s", guildId, data.Encode()),
+		Route:       ratelimit.NewGuildRoute(ratelimit.RouteSearchGuildMessages, guildId),
+		RateLimiter: rateLimiter,
+	}
+
+	var res SearchGuildMessagesResponse
+	if err, _ := endpoint.Request(ctx, token, nil, &res); err != nil {
+		return SearchGuildMessagesResponse{}, err
+	}
+
+	return res, nil
 }

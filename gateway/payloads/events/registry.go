@@ -15,6 +15,7 @@ type Event interface {
 		ChannelCreate |
 		ChannelUpdate |
 		ChannelDelete |
+		ChannelInfo |
 		ChannelPinsUpdate |
 		ThreadCreate |
 		ThreadUpdate |
@@ -76,6 +77,8 @@ type Event interface {
 		TypingStart |
 		UserUpdate |
 		VoiceChannelEffectSend |
+		VoiceChannelStartTimeUpdate |
+		VoiceChannelStatusUpdate |
 		VoiceServerUpdate |
 		VoiceStateUpdate |
 		WebhooksUpdate
@@ -97,6 +100,7 @@ var EventTypes = map[EventType]reflect.Type{
 	CHANNEL_CREATE:      reflect.TypeOf(ChannelCreate{}),
 	CHANNEL_UPDATE:      reflect.TypeOf(ChannelUpdate{}),
 	CHANNEL_DELETE:      reflect.TypeOf(ChannelDelete{}),
+	CHANNEL_INFO:        reflect.TypeOf(ChannelInfo{}),
 	CHANNEL_PINS_UPDATE: reflect.TypeOf(ChannelPinsUpdate{}),
 
 	THREAD_CREATE:         reflect.TypeOf(ThreadCreate{}),
@@ -169,9 +173,11 @@ var EventTypes = map[EventType]reflect.Type{
 
 	USER_UPDATE: reflect.TypeOf(UserUpdate{}),
 
-	VOICE_CHANNEL_EFFECT_SEND: reflect.TypeOf(VoiceChannelEffectSend{}),
-	VOICE_STATE_UPDATE:        reflect.TypeOf(VoiceStateUpdate{}),
-	VOICE_SERVER_UPDATE:       reflect.TypeOf(VoiceServerUpdate{}),
+	VOICE_CHANNEL_EFFECT_SEND:       reflect.TypeOf(VoiceChannelEffectSend{}),
+	VOICE_CHANNEL_START_TIME_UPDATE: reflect.TypeOf(VoiceChannelStartTimeUpdate{}),
+	VOICE_CHANNEL_STATUS_UPDATE:     reflect.TypeOf(VoiceChannelStatusUpdate{}),
+	VOICE_STATE_UPDATE:              reflect.TypeOf(VoiceStateUpdate{}),
+	VOICE_SERVER_UPDATE:             reflect.TypeOf(VoiceServerUpdate{}),
 
 	WEBHOOKS_UPDATE: reflect.TypeOf(WebhooksUpdate{}),
 }

@@ -300,4 +300,7 @@ const (
 	// Guild Welcome Screen
 	RouteGetGuildWelcomeScreen
 	RouteModifyGuildWelcomeScreen
+
+	// Guild Message Search
+	RouteSearchGuildMessages
 )

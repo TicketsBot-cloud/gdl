@@ -1,6 +1,7 @@
 package message
 
 import (
+	"encoding/json"
 	"regexp"
 	"strconv"
 	"time"
@@ -13,6 +14,23 @@ import (
 	"github.com/TicketsBot-cloud/gdl/objects/user"
 	"github.com/TicketsBot-cloud/gdl/utils"
 )
+
+type BaseThemeType int
+
+const (
+	BaseThemeUnset    BaseThemeType = 0
+	BaseThemeDark     BaseThemeType = 1
+	BaseThemeLight    BaseThemeType = 2
+	BaseThemeDarker   BaseThemeType = 3
+	BaseThemeMidnight BaseThemeType = 4
+)
+
+type SharedClientTheme struct {
+	Colors        []string       `json:"colors"`
+	GradientAngle int            `json:"gradient_angle"`
+	BaseMix       int            `json:"base_mix"`
+	BaseTheme     *BaseThemeType `json:"base_theme,omitempty"`
+}
 
 type Message struct {
 	Id                   uint64                      `json:"id,string"`
@@ -52,6 +70,8 @@ type Message struct {
 	RoleSubscriptionData *RoleSubscriptionData       `json:"role_subscription_data,omitempty"`
 	Poll                 *Poll                       `json:"poll,omitempty"`
 	Call                 *MessageCall                `json:"call,omitempty"`
+	Resolved             json.RawMessage             `json:"resolved,omitempty"`
+	SharedClientTheme    *SharedClientTheme          `json:"shared_client_theme,omitempty"`
 }
 
 var channelMentionRegex = regexp.MustCompile(`<#(\d+)>`)

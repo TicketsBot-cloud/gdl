@@ -725,3 +725,7 @@ func (s *Shard) EditCommandPermissions(ctx context.Context, applicationId, guild
 func (s *Shard) EditBulkCommandPermissions(ctx context.Context, applicationId, guildId uint64, data []rest.CommandWithPermissionsData) ([]rest.CommandWithPermissionsData, error) {
 	return rest.EditBulkCommandPermissions(ctx, s.Token, s.ShardManager.RateLimiter, applicationId, guildId, data)
 }
+
+func (s *Shard) SearchGuildMessages(ctx context.Context, guildId uint64, data rest.SearchGuildMessagesData) (rest.SearchGuildMessagesResponse, error) {
+	return rest.SearchGuildMessages(ctx, s.Token, s.ShardManager.RateLimiter, guildId, data)
+}

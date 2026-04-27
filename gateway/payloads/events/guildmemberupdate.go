@@ -20,4 +20,5 @@ type GuildMemberUpdate struct {
 	Mute                       *bool                   `json:"mute"`
 	Pending                    *bool                   `json:"pending"`
 	CommunicationDisabledUntil *time.Time              `json:"communication_disabled_until"`
+	Collectibles               *user.UserCollectibles  `json:"collectibles,omitempty"`
 }
