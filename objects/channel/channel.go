@@ -84,3 +84,9 @@ func (c *Channel) ToPartialChannel() PartialChannel {
 		Name: c.Name,
 	}
 }
+
+type ChannelInfoEntry struct {
+	Id             uint64  `json:"id,string"`
+	Status         *string `json:"status,omitempty"`
+	VoiceStartTime *int64  `json:"voice_start_time,omitempty"`
+}

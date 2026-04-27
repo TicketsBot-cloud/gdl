@@ -1,4 +1,4 @@
-package events
+package gateway
 
 type EventBus struct {
 	Listeners []interface{}

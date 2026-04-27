@@ -1,6 +1,7 @@
 package channel
 
 import (
+	"encoding/json"
 	"time"
 
 	"github.com/TicketsBot-cloud/gdl/objects/user"
@@ -35,4 +36,5 @@ type Attachment struct {
 	Flags              *AttachmentFlag `json:"flags,omitempty"`
 	ClipParticipants   []user.User     `json:"clip_participants,omitempty"`
 	ClipCreatedAt      *time.Time      `json:"clip_created_at,omitempty"`
+	Application        json.RawMessage `json:"application,omitempty"`
 }

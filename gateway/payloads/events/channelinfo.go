@@ -1,12 +1,8 @@
 package events
 
-type ChannelInfoChannel struct {
-	Id             uint64  `json:"id,string"`
-	Status         *string `json:"status,omitempty"`
-	VoiceStartTime *int64  `json:"voice_start_time,omitempty"`
-}
+import "github.com/TicketsBot-cloud/gdl/objects/channel"
 
 type ChannelInfo struct {
-	GuildId  uint64               `json:"guild_id,string"`
-	Channels []ChannelInfoChannel `json:"channels"`
+	GuildId  uint64                     `json:"guild_id,string"`
+	Channels []channel.ChannelInfoEntry `json:"channels"`
 }

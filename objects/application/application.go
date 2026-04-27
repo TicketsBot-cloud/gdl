@@ -86,3 +86,8 @@ func BuildFlags(flags ...Flag) Flag {
 
 	return built
 }
+
+type PartialApplication struct {
+	Id    uint64 `json:"id,string"`
+	Flags int    `json:"flags"`
+}
