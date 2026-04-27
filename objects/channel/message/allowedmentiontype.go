@@ -2,8 +2,8 @@ package message
 
 type AllowedMentionType string
 
-const(
-	EVERYONE AllowedMentionType = "everyone"
-	USERS AllowedMentionType = "users"
-	ROLES AllowedMentionType = "roles"
+const (
+	AllowedMentionTypeRoles    AllowedMentionType = "roles"
+	AllowedMentionTypeUsers    AllowedMentionType = "users"
+	AllowedMentionTypeEveryone AllowedMentionType = "everyone"
 )

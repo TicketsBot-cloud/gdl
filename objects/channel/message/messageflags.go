@@ -5,13 +5,20 @@ type MessageFlag uint
 const (
 	FlagCrossposted MessageFlag = 1 << iota
 	FlagIsCrosspost
-	FlagSupressEmbeds
+	FlagSuppressEmbeds
 	FlagSourceMessageDeleted
 	FlagUrgent
-	_ // 1 << 5 not documented
+	FlagHasThread
 	FlagEphemeral
 	FlagLoading
-	FlagComponentsV2 MessageFlag = 1 << 15
+	FlagFailedToMentionSomeRolesInThread
+)
+
+const (
+	FlagSuppressNotifications MessageFlag = 1 << (iota + 12)
+	FlagIsVoiceMessage
+	FlagHasSnapshot
+	FlagIsComponentsV2
 )
 
 func SumFlags(flags ...MessageFlag) (sum uint) {

@@ -380,9 +380,13 @@ func (c *BoltCache) StoreChannels(channels []channel.Channel) {
 			b := tx.Bucket([]byte("channels"))
 
 			for _, ch := range channels {
+				var guildId uint64
+				if ch.GuildId != nil {
+					guildId = *ch.GuildId
+				}
 				cwg := channelWithGuild{
 					CachedChannel: ch.ToCachedChannel(),
-					guildId:       ch.GuildId,
+					guildId:       guildId,
 				}
 
 				if encoded, err := json.Marshal(cwg); err == nil {
@@ -732,7 +736,11 @@ func (c *BoltCache) StoreVoiceStates(states []guild.VoiceState) {
 
 		for _, state := range states {
 			if encoded, err := json.Marshal(state.ToCachedVoiceState()); err == nil {
-				if err := b.Put(memberToBytes(state.UserId, state.GuildId), encoded); err != nil {
+				guildId := uint64(0)
+				if state.GuildId != nil {
+					guildId = *state.GuildId
+				}
+				if err := b.Put(memberToBytes(state.UserId, guildId), encoded); err != nil {
 					return err
 				}
 			} else {
@@ -766,7 +774,7 @@ func (c *BoltCache) GetVoiceState(userId, guildId uint64) (guild.VoiceState, boo
 			u = user.User{Id: userId}
 		}
 
-		m = member.Member{User: u}
+		m = member.Member{User: &u}
 	}
 
 	state := cached.ToVoiceState(guildId, m)
@@ -805,7 +813,7 @@ func (c *BoltCache) GetGuildVoiceStates(guildId uint64) []guild.VoiceState {
 						u = user.User{Id: stateUserId}
 					}
 
-					m = member.Member{User: u}
+					m = member.Member{User: &u}
 				}
 
 				states = append(states, cached.ToVoiceState(guildId, m))

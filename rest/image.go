@@ -4,7 +4,6 @@ import (
 	"encoding/base64"
 	"fmt"
 	"io"
-	"io/ioutil"
 
 	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
@@ -15,7 +14,7 @@ type Image struct {
 }
 
 func (i *Image) Encode() (string, error) {
-	content, err := ioutil.ReadAll(i.ImageReader)
+	content, err := io.ReadAll(i.ImageReader)
 	if err != nil {
 		return "", err
 	}

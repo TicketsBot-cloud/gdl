@@ -5,6 +5,7 @@ import (
 )
 
 type File struct {
+	Id      *int              `json:"id,omitempty"`
 	File    UnfurledMediaItem `json:"file"`
 	Spoiler *bool             `json:"spoiler,omitempty"`
 }

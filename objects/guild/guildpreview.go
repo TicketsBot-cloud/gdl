@@ -1,16 +1,20 @@
 package guild
 
-import "github.com/TicketsBot-cloud/gdl/objects/guild/emoji"
+import (
+	"github.com/TicketsBot-cloud/gdl/objects/guild/emoji"
+	"github.com/TicketsBot-cloud/gdl/objects/guild/sticker"
+)
 
 type GuildPreview struct {
-	Id                       uint64         `json:"id,string"`
-	Name                     string         `json:"name"`
-	Icon                     string         `json:"icon"`
-	Splash                   string         `json:"splash"`
-	DiscoverySplash          string         `json:"discovery_splash"`
-	Emojis                   []emoji.Emoji  `json:"emojis"`
-	Features                 []GuildFeature `json:"features"`
-	ApproximateMemberCount   int            `json:"approximate_member_count"`
-	ApproximatePresenceCount int            `json:"approximate_presence_count"`
-	Description              string         `json:"description"`
+	Id                       uint64            `json:"id,string"`
+	Name                     string            `json:"name"`
+	Icon                     *string           `json:"icon"`
+	Splash                   *string           `json:"splash"`
+	DiscoverySplash          *string           `json:"discovery_splash"`
+	Emojis                   []emoji.Emoji     `json:"emojis"`
+	Features                 []GuildFeature    `json:"features"`
+	ApproximateMemberCount   int               `json:"approximate_member_count"`
+	ApproximatePresenceCount int               `json:"approximate_presence_count"`
+	Description              *string           `json:"description"`
+	Stickers                 []sticker.Sticker `json:"stickers"`
 }

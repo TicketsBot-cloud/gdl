@@ -58,7 +58,7 @@ type SelectMenuInteractionData struct {
 }
 
 func (d SelectMenuInteractionData) Type() component.ComponentType {
-	return component.ComponentSelectMenu
+	return component.ComponentStringSelect
 }
 
 type FileUploadInteractionData struct {
@@ -118,7 +118,7 @@ func (d *MessageComponentInteractionData) UnmarshalJSON(data []byte) error {
 		var parsed ButtonInteractionData
 		err = json.Unmarshal(data, &parsed)
 		d.IMessageComponentInteractionData = parsed
-	case component.ComponentSelectMenu:
+	case component.ComponentStringSelect:
 		var parsed SelectMenuInteractionData
 		err = json.Unmarshal(data, &parsed)
 		d.IMessageComponentInteractionData = parsed

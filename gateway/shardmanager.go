@@ -5,7 +5,6 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
 	"github.com/TicketsBot-cloud/gdl/rest/ratelimit"
 	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
@@ -18,7 +17,7 @@ type ShardManager struct {
 	ShardOptions ShardOptions
 	Shards       map[int]*Shard
 
-	EventBus *events.EventBus
+	EventBus *EventBus
 }
 
 func NewShardManager(token string, shardOptions ShardOptions) *ShardManager {
@@ -30,7 +29,7 @@ func NewShardManager(token string, shardOptions ShardOptions) *ShardManager {
 		Token:        token,
 		RateLimiter:  ratelimit.NewRateLimiter(shardOptions.RateLimitStore, shardOptions.LargeShardingBuckets),
 		ShardOptions: shardOptions,
-		EventBus:     events.NewEventBus(),
+		EventBus:     NewEventBus(),
 	}
 
 	manager.Shards = make(map[int]*Shard)

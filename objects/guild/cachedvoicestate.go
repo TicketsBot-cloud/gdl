@@ -1,8 +1,6 @@
 package guild
 
-import (
-	"github.com/TicketsBot-cloud/gdl/objects/member"
-)
+import "github.com/TicketsBot-cloud/gdl/objects/member"
 
 type CachedVoiceState struct {
 	ChannelId uint64 `json:"channel_id"`
@@ -15,11 +13,17 @@ type CachedVoiceState struct {
 }
 
 func (s *CachedVoiceState) ToVoiceState(guildId uint64, m member.Member) VoiceState {
+	channelId := s.ChannelId
+	var userId uint64
+	if m.User != nil {
+		userId = m.User.Id
+	}
+
 	return VoiceState{
-		GuildId:   guildId,
-		ChannelId: s.ChannelId,
-		UserId:    m.User.Id,
-		Member:    m,
+		GuildId:   &guildId,
+		ChannelId: &channelId,
+		UserId:    userId,
+		Member:    &m,
 		SessionId: s.SessionId,
 		Deaf:      s.Deaf,
 		Mute:      s.Mute,

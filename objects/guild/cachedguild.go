@@ -9,12 +9,12 @@ import (
 type CachedGuild struct {
 	Id                          uint64                    `json:"id"`
 	Name                        string                    `json:"name"`
-	Icon                        string                    `json:"icon"`
-	Splash                      string                    `json:"splash"`
+	Icon                        *string                   `json:"icon"`
+	Splash                      *string                   `json:"splash"`
 	Owner                       bool                      `json:"owner"`
 	OwnerId                     uint64                    `json:"owner_id"`
 	Permissions                 uint64                    `json:"permissions"`
-	Region                      string                    `json:"region"`
+	Region                      *string                   `json:"region,omitempty"`
 	AfkChannelId                objects.NullableSnowflake `json:"afk_channel_id"`
 	AfkTimeout                  int                       `json:"afk_timeout"`
 	VerificationLevel           int                       `json:"verification_level"`
@@ -25,27 +25,27 @@ type CachedGuild struct {
 	Features                    []GuildFeature            `json:"features"`
 	MfaLevel                    int                       `json:"mfa_level"`
 	ApplicationId               objects.NullableSnowflake `json:"application_id"`
-	WidgetEnabled               bool                      `json:"widget_enabled"`
-	WidgetChannelId             objects.NullableSnowflake `json:"widget_channel_id"`
+	WidgetEnabled               *bool                     `json:"widget_enabled,omitempty"`
+	WidgetChannelId             objects.NullableSnowflake `json:"widget_channel_id,omitempty"`
 	SystemChannelId             objects.NullableSnowflake `json:"system_channel_id"`
 	SystemChannelFlags          uint16                    `json:"system_channel_flags"`
 	RulesChannelId              objects.NullableSnowflake `json:"rules_channel_id,omitempty"`
 	JoinedAt                    time.Time                 `json:"joined_at"`
 	Large                       bool                      `json:"large"`
-	Unavailable                 *bool                     `json:"unavailable"`
+	Unavailable                 *bool                     `json:"unavailable,omitempty"`
 	MemberCount                 int                       `json:"member_count"`
 	Channels                    []uint64                  `json:"-"`
 	Presences                   []uint64                  `json:"-"`
-	MaxPresences                int                       `json:"max_presences"`
-	MaxMembers                  int                       `json:"max_members"`
-	VanityUrlCode               string                    `json:"vanity_url_code"`
-	Description                 string                    `json:"description"`
-	Banner                      string                    `json:"banner"`
+	MaxPresences                *int                      `json:"max_presences,omitempty"`
+	MaxMembers                  *int                      `json:"max_members,omitempty"`
+	VanityUrlCode               *string                   `json:"vanity_url_code"`
+	Description                 *string                   `json:"description"`
+	Banner                      *string                   `json:"banner"`
 	PremiumTier                 PremiumTier               `json:"premium_tier"`
-	PremiumSubscriptionCount    int                       `json:"premium_subscription_count"`
+	PremiumSubscriptionCount    *int                      `json:"premium_subscription_count,omitempty"`
 	PreferredLocale             string                    `json:"preferred_locale"`
 	PublicUpdatesChannelId      objects.NullableSnowflake `json:"public_updates_channel_id"`
-	MaxVideoChannelUsers        int                       `json:"max_video_channel_users"`
+	MaxVideoChannelUsers        *int                      `json:"max_video_channel_users,omitempty"`
 }
 
 func (g *CachedGuild) ToGuild(guildId uint64) Guild {
@@ -66,7 +66,7 @@ func (g *CachedGuild) ToGuild(guildId uint64) Guild {
 		Features:                    g.Features,
 		MfaLevel:                    g.MfaLevel,
 		ApplicationId:               g.ApplicationId,
-		WidgetEnabled:               bool(g.WidgetEnabled),
+		WidgetEnabled:               g.WidgetEnabled,
 		WidgetChannelId:             g.WidgetChannelId,
 		SystemChannelId:             g.SystemChannelId,
 		SystemChannelFlags:          g.SystemChannelFlags,

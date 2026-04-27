@@ -19,18 +19,21 @@ type Interaction struct {
 
 type InteractionMetadata struct {
 	Interaction
-	Id             uint64                    `json:"id,string"`
-	ApplicationId  uint64                    `json:"application_id,string"`
-	GuildId        objects.NullableSnowflake `json:"guild_id"`
-	ChannelId      uint64                    `json:"channel_id,string"`
-	Channel        channel.PartialChannel    `json:"channel"`
-	Member         *member.Member            `json:"member"`
-	User           *user.User                `json:"user"`
-	Token          string                    `json:"token"`
-	AppPermissions uint64                    `json:"app_permissions,string"`
-	Locale         string                    `json:"locale"`
-	GuildLocale    string                    `json:"guild_locale"`
-	Entitlements   []entitlement.Entitlement `json:"entitlements"`
+	Id                           uint64                    `json:"id,string"`
+	ApplicationId                uint64                    `json:"application_id,string"`
+	GuildId                      objects.NullableSnowflake `json:"guild_id"`
+	ChannelId                    uint64                    `json:"channel_id,string"`
+	Channel                      channel.PartialChannel    `json:"channel"`
+	Member                       *member.Member            `json:"member"`
+	User                         *user.User                `json:"user"`
+	Token                        string                    `json:"token"`
+	AppPermissions               uint64                    `json:"app_permissions,string"`
+	Locale                       *string                   `json:"locale,omitempty"`
+	GuildLocale                  *string                   `json:"guild_locale,omitempty"`
+	Entitlements                 []entitlement.Entitlement `json:"entitlements"`
+	AuthorizingIntegrationOwners map[string]string         `json:"authorizing_integration_owners"`
+	Context                      *InteractionContextType   `json:"context,omitempty"`
+	AttachmentSizeLimit          int                       `json:"attachment_size_limit"`
 }
 
 type InteractionType uint8
@@ -58,9 +61,10 @@ type ApplicationCommandInteractionData struct {
 	Id       uint64                                    `json:"id,string"`
 	Name     string                                    `json:"name"`
 	Type     ApplicationCommandType                    `json:"type"`
-	Resolved ResolvedData                              `json:"resolved"`
-	Options  []ApplicationCommandInteractionDataOption `json:"options"`
-	TargetId uint64                                    `json:"target_id,string"`
+	Resolved *ResolvedData                             `json:"resolved,omitempty"`
+	Options  []ApplicationCommandInteractionDataOption `json:"options,omitempty"`
+	GuildId  *uint64                                   `json:"guild_id,string,omitempty"`
+	TargetId *uint64                                   `json:"target_id,string,omitempty"`
 }
 
 type MessageComponentInteraction struct {

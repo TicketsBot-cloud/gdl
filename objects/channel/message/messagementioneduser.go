@@ -8,5 +8,5 @@ import (
 // Mentions is an array of users with partial member
 type MessageMentionedUser struct {
 	user.User
-	Member member.Member
+	Member *member.Member `json:"member,omitempty"`
 }

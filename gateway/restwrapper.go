@@ -187,7 +187,7 @@ func (s *Shard) GetThreadMember(ctx context.Context, channelId, userId uint64) (
 }
 
 func (s *Shard) ListThreadMembers(ctx context.Context, channelId uint64) ([]channel.ThreadMember, error) {
-	return rest.ListThreadMembers(ctx, s.Token, s.ShardManager.RateLimiter, channelId)
+	return rest.ListThreadMembers(ctx, s.Token, s.ShardManager.RateLimiter, channelId, rest.ListThreadMembersData{})
 }
 
 func (s *Shard) ListActiveThreads(ctx context.Context, guildId uint64) (rest.ThreadsResponse, error) {
@@ -218,7 +218,7 @@ func (s *Shard) CreatePublicThread(ctx context.Context, channelId uint64, name s
 	data := rest.StartThreadWithoutMessageData{
 		Name:                name,
 		AutoArchiveDuration: autoArchiveDuration,
-		Type:                channel.ChannelTypeGuildPublicThread,
+		Type:                channel.ChannelTypePublicThread,
 	}
 
 	return rest.StartThreadWithoutMessage(ctx, s.Token, s.ShardManager.RateLimiter, channelId, data)
@@ -228,7 +228,7 @@ func (s *Shard) CreatePrivateThread(ctx context.Context, channelId uint64, name 
 	data := rest.StartThreadWithoutMessageData{
 		Name:                name,
 		AutoArchiveDuration: autoArchiveDuration,
-		Type:                channel.ChannelTypeGuildPrivateThread,
+		Type:                channel.ChannelTypePrivateThread,
 		Invitable:           invitable,
 	}
 
@@ -395,7 +395,7 @@ func (s *Shard) SearchGuildMembers(ctx context.Context, guildId uint64, data res
 
 		var users []user.User
 		for _, m := range members {
-			users = append(users, m.User)
+			users = append(users, *m.User)
 		}
 
 		if err := s.Cache.StoreUsers(ctx, users); err != nil {
@@ -419,7 +419,7 @@ func (s *Shard) ListGuildMembers(ctx context.Context, guildId uint64, data rest.
 
 		var users []user.User
 		for _, m := range members {
-			users = append(users, m.User)
+			users = append(users, *m.User)
 		}
 
 		if err := s.Cache.StoreUsers(ctx, users); err != nil {
@@ -511,7 +511,10 @@ func (s *Shard) GetGuildPruneCount(ctx context.Context, guildId uint64, days int
 
 // computePruneCount = whether 'pruned' is returned, discouraged for large guilds
 func (s *Shard) BeginGuildPrune(ctx context.Context, guildId uint64, days int, computePruneCount bool) error {
-	return rest.BeginGuildPrune(ctx, s.Token, s.ShardManager.RateLimiter, guildId, days, computePruneCount)
+	return rest.BeginGuildPrune(ctx, s.Token, s.ShardManager.RateLimiter, guildId, rest.BeginGuildPruneData{
+		Days:              days,
+		ComputePruneCount: computePruneCount,
+	})
 }
 
 func (s *Shard) GetGuildVoiceRegions(ctx context.Context, guildId uint64) ([]guild.VoiceRegion, error) {
@@ -556,7 +559,7 @@ func (s *Shard) GetGuildVanityUrl(ctx context.Context, guildId uint64) (invite.I
 }
 
 func (s *Shard) GetInvite(ctx context.Context, inviteCode string, withCounts bool) (invite.Invite, error) {
-	return rest.GetInvite(ctx, s.Token, s.ShardManager.RateLimiter, inviteCode, withCounts)
+	return rest.GetInvite(ctx, s.Token, s.ShardManager.RateLimiter, inviteCode, withCounts, nil)
 }
 
 func (s *Shard) DeleteInvite(ctx context.Context, inviteCode string) (invite.Invite, error) {
@@ -668,7 +671,7 @@ func (s *Shard) GetGuildAuditLog(ctx context.Context, guildId uint64, data rest.
 }
 
 func (s *Shard) GetGlobalCommands(ctx context.Context, applicationId uint64) ([]interaction.ApplicationCommand, error) {
-	return rest.GetGlobalCommands(ctx, s.Token, s.ShardManager.RateLimiter, applicationId)
+	return rest.GetGlobalCommands(ctx, s.Token, s.ShardManager.RateLimiter, applicationId, false)
 }
 
 func (s *Shard) CreateGlobalCommand(ctx context.Context, applicationId uint64, data rest.CreateCommandData) (interaction.ApplicationCommand, error) {
@@ -688,7 +691,7 @@ func (s *Shard) DeleteGlobalCommand(ctx context.Context, applicationId, commandI
 }
 
 func (s *Shard) GetGuildCommands(ctx context.Context, applicationId, guildId uint64) ([]interaction.ApplicationCommand, error) {
-	return rest.GetGuildCommands(ctx, s.Token, s.ShardManager.RateLimiter, applicationId, guildId)
+	return rest.GetGuildCommands(ctx, s.Token, s.ShardManager.RateLimiter, applicationId, guildId, false)
 }
 
 func (s *Shard) CreateGuildCommand(ctx context.Context, applicationId, guildId uint64, data rest.CreateCommandData) (interaction.ApplicationCommand, error) {
@@ -721,4 +724,8 @@ func (s *Shard) EditCommandPermissions(ctx context.Context, applicationId, guild
 
 func (s *Shard) EditBulkCommandPermissions(ctx context.Context, applicationId, guildId uint64, data []rest.CommandWithPermissionsData) ([]rest.CommandWithPermissionsData, error) {
 	return rest.EditBulkCommandPermissions(ctx, s.Token, s.ShardManager.RateLimiter, applicationId, guildId, data)
+}
+
+func (s *Shard) SearchGuildMessages(ctx context.Context, guildId uint64, data rest.SearchGuildMessagesData) (rest.SearchGuildMessagesResponse, error) {
+	return rest.SearchGuildMessages(ctx, s.Token, s.ShardManager.RateLimiter, guildId, data)
 }

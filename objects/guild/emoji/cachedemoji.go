@@ -7,7 +7,7 @@ import (
 
 type CachedEmoji struct {
 	GuildId       uint64   `json:"-"`
-	Name          string   `json:"name"`
+	Name          *string  `json:"name,omitempty"`
 	Roles         []uint64 `json:"roles"`
 	User          uint64   `json:"user"`
 	RequireColons bool     `json:"require_colons"`
@@ -15,12 +15,12 @@ type CachedEmoji struct {
 	Animated      bool     `json:"animated"`
 }
 
-func (e *CachedEmoji) ToEmoji(emojiId uint64, user user.User) Emoji {
+func (e *CachedEmoji) ToEmoji(emojiId uint64, u user.User) Emoji {
 	return Emoji{
 		Id:            objects.NewNullableSnowflake(emojiId),
 		Name:          e.Name,
 		Roles:         e.Roles,
-		User:          user,
+		User:          &u,
 		RequireColons: e.RequireColons,
 		Managed:       e.Managed,
 		Animated:      e.Animated,

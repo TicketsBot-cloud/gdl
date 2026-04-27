@@ -5,13 +5,14 @@ import (
 )
 
 type MentionableSelect struct {
-	CustomId    string         `json:"custom_id"`
-	Options     []SelectOption `json:"options"`
-	Placeholder string         `json:"placeholder,omitempty"`
-	MinValues   *int           `json:"min_values,omitempty"`
-	MaxValues   *int           `json:"max_values,omitempty"`
-	Disabled    *bool          `json:"disabled"`
-	Required    *bool          `json:"required,omitempty"`
+	Id            *int                 `json:"id,omitempty"`
+	CustomId      string               `json:"custom_id"`
+	Placeholder   string               `json:"placeholder,omitempty"`
+	DefaultValues []SelectDefaultValue `json:"default_values,omitempty"`
+	MinValues     *int                 `json:"min_values,omitempty"`
+	MaxValues     *int                 `json:"max_values,omitempty"`
+	Disabled      *bool                `json:"disabled,omitempty"`
+	Required      *bool                `json:"required,omitempty"`
 }
 
 func (i MentionableSelect) Type() ComponentType {

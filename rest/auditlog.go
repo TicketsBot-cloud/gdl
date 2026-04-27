@@ -15,7 +15,8 @@ type GetGuildAuditLogData struct {
 	UserId     uint64
 	ActionType auditlog.AuditLogEvent
 	Before     uint64 // audit log entry ID
-	Limit      int
+	After      uint64 // audit log entry ID
+	Limit      int    // 1-100, omitted if 0
 }
 
 func (d *GetGuildAuditLogData) Query() string {
@@ -33,10 +34,13 @@ func (d *GetGuildAuditLogData) Query() string {
 		query.Set("before", strconv.FormatUint(d.Before, 10))
 	}
 
-	if d.Limit > 100 || d.Limit < 1 {
-		d.Limit = 50
+	if d.After != 0 {
+		query.Set("after", strconv.FormatUint(d.After, 10))
 	}
-	query.Set("limit", strconv.Itoa(d.Limit))
+
+	if d.Limit >= 1 && d.Limit <= 100 {
+		query.Set("limit", strconv.Itoa(d.Limit))
+	}
 
 	return query.Encode()
 }
