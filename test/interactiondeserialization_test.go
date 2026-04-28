@@ -28,7 +28,7 @@ func TestDeserializeSelectMenuInteraction(t *testing.T) {
 		return
 	}
 
-	MustMatch(t, "interaction type", i.Data.Type(), component.ComponentSelectMenu)
+	MustMatch(t, "interaction type", i.Data.Type(), component.ComponentStringSelect)
 	data := i.Data.AsSelectMenu()
 
 	MustMatch(t, "custom id", data.CustomId, "class_select_1")

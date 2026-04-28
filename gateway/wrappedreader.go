@@ -4,7 +4,6 @@ import (
 	"errors"
 	"github.com/tatsuworks/czlib"
 	"io"
-	"io/ioutil"
 	"sync"
 )
 
@@ -43,7 +42,7 @@ func (r *wrappedReader) Read() ([]byte, error) {
 	case <-r.closeChan:
 		return nil, errors.New("reader was closed")
 	default:
-		return ioutil.ReadAll(r.ReadCloser)
+		return io.ReadAll(r.ReadCloser)
 	}
 }
 

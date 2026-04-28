@@ -107,19 +107,20 @@ func (e *Endpoint) Request(ctx context.Context, token string, body any, response
 
 		// Encode body
 		var encoded []byte
-		if e.ContentType == ApplicationJson {
+		switch e.ContentType {
+		case ApplicationJson:
 			raw, err := json.Marshal(&body)
 			if err != nil {
 				return err, nil
 			}
 			encoded = raw
-		} else if e.ContentType == ApplicationFormUrlEncoded {
+		case ApplicationFormUrlEncoded:
 			str, err := qs.Marshal(body)
 			if err != nil {
 				return err, nil
 			}
 			encoded = []byte(str)
-		} else if e.ContentType == MultipartFormData {
+		case MultipartFormData:
 			data, ok := body.(MultipartPayload)
 			if !ok {
 				return errors.New("Content-Type MultipartFormData specified but EncodeMultipartFormData was missing"), nil

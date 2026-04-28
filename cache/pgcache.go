@@ -367,10 +367,10 @@ func (c *PgCache) GetGuildChannels(ctx context.Context, guildId uint64) ([]chann
 	}
 
 	rows, err := c.Query(ctx, queryGetGuildChannels, guildId)
-	defer rows.Close()
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
 
 	var channels []channel.Channel
 	for rows.Next() {

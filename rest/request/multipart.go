@@ -58,5 +58,5 @@ func EncodeMultipartFormData(payload MultipartPayload) ([]byte, string, error) {
 		}
 	}
 
-	return []byte(string(body.Bytes()) + "\r\n--" + writer.Boundary() + "--"), writer.Boundary(), nil
+	return []byte(body.String() + "\r\n--" + writer.Boundary() + "--"), writer.Boundary(), nil
 }

@@ -43,7 +43,7 @@ func (s *MemoryStore) getTTLAndDecrease(route Route) (time.Duration, error) {
 
 	if found {
 		remaining := item.Data.(int)
-		ttl := item.ExpireAt.Sub(time.Now())
+		ttl := time.Until(item.ExpireAt)
 
 		if remaining > 0 {
 			s.Cache.SetWithTTL(key, remaining-1, ttl)
@@ -59,7 +59,7 @@ func (s *MemoryStore) getTTLAndDecrease(route Route) (time.Duration, error) {
 func (s *MemoryStore) getGlobalTTL() (time.Duration, error) {
 	s.globalLock.RLock()
 	defer s.globalLock.RUnlock()
-	return s.globalResetAfter.Sub(time.Now()), nil
+	return time.Until(s.globalResetAfter), nil
 }
 
 func (s *MemoryStore) UpdateRateLimit(route Route, remaining int, resetAfter time.Duration) error {

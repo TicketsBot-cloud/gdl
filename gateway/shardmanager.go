@@ -66,6 +66,6 @@ func (sm *ShardManager) ShardForGuild(guildId uint64) *Shard {
 
 func (sm *ShardManager) WaitForInterrupt() {
 	ch := make(chan os.Signal, 1)
-	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
+	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-ch
 }
