@@ -18,12 +18,12 @@ type Entitlement struct {
 type EntitlementType uint16
 
 const (
-	TypePurchase EntitlementType = iota + 1
-	TypePremiumSubscription
-	TypeDeveloperGift
-	TypeTestModePurchase
-	TypeFreePurchase
-	TypeUserGift
-	TypePremiumPurchase
-	TypeApplicationSubscription
+	EntitlementTypePurchase EntitlementType = iota + 1
+	EntitlementTypePremiumSubscription
+	EntitlementTypeDeveloperGift
+	EntitlementTypeTestModePurchase
+	EntitlementTypeFreePurchase
+	EntitlementTypeUserGift
+	EntitlementTypePremiumPurchase
+	EntitlementTypeApplicationSubscription
 )

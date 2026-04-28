@@ -1,14 +1,22 @@
 package events
 
-import "time"
+import (
+	"time"
+
+	"github.com/TicketsBot-cloud/gdl/objects/user"
+)
 
 type InviteCreate struct {
-	ChannelId uint64    `json:"channel_id,string"`
-	Code      string    `json:"code"`
-	CreatedAt time.Time `json:"created_at"`
-	GuildId   uint64    `json:"guild_id,string"`
-	MaxAge    int       `json:"max_age"` // How long the invite is valid for, in seconds
-	MaxUses   int       `json:"max_uses"`
-	Temporary bool      `json:"temporary"`
-	Uses      int       `json:"uses"` // Will always be 0
+	ChannelId  uint64     `json:"channel_id,string"`
+	Code       string     `json:"code"`
+	CreatedAt  time.Time  `json:"created_at"`
+	GuildId    *uint64    `json:"guild_id,string"`
+	Inviter    *user.User `json:"inviter"`
+	MaxAge     int        `json:"max_age"`
+	MaxUses    int        `json:"max_uses"`
+	TargetType *int       `json:"target_type"`
+	TargetUser *user.User `json:"target_user"`
+	Temporary  bool       `json:"temporary"`
+	Uses       int        `json:"uses"`
+	ExpiresAt  *time.Time `json:"expires_at"`
 }

@@ -5,9 +5,10 @@ import (
 )
 
 type Label struct {
+	Id          *int      `json:"id,omitempty"`
 	Label       string    `json:"label"`
 	Description *string   `json:"description,omitempty"`
-	Component   Component `json:"component"` // This can only be string select or text input
+	Component   Component `json:"component"`
 }
 
 func (i Label) Type() ComponentType {

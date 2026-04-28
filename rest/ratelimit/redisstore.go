@@ -19,8 +19,7 @@ func NewRedisStore(client *redis.Client, keyPrefix string) *RedisStore {
 		Client:    client,
 		keyPrefix: keyPrefix,
 		ContextBuilder: func() context.Context {
-			ctx, _ := context.WithTimeout(context.Background(), time.Second*5)
-			return ctx
+			return context.Background()
 		},
 	}
 }

@@ -36,15 +36,20 @@ func GetChannel(ctx context.Context, token string, rateLimiter *ratelimit.Rateli
 }
 
 type ModifyChannelData struct {
-	Name                 string                        `json:"name,omitempty"`
-	Position             int                           `json:"position,omitempty"`
-	Topic                string                        `json:"topic,omitempty"`
-	Nsfw                 bool                          `json:"nsfw,omitempty"`
-	RateLimitPerUser     int                           `json:"rate_limit_per_user,omitempty"`
-	Bitrate              int                           `json:"bitrate,omitempty"`
-	UserLimit            int                           `json:"user_limit,omitempty"`
-	PermissionOverwrites []channel.PermissionOverwrite `json:"permission_overwrites,omitempty"`
-	ParentId             uint64                        `json:"parent_id,string,omitempty"`
+	Name                          string                        `json:"name,omitempty"`
+	Position                      int                           `json:"position,omitempty"`
+	Topic                         string                        `json:"topic,omitempty"`
+	Nsfw                          bool                          `json:"nsfw,omitempty"`
+	RateLimitPerUser              int                           `json:"rate_limit_per_user,omitempty"`
+	Bitrate                       int                           `json:"bitrate,omitempty"`
+	UserLimit                     int                           `json:"user_limit,omitempty"`
+	PermissionOverwrites          []channel.PermissionOverwrite `json:"permission_overwrites,omitempty"`
+	ParentId                      uint64                        `json:"parent_id,string,omitempty"`
+	DefaultAutoArchiveDuration    *uint16                       `json:"default_auto_archive_duration,omitempty"`
+	Flags                         *int                          `json:"flags,omitempty"`
+	DefaultThreadRateLimitPerUser *int                          `json:"default_thread_rate_limit_per_user,omitempty"`
+	DefaultSortOrder              *int                          `json:"default_sort_order,omitempty"`
+	DefaultForumLayout            *int                          `json:"default_forum_layout,omitempty"`
 	*ThreadMetadataModifyData
 }
 
@@ -323,19 +328,36 @@ func DeleteAllReactionsEmoji(ctx context.Context, token string, rateLimiter *rat
 }
 
 type EditMessageData struct {
-	Content    string                `json:"content"`
-	Embeds     []*embed.Embed        `json:"embeds"`
-	Flags      uint                  `json:"flags"` // https://discord.com/developers/docs/resources/channel#message-object-message-flags TODO: Helper function
-	Components []component.Component `json:"components"`
+	Content         string                  `json:"content,omitempty"`
+	Embeds          []*embed.Embed          `json:"embeds,omitempty"`
+	Flags           uint                    `json:"flags,omitempty"`
+	AllowedMentions *message.AllowedMention `json:"allowed_mentions,omitempty"`
+	Components      []component.Component   `json:"components,omitempty"`
+	Attachments     []request.Attachment    `json:"attachments,omitempty"`
+}
+
+func (d EditMessageData) GetAttachments() []request.Attachment {
+	return d.Attachments
 }
 
 func EditMessage(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId, messageId uint64, data EditMessageData) (message.Message, error) {
-	endpoint := request.Endpoint{
-		RequestType: request.PATCH,
-		ContentType: request.ApplicationJson,
-		Endpoint:    fmt.Sprintf("/channels/%d/messages/%d", channelId, messageId),
-		Route:       ratelimit.NewChannelRoute(ratelimit.RouteEditMessage, channelId),
-		RateLimiter: rateLimiter,
+	var endpoint request.Endpoint
+	if len(data.Attachments) == 0 {
+		endpoint = request.Endpoint{
+			RequestType: request.PATCH,
+			ContentType: request.ApplicationJson,
+			Endpoint:    fmt.Sprintf("/channels/%d/messages/%d", channelId, messageId),
+			Route:       ratelimit.NewChannelRoute(ratelimit.RouteEditMessage, channelId),
+			RateLimiter: rateLimiter,
+		}
+	} else {
+		endpoint = request.Endpoint{
+			RequestType: request.PATCH,
+			ContentType: request.MultipartFormData,
+			Endpoint:    fmt.Sprintf("/channels/%d/messages/%d", channelId, messageId),
+			Route:       ratelimit.NewChannelRoute(ratelimit.RouteEditMessage, channelId),
+			RateLimiter: rateLimiter,
+		}
 	}
 
 	var message message.Message
@@ -409,12 +431,13 @@ func GetChannelInvites(ctx context.Context, token string, rateLimiter *ratelimit
 }
 
 type CreateInviteData struct {
-	MaxAge         int    `json:"max_age"`  // seconds, 0 = never
-	MaxUses        int    `json:"max_uses"` // 0 = unlimited
-	Temporary      bool   `json:"temporary"`
-	Unique         bool   `json:"unique"`
-	TargetUser     uint64 `json:"target_user,string,omitempty"`
-	TargetUserType int    `json:"target_user_type,omitempty"`
+	MaxAge              int     `json:"max_age"`  // seconds, 0 = never
+	MaxUses             int     `json:"max_uses"` // 0 = unlimited
+	Temporary           bool    `json:"temporary"`
+	Unique              bool    `json:"unique"`
+	TargetType          int     `json:"target_type,omitempty"`
+	TargetUserId        *uint64 `json:"target_user_id,string,omitempty"`
+	TargetApplicationId *uint64 `json:"target_application_id,string,omitempty"`
 }
 
 func CreateChannelInvite(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId uint64, data CreateInviteData) (invite.Invite, error) {
@@ -437,13 +460,30 @@ func CreateChannelInvite(ctx context.Context, token string, rateLimiter *ratelim
 func DeleteChannelPermissions(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId, overwriteId uint64) error {
 	endpoint := request.Endpoint{
 		RequestType: request.DELETE,
-		ContentType: request.ApplicationJson,
+		ContentType: request.Nil,
 		Endpoint:    fmt.Sprintf("/channels/%d/permissions/%d", channelId, overwriteId),
 		Route:       ratelimit.NewChannelRoute(ratelimit.RouteDeleteChannelPermission, channelId),
 		RateLimiter: rateLimiter,
 	}
 
 	err, _ := endpoint.Request(ctx, token, nil, nil)
+	return err
+}
+
+func FollowAnnouncementChannel(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId, webhookChannelId uint64) error {
+	endpoint := request.Endpoint{
+		RequestType: request.POST,
+		ContentType: request.ApplicationJson,
+		Endpoint:    fmt.Sprintf("/channels/%d/followers", channelId),
+		Route:       ratelimit.NewChannelRoute(ratelimit.RouteFollowNewsChannel, channelId),
+		RateLimiter: rateLimiter,
+	}
+
+	body := map[string]interface{}{
+		"webhook_channel_id": strconv.FormatUint(webhookChannelId, 10),
+	}
+
+	err, _ := endpoint.Request(ctx, token, body, nil)
 	return err
 }
 
@@ -568,11 +608,35 @@ func GetThreadMember(ctx context.Context, token string, rateLimiter *ratelimit.R
 	return
 }
 
-func ListThreadMembers(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId uint64) (members []channel.ThreadMember, err error) {
+type ListThreadMembersData struct {
+	WithMember bool   // include guild member data for each thread member
+	After      uint64 // get thread members after this user ID
+	Limit      int    // max 100
+}
+
+func (d *ListThreadMembersData) Query() string {
+	query := url.Values{}
+
+	if d.WithMember {
+		query.Set("with_member", "true")
+	}
+
+	if d.After != 0 {
+		query.Set("after", strconv.FormatUint(d.After, 10))
+	}
+
+	if d.Limit > 0 {
+		query.Set("limit", strconv.Itoa(d.Limit))
+	}
+
+	return query.Encode()
+}
+
+func ListThreadMembers(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId uint64, data ListThreadMembersData) (members []channel.ThreadMember, err error) {
 	endpoint := request.Endpoint{
 		RequestType: request.GET,
 		ContentType: request.Nil,
-		Endpoint:    fmt.Sprintf("/channels/%d/thread-members", channelId),
+		Endpoint:    fmt.Sprintf("/channels/%d/thread-members?%s", channelId, data.Query()),
 		Route:       ratelimit.NewChannelRoute(ratelimit.RouteListThreadMembers, channelId),
 		RateLimiter: rateLimiter,
 	}
@@ -583,7 +647,8 @@ func ListThreadMembers(ctx context.Context, token string, rateLimiter *ratelimit
 
 type StartThreadWithMessageData struct {
 	Name                string `json:"name"`
-	AutoArchiveDuration uint16 `json:"auto_archive_duration"`
+	AutoArchiveDuration uint16 `json:"auto_archive_duration,omitempty"`
+	RateLimitPerUser    *int   `json:"rate_limit_per_user,omitempty"`
 }
 
 func StartThreadWithMessage(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId, messageId uint64, data StartThreadWithMessageData) (ch channel.Channel, err error) {
@@ -601,9 +666,10 @@ func StartThreadWithMessage(ctx context.Context, token string, rateLimiter *rate
 
 type StartThreadWithoutMessageData struct {
 	Name                string              `json:"name"`
-	AutoArchiveDuration uint16              `json:"auto_archive_duration"`
-	Type                channel.ChannelType `json:"type"`
-	Invitable           bool                `json:"invitable"`
+	AutoArchiveDuration uint16              `json:"auto_archive_duration,omitempty"`
+	Type                channel.ChannelType `json:"type,omitempty"`
+	Invitable           bool                `json:"invitable,omitempty"`
+	RateLimitPerUser    *int                `json:"rate_limit_per_user,omitempty"`
 }
 
 func StartThreadWithoutMessage(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId uint64, data StartThreadWithoutMessageData) (ch channel.Channel, err error) {
@@ -647,7 +713,7 @@ func (d *ListThreadsData) Query() string {
 	query := url.Values{}
 
 	if !d.Before.IsZero() {
-		query.Set("before", d.Before.String())
+		query.Set("before", d.Before.UTC().Format(time.RFC3339))
 	}
 
 	if d.Limit > 0 {
@@ -687,7 +753,7 @@ func ListJoinedPrivateArchivedThreads(ctx context.Context, token string, rateLim
 	endpoint := request.Endpoint{
 		RequestType: request.GET,
 		ContentType: request.Nil,
-		Endpoint:    fmt.Sprintf("/channels/%d/usrs/@methreads/archived/private?%s", channelId, data.Query()),
+		Endpoint:    fmt.Sprintf("/channels/%d/users/@me/threads/archived/private?%s", channelId, data.Query()),
 		Route:       ratelimit.NewChannelRoute(ratelimit.RouteGetArchivedPrivateThreads, channelId),
 		RateLimiter: rateLimiter,
 	}

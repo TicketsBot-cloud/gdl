@@ -5,8 +5,6 @@ import (
 	"time"
 )
 
-// Big thanks to https://github.com/spencersharkey for sharing his ratelimiter with me
-
 type Ratelimiter struct {
 	sync.Mutex
 	Store                RateLimitStore

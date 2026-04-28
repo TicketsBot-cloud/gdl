@@ -63,4 +63,37 @@ const (
 	ChangeKeyEnableEmoticons   ChangeKey = "enable_emoticons"
 	ChangeKeyExpireBehaviour   ChangeKey = "expire_behaviour"
 	ChangeKeyExpireGracePeriod ChangeKey = "expire_grace_period"
+
+	// guild
+	ChangeKeyDiscoverySplashHash       ChangeKey = "discovery_splash_hash"
+	ChangeKeyBanner                    ChangeKey = "banner_hash"
+	ChangeKeyRulesChannelId            ChangeKey = "rules_channel_id"
+	ChangeKeyPublicUpdatesChannelId    ChangeKey = "public_updates_channel_id"
+	ChangeKeyPreferredLocale           ChangeKey = "preferred_locale"
+	ChangeKeyPremiumProgressBarEnabled ChangeKey = "premium_progress_bar_enabled"
+
+	// channel
+	ChangeKeyDefaultAutoArchiveDuration ChangeKey = "default_auto_archive_duration"
+	ChangeKeyForumTags                  ChangeKey = "available_tags"
+	ChangeKeyDefaultReactionEmoji       ChangeKey = "default_reaction_emoji"
+	ChangeKeyDefaultSortOrder           ChangeKey = "default_sort_order"
+	ChangeKeyDefaultForumLayout         ChangeKey = "default_forum_layout"
+
+	// role
+	ChangeKeyUnicodeEmoji ChangeKey = "unicode_emoji"
+	ChangeKeyIconEmoji    ChangeKey = "icon_emoji"
+
+	// thread
+	ChangeKeyArchived            ChangeKey = "archived"
+	ChangeKeyAutoArchiveDuration ChangeKey = "auto_archive_duration"
+	ChangeKeyLocked              ChangeKey = "locked"
+
+	// soundboard
+	ChangeKeySoundId   ChangeKey = "sound_id"
+	ChangeKeyVolume    ChangeKey = "volume"
+	ChangeKeyEmojiName ChangeKey = "emoji_name"
+	ChangeKeyEmojiId   ChangeKey = "emoji_id"
+
+	// command permissions
+	ChangeKeyCommandId ChangeKey = "command_id"
 )

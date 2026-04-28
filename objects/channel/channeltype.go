@@ -8,12 +8,15 @@ const (
 	ChannelTypeGuildVoice
 	ChannelTypeGroupDM
 	ChannelTypeGuildCategory
-	ChannelTypeGuildNews
-	ChannelTypeGuildStore
-	ChannelTypeGuildNewsThread ChannelType = iota + 3
-	ChannelTypeGuildPublicThread
-	ChannelTypeGuildPrivateThread
+	ChannelTypeGuildAnnouncement
+)
+
+const (
+	ChannelTypeAnnouncementThread ChannelType = iota + 10
+	ChannelTypePublicThread
+	ChannelTypePrivateThread
 	ChannelTypeGuildStageVoice
 	ChannelTypeGuildDirectory
 	ChannelTypeGuildForum
+	ChannelTypeGuildMedia
 )

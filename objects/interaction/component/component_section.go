@@ -5,8 +5,9 @@ import (
 )
 
 type Section struct {
+	Id         *int        `json:"id,omitempty"`
 	Components []Component `json:"components"`
-	Accessory  Component   `json:"accessory,omitempty"`
+	Accessory  Component   `json:"accessory"`
 }
 
 func (i Section) Type() ComponentType {

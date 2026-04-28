@@ -1,12 +1,11 @@
-package events
+package gateway
 
 type EventBus struct {
 	Listeners []interface{}
 }
 
 func NewEventBus() *EventBus {
-	return &EventBus{
-	}
+	return &EventBus{}
 }
 
 func (e *EventBus) RegisterListener(fn interface{}) {

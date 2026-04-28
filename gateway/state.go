@@ -2,7 +2,7 @@ package gateway
 
 type State int
 
-const(
+const (
 	CONNECTED State = iota
 	CONNECTING
 	DISCONNECTING

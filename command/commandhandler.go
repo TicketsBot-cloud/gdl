@@ -59,12 +59,12 @@ func (h *CommandHandler) commandListener(s *gateway.Shard, e *events.MessageCrea
 	}
 
 	for _, cmd := range h.commands {
-		match := strings.ToLower(cmd.Name) == strings.ToLower(root)
+		match := strings.EqualFold(cmd.Name, root)
 
 		// check aliases
 		if !match {
 			for _, alias := range cmd.Aliases {
-				if strings.ToLower(cmd.Name) == strings.ToLower(alias) {
+				if strings.EqualFold(cmd.Name, alias) {
 					match = true
 					break
 				}
@@ -76,12 +76,12 @@ func (h *CommandHandler) commandListener(s *gateway.Shard, e *events.MessageCrea
 		argloop:
 			for i, arg := range args {
 				for _, sub := range cmd.SubCommands {
-					subMatch := strings.ToLower(arg) == strings.ToLower(sub.Name)
+					subMatch := strings.EqualFold(arg, sub.Name)
 
 					// check aliases
 					if !subMatch {
 						for _, alias := range sub.Aliases {
-							if strings.ToLower(arg) == strings.ToLower(alias) {
+							if strings.EqualFold(arg, alias) {
 								subMatch = true
 								break
 							}

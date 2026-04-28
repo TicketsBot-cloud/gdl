@@ -5,6 +5,7 @@ import (
 )
 
 type Separator struct {
+	Id      *int  `json:"id,omitempty"`
 	Divider *bool `json:"divider,omitempty"`
 	Spacing *int  `json:"spacing,omitempty"`
 }

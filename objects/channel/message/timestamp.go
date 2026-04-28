@@ -8,7 +8,7 @@ import (
 type TimestampStyle string
 
 const (
-	TimestampStyleShortTime     TimestampStyle = "s"
+	TimestampStyleShortTime     TimestampStyle = "t"
 	TimestampStyleLongTime      TimestampStyle = "T"
 	TimestampStyleShortDate     TimestampStyle = "d"
 	TimestampStyleLongDate      TimestampStyle = "D"

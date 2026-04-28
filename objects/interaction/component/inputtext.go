@@ -5,6 +5,7 @@ import (
 )
 
 type InputText struct {
+	Id          *int           `json:"id,omitempty"`
 	Style       TextStyleTypes `json:"style"`
 	CustomId    string         `json:"custom_id"`
 	Label       *string        `json:"label,omitempty"`

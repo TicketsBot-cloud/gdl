@@ -5,6 +5,7 @@ import (
 )
 
 type Container struct {
+	Id          *int        `json:"id,omitempty"`
 	Components  []Component `json:"components"`
 	AccentColor *int        `json:"accent_color,omitempty"`
 	Spoiler     *bool       `json:"spoiler,omitempty"`

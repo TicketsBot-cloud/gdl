@@ -3,11 +3,12 @@ package component
 import "encoding/json"
 
 type CheckboxGroup struct {
-	CustomId  string                 `json:"custom_id"`
-	Options   []CheckboxGroupOption  `json:"options"`
-	MinValues *int                   `json:"min_values,omitempty"`
-	MaxValues *int                   `json:"max_values,omitempty"`
-	Required  *bool                  `json:"required,omitempty"`
+	Id        *int                  `json:"id,omitempty"`
+	CustomId  string                `json:"custom_id"`
+	Options   []CheckboxGroupOption `json:"options"`
+	MinValues *int                  `json:"min_values,omitempty"`
+	MaxValues *int                  `json:"max_values,omitempty"`
+	Required  *bool                 `json:"required,omitempty"`
 }
 
 type CheckboxGroupOption struct {
