@@ -48,6 +48,8 @@ var (
 	queryGetUser string
 	//go:embed sql/get_users.sql
 	queryGetUsers string
+	//go:embed sql/delete_user.sql
+	queryDeleteUser string
 
 	//go:embed sql/insert_guild.sql
 	queryInsertGuild string
@@ -228,6 +230,11 @@ func (c *PgCache) GetUsers(ctx context.Context, ids []uint64) (map[uint64]user.U
 	}
 
 	return users, nil
+}
+
+func (c *PgCache) DeleteUser(ctx context.Context, userId uint64) error {
+	_, err := c.Exec(ctx, queryDeleteUser, userId)
+	return err
 }
 
 func (c *PgCache) StoreGuilds(ctx context.Context, guilds []guild.Guild) error {
