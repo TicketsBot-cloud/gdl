@@ -77,9 +77,9 @@ func BuildPermissions(permissions ...Permission) uint64 {
 func (p Permission) String() string {
 	switch p {
 	case CreateInstantInvite:
-		return "Create Instant Invite"
+		return "Create Invite"
 	case KickMembers:
-		return "Kick Members"
+		return "Kick, Approve and Reject Members"
 	case BanMembers:
 		return "Ban Members"
 	case Administrator:
@@ -95,13 +95,13 @@ func (p Permission) String() string {
 	case PrioritySpeaker:
 		return "Priority Speaker"
 	case Stream:
-		return "Stream"
+		return "Video"
 	case ViewChannel:
 		return "View Channels"
 	case SendMessages:
-		return "Send Messages"
+		return "Send Messages and Create Posts"
 	case SendTTSMessages:
-		return "Send TTS Messages"
+		return "Send Text-to-speech Messages"
 	case ManageMessages:
 		return "Manage Messages"
 	case EmbedLinks:
@@ -111,7 +111,7 @@ func (p Permission) String() string {
 	case ReadMessageHistory:
 		return "Read Message History"
 	case MentionEveryone:
-		return "Mention Everyone"
+		return "Mention @everyone, @here and All Roles"
 	case UseExternalEmojis:
 		return "Use External Emojis"
 	case ViewGuildInsights:
@@ -137,7 +137,7 @@ func (p Permission) String() string {
 	case ManageWebhooks:
 		return "Manage Webhooks"
 	case ManageEmojis:
-		return "Manage Emojis"
+		return "Manage Expressions"
 	case UseApplicationCommands:
 		return "Use Application Commands"
 	case RequestToSpeak:
@@ -145,7 +145,7 @@ func (p Permission) String() string {
 	case ManageEvents:
 		return "Manage Events"
 	case ManageThreads:
-		return "Manage Threads"
+		return "Manage Threads and Posts"
 	case CreatePublicThreads:
 		return "Create Public Threads"
 	case CreatePrivateThreads:
@@ -153,17 +153,17 @@ func (p Permission) String() string {
 	case UseExternalStickers:
 		return "Use External Stickers"
 	case SendMessagesInThreads:
-		return "Send Messages in Threads"
+		return "Send Messages in Threads and Posts"
 	case UseEmbeddedActivities:
-		return "Use Embedded Activities"
+		return "Use Activities"
 	case ModerateMembers:
-		return "Moderate Members"
+		return "Time out members"
 	case ViewCreatorMonetizationAnalytics:
 		return "View Creator Monetization Analytics"
 	case UseSoundboard:
 		return "Use Soundboard"
 	case CreateGuildExpressions:
-		return "Create Guild Expressions"
+		return "Create Expressions"
 	case CreateEvents:
 		return "Create Events"
 	case UseExternalSounds:
@@ -171,7 +171,7 @@ func (p Permission) String() string {
 	case SendVoiceMessages:
 		return "Send Voice Messages"
 	case SendPolls:
-		return "Send Polls"
+		return "Create Polls"
 	case UseExternalApps:
 		return "Use External Apps"
 	case PinMessages:
@@ -184,27 +184,41 @@ func (p Permission) String() string {
 }
 
 func (p Permission) ChannelName(channelType channel.ChannelType) string {
+	if channelType == channel.ChannelTypeGuildCategory {
+		if p == ManageRoles {
+			return "Manage Permissions"
+		}
+
+		return p.String()
+	}
+
 	if channelType.IsPostBased() {
 		switch p {
-		case SendMessages, CreatePublicThreads:
+		case SendMessages:
 			return "Create Posts"
 		case SendMessagesInThreads:
 			return "Send Messages in Posts"
 		case ManageThreads:
 			return "Manage Posts"
+		case ReadMessageHistory:
+			return "Read Post History"
 		}
-	}
-
-	if channelType != channel.ChannelTypeGuildCategory {
+	} else {
 		switch p {
-		case ViewChannel:
-			return "View Channel"
-		case ManageChannels:
-			return "Manage Channel"
+		case SendMessages:
+			return "Send Messages"
+		case SendMessagesInThreads:
+			return "Send Messages in Threads"
+		case ManageThreads:
+			return "Manage Threads"
 		}
 	}
 
 	switch p {
+	case ViewChannel:
+		return "View Channel"
+	case ManageChannels:
+		return "Manage Channel"
 	case ManageRoles:
 		return "Manage Permissions"
 	default:
