@@ -1,5 +1,7 @@
 package permission
 
+import "github.com/TicketsBot-cloud/gdl/objects/channel"
+
 type Permission uint64
 
 const (
@@ -95,7 +97,7 @@ func (p Permission) String() string {
 	case Stream:
 		return "Stream"
 	case ViewChannel:
-		return "Read Messages"
+		return "View Channels"
 	case SendMessages:
 		return "Send Messages"
 	case SendTTSMessages:
@@ -174,8 +176,39 @@ func (p Permission) String() string {
 		return "Use External Apps"
 	case PinMessages:
 		return "Pin Messages"
+	case BypassSlowmode:
+		return "Bypass Slowmode"
 	default:
 		return "Unknown Permission"
+	}
+}
+
+func (p Permission) ChannelName(channelType channel.ChannelType) string {
+	if channelType.IsPostBased() {
+		switch p {
+		case SendMessages, CreatePublicThreads:
+			return "Create Posts"
+		case SendMessagesInThreads:
+			return "Send Messages in Posts"
+		case ManageThreads:
+			return "Manage Posts"
+		}
+	}
+
+	if channelType != channel.ChannelTypeGuildCategory {
+		switch p {
+		case ViewChannel:
+			return "View Channel"
+		case ManageChannels:
+			return "Manage Channel"
+		}
+	}
+
+	switch p {
+	case ManageRoles:
+		return "Manage Permissions"
+	default:
+		return p.String()
 	}
 }
 
@@ -230,4 +263,5 @@ var AllPermissions = []Permission{
 	SendPolls,
 	UseExternalApps,
 	PinMessages,
+	BypassSlowmode,
 }
