@@ -17,4 +17,9 @@ type PartialChannel struct {
 	LastMessageId    objects.NullableSnowflake `json:"last_message_id"`
 	ParentId         objects.NullableSnowflake `json:"parent_id,omitempty"`
 	LastPinTimestamp time.Time                 `json:"last_pin_timestamp"`
+	Flags            ChannelFlag               `json:"flags"`
+}
+
+func (c *PartialChannel) IsObfuscated() bool {
+	return c.Flags.Has(ChannelFlagObfuscated)
 }

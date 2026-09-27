@@ -23,6 +23,11 @@ type CachedChannel struct {
 	ApplicationId        uint64                    `json:"application_id"`
 	ParentId             objects.NullableSnowflake `json:"parent_id,omitempty"`
 	LastPinTimestamp     time.Time                 `json:"last_pin_timestamp"`
+	Flags                ChannelFlag               `json:"flags"`
+}
+
+func (c *CachedChannel) IsObfuscated() bool {
+	return c.Flags.Has(ChannelFlagObfuscated)
 }
 
 func (c *CachedChannel) ToChannel(channelId, guildId uint64) Channel {
@@ -45,5 +50,6 @@ func (c *CachedChannel) ToChannel(channelId, guildId uint64) Channel {
 		ApplicationId:        c.ApplicationId,
 		ParentId:             c.ParentId,
 		LastPinTimestamp:     c.LastPinTimestamp,
+		Flags:                c.Flags,
 	}
 }

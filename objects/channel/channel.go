@@ -33,10 +33,15 @@ type Channel struct {
 	MemberCount          uint64                    `json:"member_count"`
 	ThreadMetadata       *ThreadMetadata           `json:"thread_metadata,omitempty"`
 	Member               ThreadMember              `json:"member"`
+	Flags                ChannelFlag               `json:"flags"`
 }
 
 func (c *Channel) Mention() string {
 	return fmt.Sprintf("<#%d>", c.Id)
+}
+
+func (c *Channel) IsObfuscated() bool {
+	return c.Flags.Has(ChannelFlagObfuscated)
 }
 
 func (c *Channel) ToCachedChannel() CachedChannel {
@@ -57,6 +62,7 @@ func (c *Channel) ToCachedChannel() CachedChannel {
 		ApplicationId:        c.ApplicationId,
 		ParentId:             c.ParentId,
 		LastPinTimestamp:     c.LastPinTimestamp,
+		Flags:                c.Flags,
 	}
 }
 
@@ -72,5 +78,6 @@ func (c *Channel) ToPartialChannel() PartialChannel {
 		LastMessageId:    c.LastMessageId,
 		ParentId:         c.ParentId,
 		LastPinTimestamp: c.LastPinTimestamp,
+		Flags:            c.Flags,
 	}
 }
