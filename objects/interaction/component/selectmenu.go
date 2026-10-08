@@ -14,6 +14,14 @@ type SelectMenu struct {
 	MaxValues   *int           `json:"max_values,omitempty"`
 	Disabled    bool           `json:"disabled"`
 	Required    *bool          `json:"required,omitempty"`
+
+	// IsPanelSelect marks this select menu as a placeholder for the multi-panel's
+	// dropdown within a guild-authored Components V2 tree, rather than a literal select
+	// menu to send to Discord. It is never sent to Discord as-is: a resolve pass always
+	// replaces a select menu carrying IsPanelSelect with a fresh select menu built from
+	// the multi-panel's unplaced panels before the message goes out, clearing
+	// IsPanelSelect on the output.
+	IsPanelSelect bool `json:"is_panel_select,omitempty"`
 }
 
 type SelectOption struct {
