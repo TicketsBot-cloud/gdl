@@ -27,8 +27,17 @@ func (e *Embed) SetTimestamp(timestamp time.Time) *Embed {
 }
 
 func (e *Embed) SetColor(color int) *Embed {
-	e.Color = color
+	e.Color = &color
 	return e
+}
+
+func (e *Embed) SetColorPtr(color *int) *Embed {
+	if color == nil {
+		e.Color = nil
+		return e
+	}
+
+	return e.SetColor(*color)
 }
 
 func (e *Embed) SetFooter(text, iconUrl string) *Embed {
