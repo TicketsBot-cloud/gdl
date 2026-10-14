@@ -13,14 +13,7 @@ type Button struct {
 	Emoji    *emoji.Emoji `json:"emoji,omitempty"`
 	SkuId    *uint64      `json:"sku_id,string,omitempty"`
 	Url      *string      `json:"url,omitempty"`
-	Disabled bool         `json:"disabled,omitempty"`
-
-	// PanelId marks this button as a placeholder for a real panel's "Open Ticket" button
-	// within a guild-authored Components V2 tree, rather than a literal button to send to
-	// Discord. It is never sent to Discord as-is: a resolve pass always replaces a button
-	// carrying PanelId with a fresh button built from the referenced panel's real
-	// CustomId/Label/Emoji before the message goes out, clearing PanelId on the output.
-	PanelId *int `json:"panel_id,omitempty"`
+	Disabled bool         `json:"disabled"`
 }
 
 func (b Button) Type() ComponentType {
