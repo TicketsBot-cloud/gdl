@@ -7,7 +7,7 @@ type Embed struct {
 	Description string         `json:"description,omitempty"`
 	Url         string         `json:"url,omitempty"`
 	Timestamp   *time.Time     `json:"timestamp,omitempty"`
-	Color       int            `json:"color,omitempty"`
+	Color       *int           `json:"color,omitempty"`
 	Footer      *EmbedFooter    `json:"footer,omitempty"`
 	Image       *EmbedImage     `json:"image,omitempty"`
 	Thumbnail   *EmbedThumbnail `json:"thumbnail,omitempty"`
