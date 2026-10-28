@@ -327,6 +327,9 @@ type EditMessageData struct {
 	Embeds     []*embed.Embed        `json:"embeds"`
 	Flags      uint                  `json:"flags"` // https://discord.com/developers/docs/resources/channel#message-object-message-flags TODO: Helper function
 	Components []component.Component `json:"components"`
+
+	// Discord re-parses mentions with default allowances on an edit that does not send it.
+	AllowedMentions *message.AllowedMention `json:"allowed_mentions,omitempty"`
 }
 
 func EditMessage(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId, messageId uint64, data EditMessageData) (message.Message, error) {
