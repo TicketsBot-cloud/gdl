@@ -12,7 +12,7 @@ type wrappedReader struct {
 	io.ReadCloser
 	sync.RWMutex
 	closeChan chan struct{}
-	isClosed bool
+	isClosed  bool
 }
 
 func (r *wrappedReader) Close() error {

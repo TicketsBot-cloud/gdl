@@ -33,4 +33,3 @@ func IsZero(v reflect.Value) bool {
 
 	return result
 }
-

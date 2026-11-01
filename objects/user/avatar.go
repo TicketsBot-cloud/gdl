@@ -7,7 +7,7 @@ import (
 
 type Avatar struct {
 	Animated bool
-	data []uint64
+	data     []uint64
 }
 
 func (a *Avatar) String() string {
@@ -67,5 +67,3 @@ func (a *Avatar) UnmarshalJSON(data []byte) error {
 
 	return nil
 }
-
-

@@ -5,8 +5,7 @@ type EventBus struct {
 }
 
 func NewEventBus() *EventBus {
-	return &EventBus{
-	}
+	return &EventBus{}
 }
 
 func (e *EventBus) RegisterListener(fn interface{}) {

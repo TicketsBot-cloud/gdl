@@ -157,6 +157,7 @@ func GetChannelMessage(ctx context.Context, token string, rateLimiter *ratelimit
 type CreateMessageData struct {
 	Content          string                    `json:"content"`
 	Nonce            string                    `json:"nonce,omitempty"`
+	EnforceNonce     bool                      `json:"enforce_nonce,omitempty"`
 	Tts              bool                      `json:"tts,omitempty"`
 	Embeds           []*embed.Embed            `json:"embeds,omitempty"`
 	Flags            uint                      `json:"flags,omitempty"`
@@ -323,10 +324,11 @@ func DeleteAllReactionsEmoji(ctx context.Context, token string, rateLimiter *rat
 }
 
 type EditMessageData struct {
-	Content    string                `json:"content"`
-	Embeds     []*embed.Embed        `json:"embeds"`
-	Flags      uint                  `json:"flags"` // https://discord.com/developers/docs/resources/channel#message-object-message-flags TODO: Helper function
-	Components []component.Component `json:"components"`
+	Content         string                  `json:"content"`
+	Embeds          []*embed.Embed          `json:"embeds"`
+	Flags           uint                    `json:"flags"` // https://discord.com/developers/docs/resources/channel#message-object-message-flags TODO: Helper function
+	Components      []component.Component   `json:"components"`
+	AllowedMentions *message.AllowedMention `json:"allowed_mentions,omitempty"`
 }
 
 func EditMessage(ctx context.Context, token string, rateLimiter *ratelimit.Ratelimiter, channelId, messageId uint64, data EditMessageData) (message.Message, error) {
