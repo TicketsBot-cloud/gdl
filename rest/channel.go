@@ -157,6 +157,7 @@ func GetChannelMessage(ctx context.Context, token string, rateLimiter *ratelimit
 type CreateMessageData struct {
 	Content          string                    `json:"content"`
 	Nonce            string                    `json:"nonce,omitempty"`
+	EnforceNonce     bool                      `json:"enforce_nonce,omitempty"`
 	Tts              bool                      `json:"tts,omitempty"`
 	Embeds           []*embed.Embed            `json:"embeds,omitempty"`
 	Flags            uint                      `json:"flags,omitempty"`

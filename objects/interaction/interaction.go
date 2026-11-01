@@ -90,6 +90,7 @@ type ModalSubmitInteractionData struct {
 	CustomId   string                                `json:"custom_id"`
 	Components []ModalSubmitInteractionActionRowData `json:"components"`
 	Component  *ModalSubmitInteractionComponentData  `json:"component,omitempty"` // For single component
+	Resolved   ResolvedData                          `json:"resolved"`
 }
 
 type ModalSubmitInteractionActionRowData struct {
