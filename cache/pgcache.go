@@ -59,6 +59,8 @@ var (
 	queryGetGuildCount string
 	//go:embed sql/get_guild_owner.sql
 	queryGetGuildOwner string
+	//go:embed sql/get_guild_ids_by_owner.sql
+	queryGetGuildIdsByOwner string
 	//go:embed sql/delete_guild.sql
 	queryDeleteGuild string
 
@@ -537,6 +539,26 @@ func (c *PgCache) GetGuildOwner(ctx context.Context, guildId uint64) (uint64, er
 	}
 
 	return parsed, nil
+}
+
+func (c *PgCache) GetGuildIdsByOwner(ctx context.Context, userId uint64) ([]uint64, error) {
+	rows, err := c.Query(ctx, queryGetGuildIdsByOwner, strconv.FormatUint(userId, 10))
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var ids []uint64
+	for rows.Next() {
+		var id uint64
+		if err := rows.Scan(&id); err != nil {
+			return nil, err
+		}
+
+		ids = append(ids, id)
+	}
+
+	return ids, rows.Err()
 }
 
 func (c *PgCache) StoreMember(ctx context.Context, m member.Member, guildId uint64) error {

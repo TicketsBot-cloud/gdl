@@ -1,0 +1,1 @@
+SELECT "guild_id" FROM guilds WHERE "data"->>'owner_id' = $1;
