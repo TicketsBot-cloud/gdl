@@ -29,6 +29,8 @@ const (
 	ComponentRadioGroup ComponentType = iota + 4 // 21
 	ComponentCheckboxGroup
 	ComponentCheckbox
+	ComponentOverflowMenu ComponentType = iota + 5 // 25
+	ComponentMenuActionItem
 )
 
 type Component struct {
@@ -104,6 +106,10 @@ func encode(c ComponentData) (json.RawMessage, error) {
 	case CheckboxGroup:
 		return json.Marshal(v)
 	case Checkbox:
+		return json.Marshal(v)
+	case OverflowMenu:
+		return json.Marshal(v)
+	case MenuActionItem:
 		return json.Marshal(v)
 	default:
 		fmt.Println(v)
@@ -204,6 +210,14 @@ func (c *Component) UnmarshalJSON(data []byte) error {
 		c.ComponentData = parsed
 	case ComponentCheckbox:
 		var parsed Checkbox
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentOverflowMenu:
+		var parsed OverflowMenu
+		err = json.Unmarshal(data, &parsed)
+		c.ComponentData = parsed
+	case ComponentMenuActionItem:
+		var parsed MenuActionItem
 		err = json.Unmarshal(data, &parsed)
 		c.ComponentData = parsed
 	default:

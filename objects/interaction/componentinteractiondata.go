@@ -35,6 +35,10 @@ func (d MessageComponentInteractionData) AsCheckbox() CheckboxInteractionData {
 	return d.IMessageComponentInteractionData.(CheckboxInteractionData)
 }
 
+func (d MessageComponentInteractionData) AsMenuActionItem() MenuActionItemInteractionData {
+	return d.IMessageComponentInteractionData.(MenuActionItemInteractionData)
+}
+
 type IMessageComponentInteractionData interface {
 	Type() component.ComponentType
 }
@@ -97,6 +101,14 @@ func (d CheckboxInteractionData) Type() component.ComponentType {
 	return component.ComponentCheckbox
 }
 
+type MenuActionItemInteractionData struct {
+	MessageComponentInteractionBaseData
+}
+
+func (d MenuActionItemInteractionData) Type() component.ComponentType {
+	return component.ComponentMenuActionItem
+}
+
 func (d *MessageComponentInteractionData) UnmarshalJSON(data []byte) error {
 	var raw map[string]interface{}
 	if err := json.Unmarshal(data, &raw); err != nil {
@@ -136,6 +148,10 @@ func (d *MessageComponentInteractionData) UnmarshalJSON(data []byte) error {
 		d.IMessageComponentInteractionData = parsed
 	case component.ComponentCheckbox:
 		var parsed CheckboxInteractionData
+		err = json.Unmarshal(data, &parsed)
+		d.IMessageComponentInteractionData = parsed
+	case component.ComponentMenuActionItem:
+		var parsed MenuActionItemInteractionData
 		err = json.Unmarshal(data, &parsed)
 		d.IMessageComponentInteractionData = parsed
 	default:
